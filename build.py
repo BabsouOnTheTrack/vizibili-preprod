@@ -172,12 +172,17 @@ f'''
       </div>
       <p class="reassurance">Entreprises locales et entreprises de nettoyage · Basés dans les Vosges</p>
     </div>
-    <div class="carte-chemin" role="img" aria-label="Le chemin que nous suivons, de la recherche Google au client signé">
-      <p class="titre">Le chemin que nous suivons</p>
-      <ol>
-        <li>Recherche Google</li><li>Annonce ou fiche Google</li><li>Page dédiée</li><li>Demande, puis tri</li><li>Devis</li><li class="fin">Client signé</li>
+    <div class="itineraire" role="img" aria-label="Le chemin que nous suivons : recherche Google, annonce ou fiche Google, page dédiée, demande puis tri, devis, client signé. Chaque étape est mesurée.">
+      <p class="it-titre">Le chemin que nous suivons</p>
+      <ol class="it-etapes" aria-hidden="true">
+        <li><span class="it-pin"></span><span class="it-nom">Recherche Google</span><span class="it-mesure">ce qui a été tapé</span></li>
+        <li><span class="it-pin"></span><span class="it-nom">Annonce ou fiche Google</span><span class="it-mesure">les clics</span></li>
+        <li><span class="it-pin"></span><span class="it-nom">Page dédiée</span><span class="it-mesure">les visites</span></li>
+        <li><span class="it-pin"></span><span class="it-nom">Demande, puis tri</span><span class="it-mesure">les demandes sérieuses</span></li>
+        <li><span class="it-pin"></span><span class="it-nom">Devis</span><span class="it-mesure">les devis émis</span></li>
+        <li class="it-fin"><span class="it-pin"></span><span class="it-nom">Client signé</span><span class="it-mesure">ce qu'il rapporte</span></li>
       </ol>
-      <p class="legende">Chaque étape se mesure. C'est là que se joue la différence.</p>
+      <p class="it-legende">Chaque étape se mesure. C'est là que se joue la différence.</p>
     </div>
   </div>
 </section>

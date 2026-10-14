@@ -293,3 +293,32 @@ footer.pied a { color: var(--texte-sur-encre); }
   .constat p { font-size: 1.1rem; }
   .constat .btn { width: 100%; }
 }
+
+/* ===== HÉROS : l'itinéraire (élément signature) ===== */
+.itineraire { background: var(--encre); color: var(--texte-sur-encre); border-radius: 18px; padding: 30px 30px 26px; max-width: 460px; margin-left: auto; position: relative; overflow: hidden; }
+.itineraire::after { content: ""; position: absolute; right: -96px; top: -104px; width: 170px; height: 170px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 1.5px solid rgba(215,114,41,0.35); pointer-events: none; }
+.it-titre { font-family: 'Archivo', system-ui, sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--papier); margin-bottom: 22px; }
+.it-etapes { list-style: none; position: relative; display: grid; gap: 4px; }
+.it-etapes::before, .it-etapes::after { content: ""; position: absolute; left: 10px; top: 14px; bottom: 26px; width: 3px; border-radius: 3px; }
+.it-etapes::before { background: var(--trait-sombre); }
+.it-etapes::after { background: var(--orange); transform-origin: top; animation: it-trace 1.6s cubic-bezier(.6,0,.2,1) .3s both; }
+.it-etapes li { display: grid; grid-template-columns: 24px 1fr auto; align-items: center; gap: 0 14px; padding: 9px 0; position: relative; z-index: 1; }
+.it-pin { width: 13px; height: 13px; margin-left: 5px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--encre); border: 2.5px solid var(--orange); }
+.it-nom { color: var(--papier); font-weight: 600; font-size: 15px; }
+.it-mesure { font-size: 12.5px; color: var(--texte-sur-encre); text-align: right; }
+.it-fin { margin-top: 8px; padding: 14px 14px 14px 0 !important; }
+.it-fin::before { content: ""; position: absolute; inset: 0 -14px 0 -14px; background: rgba(215,114,41,0.14); border: 1px solid rgba(255,154,77,0.4); border-radius: 12px; z-index: -1; }
+.it-fin .it-pin { width: 22px; height: 22px; margin-left: 1px; background: var(--orange); border: 0; box-shadow: 0 0 0 6px rgba(215,114,41,0.25); animation: it-arrivee .5s ease-out 1.8s both; }
+.it-fin .it-nom { color: var(--orange-vif); font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 1.2rem; }
+.it-fin .it-mesure { color: var(--papier); font-weight: 600; }
+.it-legende { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--trait-sombre); font-size: 13.5px; }
+@keyframes it-trace { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes it-arrivee { 0% { transform: rotate(-45deg) scale(.6); } 70% { transform: rotate(-45deg) scale(1.12); } 100% { transform: rotate(-45deg) scale(1); } }
+@media (prefers-reduced-motion: reduce) { .it-etapes::after, .it-fin .it-pin { animation: none; } }
+@media (max-width: 980px) { .itineraire { margin: 0 auto; } }
+@media (max-width: 640px) {
+  .itineraire { padding: 24px 20px 20px; }
+  .it-etapes li { grid-template-columns: 24px 1fr; }
+  .it-mesure { grid-column: 2; text-align: left; }
+  .it-etapes::before, .it-etapes::after { bottom: 34px; }
+}
