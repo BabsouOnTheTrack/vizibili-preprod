@@ -334,3 +334,7 @@ blockquote, blockquote cite { color: var(--encre); }
 .article .exemple, .article .exemple strong { color: var(--encre); }
 .parcours li.fin { color: var(--encre); }
 .choix:has(input:checked) { color: var(--encre); }
+
+/* « Ce que vous obtenez » en orange signature : sur sa propre ligne, en grand (≥ 19 px gras) pour rester lisible */
+.frise .obtenu strong,
+.fond-chaud .frise .obtenu strong { display: block; color: var(--orange); font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 1.2rem; line-height: 1.3; margin-bottom: 2px; }
