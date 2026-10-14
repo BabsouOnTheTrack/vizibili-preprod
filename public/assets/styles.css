@@ -322,3 +322,15 @@ footer.pied a { color: var(--texte-sur-encre); }
   .it-mesure { grid-column: 2; text-align: left; }
   .it-etapes::before, .it-etapes::after { bottom: 34px; }
 }
+
+/* ===== TEXTE NOIR SUR LES FONDS CRÈME ET CARAMEL (demande du fondateur, 14/10/2026) ===== */
+.fond-chaud,
+.fond-chaud :is(p, li, span, cite, small, strong, a:not(.btn)) { color: var(--encre); }
+.fond-chaud .constat p { color: var(--papier); }               /* le bandeau noir garde son texte blanc */
+.fond-chaud .etiquette.en-cours::before { border-color: var(--orange-texte); }
+.symptome .ou, .chemin-casse .lab { color: var(--encre); fill: var(--encre); }
+blockquote, blockquote cite { color: var(--encre); }
+.encart, .encart :is(p, li, strong, a), .encart .ecrire { color: var(--encre); }
+.article .exemple, .article .exemple strong { color: var(--encre); }
+.parcours li.fin { color: var(--encre); }
+.choix:has(input:checked) { color: var(--encre); }
