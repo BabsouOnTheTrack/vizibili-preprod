@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Demander un diagnostic d&#x27;acquisition · ViZiBiLi</title>
+<meta name="description" content="Parlez-nous de votre activité et de vos objectifs. Nous revenons vers vous pour un premier échange offert, et vous dire honnêtement par où commencer.">
+<link rel="canonical" href="https://vizibili.fr/contact/">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/fonts/archivo-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css">
+<meta property="og:title" content="Demander un diagnostic d&#x27;acquisition · ViZiBiLi">
+<meta property="og:description" content="Parlez-nous de votre activité et de vos objectifs. Nous revenons vers vous pour un premier échange offert, et vous dire honnêtement par où commencer.">
+<meta property="og:url" content="https://vizibili.fr/contact/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://vizibili.fr/assets/logo-vizibili.png">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "ProfessionalService",
+   "@id": "https://vizibili.fr/#organisation",
+   "name": "ViZiBiLi",
+   "url": "https://vizibili.fr/",
+   "logo": "https://vizibili.fr/assets/logo-vizibili.png",
+   "image": "https://vizibili.fr/assets/logo-vizibili.png",
+   "email": "hello@vizibili.fr",
+   "description": "Acquisition de clients sur Google pour les entreprises locales et les entreprises de nettoyage : annonces, pages dédiées et suivi des demandes jusqu'au client signé.",
+   "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "5 Rue des Sapins",
+    "postalCode": "88390",
+    "addressLocality": "Darnieulles",
+    "addressRegion": "Vosges",
+    "addressCountry": "FR"
+   },
+   "areaServed": [
+    {
+     "@type": "AdministrativeArea",
+     "name": "Vosges"
+    },
+    {
+     "@type": "Country",
+     "name": "France"
+    }
+   ]
+  },
+  {
+   "@type": "ContactPage",
+   "url": "https://vizibili.fr/contact/"
+  }
+ ]
+}
+</script>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+<a class="evitement" href="#contenu">Aller au contenu</a>
+<header class="site-header">
+  <a href="/" class="logo" aria-label="ViZiBiLi, accueil"><img src="/assets/logo-vizibili.png" alt="ViZiBiLi" width="92" height="92"></a>
+  <nav class="site-nav" id="navigation" aria-label="Navigation principale">
+      <a href="/methode/">Méthode</a>
+      <a href="/entreprises-de-nettoyage/">Nettoyage</a>
+      <a href="/offre/">Offre</a>
+      <a href="/cas-clients/">Cas clients</a>
+      <a href="/a-propos/">À propos</a>
+  </nav>
+  <a href="/contact/" class="btn btn-plein">Demander un diagnostic</a>
+  <button type="button" class="bouton-menu" aria-controls="navigation" aria-expanded="false" aria-label="Ouvrir le menu">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#141414" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg>
+  </button>
+</header>
+<main id="contenu">
+<section>
+  <div class="contenu diagnostic">
+    <div>
+      <p class="repere">Diagnostic</p>
+      <h1>Parlons de votre activité, et de ce qui vous ferait gagner des clients.</h1>
+      <p class="sous-titre">Quelques questions pour comprendre votre situation. Nous revenons vers vous pour un premier échange offert, où nous vous dirons honnêtement si nous pouvons vous aider, et par où commencer.</p>
+      <form id="formulaire-diagnostic" class="formulaire" action="/api/diagnostic" method="post" novalidate>
+        <div class="champ"><label for="nom">Votre nom et prénom <span class="requis" aria-hidden="true">*</span></label><input id="nom" name="nom" type="text" autocomplete="name" data-requis required aria-describedby="nom-err"><span class="message-erreur" id="nom-err">Merci de compléter ce champ.</span></div>
+        <div class="champ"><label for="entreprise">Votre entreprise <span class="requis" aria-hidden="true">*</span></label><input id="entreprise" name="entreprise" type="text" autocomplete="organization" data-requis required aria-describedby="entreprise-err"><span class="message-erreur" id="entreprise-err">Merci de compléter ce champ.</span></div>
+        <div class="champ"><label for="activite">Votre activité <span class="requis" aria-hidden="true">*</span></label><span class="aide" id="activite-aide">Par exemple : entreprise de nettoyage, plombier, cabinet d'avocats.</span><input id="activite" name="activite" type="text" data-requis required aria-describedby="activite-aide activite-err"><span class="message-erreur" id="activite-err">Merci de compléter ce champ.</span></div>
+        <div class="champ"><label for="site">Votre site internet <span class="facultatif">(facultatif)</span></label><input id="site" name="site" type="url" inputmode="url" autocomplete="url"></div>
+        <div class="champ"><label for="contact">Votre e-mail ou votre téléphone <span class="requis" aria-hidden="true">*</span></label><span class="aide" id="contact-aide">Pour que nous puissions vous répondre.</span><input id="contact" name="contact" type="text" inputmode="email" autocomplete="email" data-requis required aria-describedby="contact-aide contact-err"><span class="message-erreur" id="contact-err">Indiquez un e-mail ou un numéro de téléphone valide.</span></div>
+        <div class="champ"><fieldset><legend>Votre besoin principal <span class="requis" aria-hidden="true">*</span></legend>
+          <label class="choix"><input type="radio" name="besoin" value="Trouver plus de clients" data-requis required> Trouver plus de clients</label>
+          <label class="choix"><input type="radio" name="besoin" value="Transformer mes demandes en devis signés"> Transformer mes demandes en devis signés</label>
+          <label class="choix"><input type="radio" name="besoin" value="Savoir ce que me rapporte ma publicité"> Savoir ce que me rapporte ma publicité</label>
+          <label class="choix"><input type="radio" name="besoin" value="Autre"> Autre</label>
+        </fieldset><span class="message-erreur">Choisissez votre besoin principal.</span></div>
+        <div class="champ"><label for="objectif">Ce que vous aimeriez obtenir</label><span class="aide" id="objectif-aide">En quelques mots, si vous le souhaitez.</span><textarea id="objectif" name="objectif" rows="4" maxlength="2000" aria-describedby="objectif-aide"></textarea></div>
+        <div class="piege" aria-hidden="true"><label for="entreprise_web">Ne pas remplir</label><input id="entreprise_web" name="entreprise_web" type="text" tabindex="-1" autocomplete="off"></div>
+        <input type="hidden" name="prov_source"><input type="hidden" name="prov_support"><input type="hidden" name="prov_campagne"><input type="hidden" name="prov_arrivee"><input type="hidden" name="prov_gclid">
+        <p class="mention">Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni vendues ni partagées. <a href="/confidentialite/">Politique de confidentialité</a></p>
+        <p id="alerte-envoi" class="alerte-envoi" tabindex="-1" role="alert">Votre demande n'a pas pu être envoyée. Réessayez dans un instant, ou écrivez-nous à <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a>.</p>
+        <button type="submit" class="btn btn-plein">Envoyer ma demande</button>
+      </form>
+    </div>
+    <aside class="encart">
+      <h2>Ce qui se passe après votre demande.</h2>
+      <ol class="etapes">
+        <li><p><strong>Nous lisons votre demande</strong> et regardons rapidement votre présence actuelle sur Google.</p></li>
+        <li><p><strong>Nous revenons vers vous</strong> pour convenir d'un premier échange offert, par téléphone ou en visio, partout en France.</p></li>
+        <li><p><strong>Nous vous disons franchement</strong> si nous pouvons vous aider. Si un diagnostic complet est utile, nous vous présentons ce qu'il comprend et son prix, avant de commencer.</p></li>
+      </ol>
+      <p class="ecrire">Vous préférez écrire ? <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></p>
+    </aside>
+  </div>
+</section>
+</main>
+<footer class="pied">
+  <div>© 2026 ViZiBiLi · 5 Rue des Sapins, 88390 Darnieulles · <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></div>
+  <nav aria-label="Liens de pied de page"><a href="/ressources/">Ressources</a><a href="/contact/">Diagnostic</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a></nav>
+</footer>
+</body>
+</html>

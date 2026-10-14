@@ -1,0 +1,25 @@
+// ViZiBiLi : PRÉPRODUCTION uniquement (dépôt séparé du site en ligne)
+// Ce fichier ne peut pas toucher vizibili.fr : nom de Worker distinct, aucun domaine rattaché.
+// La configuration de production sera fournie à la Phase 6, après GO écrit.
+{
+  "name": "vizibili-preprod",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
+  },
+  "vars": {
+    "ENVIRONNEMENT": "preproduction",
+    "PROTECTION": "aucune",
+    "DESTINATAIRE": "hello@vizibili.fr",
+    "EXPEDITEUR": "formulaire@vizibili.fr"
+  }
+  // PROTECTION "aucune" : préproduction ouverte sans mot de passe, à la demande du fondateur (14/10/2026).
+  // Elle reste non indexable (en-tête noindex + robots.txt bloquant).
+  // Pour remettre un mot de passe : retirer la ligne PROTECTION et créer le secret PREPROD_MOT_DE_PASSE.
+  // E-mail des demandes : ajouté plus tard, une fois Email Routing activé.
+}
