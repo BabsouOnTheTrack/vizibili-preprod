@@ -6,6 +6,8 @@
   "main": "src/index.js",
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
+  // Conserve les variables saisies dans le tableau de bord Cloudflare (réglages SMTP) à chaque déploiement.
+  "keep_vars": true,
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
@@ -15,11 +17,14 @@
   "vars": {
     "ENVIRONNEMENT": "preproduction",
     "PROTECTION": "aucune",
-    "DESTINATAIRE": "hello@vizibili.fr",
-    "EXPEDITEUR": "formulaire@vizibili.fr"
+    "DESTINATAIRE": "hello@vizibili.fr"
   }
   // PROTECTION "aucune" : préproduction ouverte sans mot de passe, à la demande du fondateur (14/10/2026).
   // Elle reste non indexable (en-tête noindex + robots.txt bloquant).
   // Pour remettre un mot de passe : retirer la ligne PROTECTION et créer le secret PREPROD_MOT_DE_PASSE.
-  // E-mail des demandes : ajouté plus tard, une fois Email Routing activé.
+  // E-mail des demandes : serveur de messagerie du fondateur (SMTP), indépendant de Cloudflare.
+  // À saisir dans Cloudflare › Workers › vizibili-preprod › Settings › Variables and Secrets :
+  //   SMTP_HOTE (texte), SMTP_PORT (texte : 465 ou 587), SMTP_UTILISATEUR (texte : adresse de la boîte d'envoi),
+  //   SMTP_MOT_DE_PASSE (type Secret). L'expéditeur est SMTP_UTILISATEUR, sauf variable EXPEDITEUR.
+  // NE PAS activer Cloudflare Email Routing : il remplacerait les enregistrements MX et détournerait la messagerie existante.
 }

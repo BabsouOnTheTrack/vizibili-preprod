@@ -12,7 +12,7 @@ for d, _, fs in os.walk(RACINE):
         if f == 'index.html':
             PUBLIC_ROUTES.add('/' + os.path.relpath(d, RACINE).replace(os.sep, '/').strip('.') + ('/' if d != RACINE else ''))
 PUBLIC_ROUTES.add('/')
-EXTERNES_OK = {'/api/diagnostic', '/fonts/archivo-800.woff2', '/fonts/inter-400.woff2', '/assets/favicon.png', '/assets/apple-touch-icon.png'}
+EXTERNES_OK = {'/api/demande', '/fonts/archivo-800.woff2', '/fonts/inter-400.woff2', '/assets/favicon.png', '/assets/apple-touch-icon.png'}
 
 # Registre éditorial (Gates 2 et 3) : interdits dans le texte visible
 INTERDITS = [
@@ -67,7 +67,7 @@ for p in pages:
     if not x.meta.get('description'): erreurs.append(f'{route} : pas de meta description')
     else:
         descs.setdefault(x.meta['description'], []).append(route)
-        if not (70 <= len(x.meta['description']) <= 160) and route not in ('/mentions-legales/', '/contact/merci/', '/404.html'):
+        if not (70 <= len(x.meta['description']) <= 160) and route not in ('/mentions-legales/', '/premier-echange/merci/', '/404.html'):
             avert.append(f'{route} : meta description de {len(x.meta["description"])} caractères')
     if len(x.titre) > 65: avert.append(f'{route} : title de {len(x.titre)} caractères')
     if route != '/404.html' and x.canon != 'https://vizibili.fr' + route: erreurs.append(f'{route} : canonique {x.canon}')
@@ -87,7 +87,7 @@ for p in pages:
         for m in re.finditer(motif, texte, flags=re.I):
             ctx = texte[max(0, m.start() - 40): m.end() + 40]
             # Paroles du lecteur (questions de FAQ, questions citées) : autorisées
-            if nom == 'voix « je »' and re.search(r'Je travaille surtout|ai-je', ctx):
+            if nom == 'voix « je »' and re.search(r'Je travaille surtout|Je ne suis pas dans|ai-je', ctx):
                 continue
             erreurs.append(f'{route} : {nom} → « …{ctx}… »')
     for m in re.finditer(r'garanti\w*', texte):
@@ -105,7 +105,7 @@ for t, r in descs.items():
 sitemap = open(os.path.join(RACINE, 'sitemap.xml'), encoding='utf-8').read()
 for loc in re.findall(r'<loc>https://vizibili.fr(.*?)</loc>', sitemap):
     if loc not in PUBLIC_ROUTES: erreurs.append(f'sitemap : {loc} absent')
-if '/contact/merci/' in sitemap: erreurs.append('sitemap : page de confirmation indexée')
+if '/premier-echange/merci/' in sitemap: erreurs.append('sitemap : page de confirmation indexée')
 
 print(f'{len(pages)} pages contrôlées')
 print(f'\nERREURS ({len(erreurs)})'); [print(' -', e) for e in erreurs]
