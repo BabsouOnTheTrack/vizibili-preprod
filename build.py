@@ -112,7 +112,49 @@ def parcours(etapes, label):
     return f'<ol class="parcours" aria-label="{label}">' + ''.join(items) + '</ol>'
 
 
+def chemin_casse(etapes, casse, legende):
+    """Mini-parcours : où le chemin casse. casse = index du segment rompu, ou None si rien n'est mesuré."""
+    n = len(etapes)
+    w, y, x0, x1 = 300, 18, 10, 290
+    pas = (x1 - x0) / (n - 1)
+    xs = [x0 + i * pas for i in range(n)]
+    seg = []
+    for i in range(n - 1):
+        a, b = xs[i] + 6, xs[i + 1] - 6
+        if casse is None:
+            seg.append(f'<line class="flou" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
+        elif i == casse:
+            m = (a + b) / 2
+            seg.append(f'<circle class="halo" cx="{m:.1f}" cy="{y}" r="13"/>'
+                       f'<line class="rompu" x1="{a:.1f}" y1="{y}" x2="{m - 5:.1f}" y2="{y}"/>'
+                       f'<polyline class="eclair" points="{m - 5:.1f},{y} {m - 1:.1f},{y - 7} {m + 2:.1f},{y + 7} {m + 5:.1f},{y}"/>'
+                       f'<line class="perdu" x1="{m + 5:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
+        elif i > casse:
+            seg.append(f'<line class="perdu" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
+        else:
+            seg.append(f'<line class="ok" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
+    pts = []
+    for i, x in enumerate(xs):
+        etat = 'flou' if casse is None else ('ok' if i <= casse else 'perdu')
+        pts.append(f'<circle class="pt {etat}" cx="{x:.1f}" cy="{y}" r="5"/>')
+    lab = (f'<text x="{x0}" y="44" class="lab">{etapes[0]}</text>'
+           f'<text x="{x1}" y="44" class="lab" text-anchor="end">{etapes[-1]}</text>')
+    svg = f'<svg class="chemin-casse" viewBox="0 0 {w} 50" aria-hidden="true" focusable="false">{"".join(seg)}{"".join(pts)}{lab}</svg>'
+    return f'<div class="signal">{svg}<p class="ou">{legende}</p></div>'
+
+
+def symptome(titre, texte, etapes, casse, legende):
+    return f'''      <article class="symptome">
+        {chemin_casse(etapes, casse, legende)}
+        <h3>{titre}</h3>
+        <p>{texte}</p>
+      </article>'''
+
+
 PAGES = []
+
+CH_A = ['Recherche', 'Annonce', 'Page', 'Demande', 'Devis', 'Client']
+CH_N = ['Recherche', 'Demande', 'Visite', 'Devis', 'Contrat']
 
 # ---------------------------------------------------------------- ACCUEIL
 PAGES.append(page('/', 'ViZiBiLi · Transformez vos recherches Google en clients',
@@ -146,15 +188,18 @@ f'''
       <h2>Être visible ne suffit pas. Encore faut-il que cette visibilité devienne des clients.</h2>
       <p>Beaucoup d'entreprises sont présentes sur Google sans savoir ce que cela leur rapporte. Vous vous reconnaissez peut-être dans l'une de ces situations :</p>
     </div>
-    <div class="grille-3">
-      <div class="carte"><strong>Des visites sans demandes</strong><p>Des visites sur votre site, mais très peu de demandes.</p></div>
-      <div class="carte"><strong>Une publicité sans résultat clair</strong><p>Une publicité qui dépense chaque mois, sans demande sérieuse au bout.</p></div>
-      <div class="carte"><strong>Des formulaires sans suite</strong><p>Des formulaires reçus, puis jamais transformés en devis.</p></div>
-      <div class="carte"><strong>Des demandes hors sujet</strong><p>Des demandes qui ne correspondent pas à ce que vous vendez.</p></div>
-      <div class="carte"><strong>Un coût inconnu</strong><p>Aucune idée de ce que vous coûte un nouveau client.</p></div>
-      <div class="carte"><strong>Aucun lien avec vos encaissements</strong><p>Aucun lien clair entre ce que vous dépensez et ce que vous encaissez.</p></div>
+    <div class="symptomes">
+{symptome("Des visites sans demandes", "Des visites sur votre site, mais très peu de demandes.", CH_A, 2, "Ça casse entre la page et la demande")}
+{symptome("Une publicité sans résultat clair", "Une publicité qui dépense chaque mois, sans demande sérieuse au bout.", CH_A, 1, "Ça casse entre l'annonce et la demande")}
+{symptome("Des formulaires sans suite", "Des formulaires reçus, puis jamais transformés en devis.", CH_A, 3, "Ça casse entre la demande et le devis")}
+{symptome("Des demandes hors sujet", "Des demandes qui ne correspondent pas à ce que vous vendez.", CH_A, 0, "Ça casse dès la recherche ciblée")}
+{symptome("Un coût inconnu", "Aucune idée de ce que vous coûte un nouveau client.", CH_A, None, "Rien n'est mesuré, d'un bout à l'autre")}
+{symptome("Aucun lien avec vos encaissements", "Aucun lien clair entre ce que vous dépensez et ce que vous encaissez.", CH_A, 4, "Ça casse entre le devis et le client")}
     </div>
-    <p class="conclusion">Le problème n'est presque jamais un seul outil. C'est le chemin entier, de la recherche jusqu'à la signature, que personne ne regarde.</p>
+    <div class="constat">
+      <p>Le problème n'est presque jamais un seul outil. C'est le chemin entier, de la recherche jusqu'à la signature, que personne ne regarde.</p>
+      <a href="/methode/" class="btn btn-plein">Découvrir notre méthode</a>
+    </div>
   </div>
 </section>
 
@@ -258,15 +303,18 @@ f'''
 <section class="fond-chaud">
   <div class="contenu">
     <div class="titre-section"><h2>Vous connaissez sûrement l'une de ces situations.</h2></div>
-    <div class="grille-3">
-      <div class="carte simple"><p>Vous cherchez des contrats d'entretien réguliers, mais vous recevez surtout des demandes ponctuelles.</p></div>
-      <div class="carte simple"><p>Votre activité dépend presque entièrement du bouche-à-oreille.</p></div>
-      <div class="carte simple"><p>Des demandes arrivent pour des prestations que vous ne faites pas, ou hors de votre zone.</p></div>
-      <div class="carte simple"><p>Des prospects demandent un devis, puis ne répondent plus.</p></div>
-      <div class="carte simple"><p>Vous payez pour être visible sans savoir ce que cela vous rapporte réellement.</p></div>
-      <div class="carte simple"><p>Dix demandes de petits ménages ne valent pas un contrat de bureaux, mais rien ne vous permet de faire la différence avant de vous déplacer.</p></div>
+    <div class="symptomes">
+{symptome("Des demandes ponctuelles", "Vous cherchez des contrats d'entretien réguliers, mais vous recevez surtout des demandes ponctuelles.", CH_N, 0, "Ça casse dès la recherche ciblée")}
+{symptome("Tout repose sur le bouche-à-oreille", "Votre activité dépend presque entièrement du bouche-à-oreille.", CH_N, 0, "Aucune entrée depuis Google")}
+{symptome("Des demandes hors zone ou hors métier", "Des demandes arrivent pour des prestations que vous ne faites pas, ou hors de votre zone.", CH_N, 1, "Ça casse au tri des demandes")}
+{symptome("Des devis sans réponse", "Des prospects demandent un devis, puis ne répondent plus.", CH_N, 3, "Ça casse entre le devis et le contrat")}
+{symptome("Une visibilité sans retour connu", "Vous payez pour être visible sans savoir ce que cela vous rapporte réellement.", CH_N, None, "Rien n'est mesuré, d'un bout à l'autre")}
+{symptome("Petits ménages ou bureaux ?", "Dix demandes de petits ménages ne valent pas un contrat de bureaux, mais rien ne vous permet de faire la différence avant de vous déplacer.", CH_N, 1, "Ça casse avant la visite sur place")}
     </div>
-    <p class="conclusion">Ce ne sont pas des fatalités du métier. Ce sont des signaux que le chemin entre la recherche et le contrat n'est pas piloté.</p>
+    <div class="constat">
+      <p>Ce ne sont pas des fatalités du métier. Ce sont des signaux que le chemin entre la recherche et le contrat n'est pas piloté.</p>
+      <a href="/contact/?besoin=nettoyage" class="btn btn-plein">Étudions le potentiel de votre entreprise</a>
+    </div>
   </div>
 </section>
 

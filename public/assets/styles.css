@@ -263,3 +263,33 @@ footer.pied a { color: var(--texte-sur-encre); }
   .actions .btn { display: block; width: 100%; }
   .formulaire .btn { justify-self: stretch; }
 }
+
+/* ===== SYMPTÔMES : où le chemin casse ===== */
+.symptomes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.symptome { background: var(--papier); border: 1px solid var(--trait); border-radius: var(--rayon-carte); padding: 22px 24px 26px; display: flex; flex-direction: column; }
+.symptome .signal { background: var(--papier-chaud); border-radius: var(--rayon); padding: 12px 14px 10px; margin-bottom: 20px; }
+.chemin-casse { display: block; width: 100%; height: auto; overflow: visible; }
+.chemin-casse line { stroke-width: 2.5; stroke-linecap: round; }
+.chemin-casse .ok { stroke: var(--encre); fill: var(--encre); }
+.chemin-casse .perdu { stroke: var(--pin-inactif); fill: var(--papier); stroke-dasharray: 2 5; }
+.chemin-casse circle.perdu { stroke-dasharray: none; stroke-width: 2; }
+.chemin-casse .flou { stroke: var(--texte-2); fill: var(--papier); stroke-dasharray: 2 5; }
+.chemin-casse circle.flou { stroke-dasharray: none; stroke-width: 2; }
+.chemin-casse .rompu { stroke: var(--encre); }
+.chemin-casse .halo { fill: var(--surligne); stroke: var(--orange); stroke-width: 1.5; }
+.chemin-casse .eclair { fill: none; stroke: var(--orange-texte); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.chemin-casse .lab { font-family: 'Inter', system-ui, sans-serif; font-size: 10.5px; fill: var(--texte-2); }
+.symptome .ou { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--orange-texte); }
+.symptome h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: 8px; }
+.symptome > p { color: var(--texte-2); font-size: 15.5px; }
+
+.constat { margin-top: 36px; background: var(--encre); border-radius: var(--rayon-carte); padding: 28px 32px; display: flex; flex-wrap: wrap; gap: 20px 32px; align-items: center; justify-content: space-between; }
+.constat p { color: var(--papier); font-family: 'Archivo', system-ui, sans-serif; font-weight: 700; font-size: 1.25rem; line-height: 1.35; max-width: 640px; flex: 1 1 420px; }
+
+@media (max-width: 980px) { .symptomes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .symptomes { grid-template-columns: 1fr; }
+  .constat { padding: 24px 20px; }
+  .constat p { font-size: 1.1rem; }
+  .constat .btn { width: 100%; }
+}
