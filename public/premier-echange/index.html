@@ -59,6 +59,7 @@
  ]
 }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="/assets/site.js" defer></script>
 </head>
 <body>
@@ -147,6 +148,7 @@
         <div class="champ"><label for="site">Site internet <span class="facultatif">(facultatif)</span></label><input id="site" name="site" type="text" inputmode="url" autocomplete="url" placeholder="www.votre-entreprise.fr"></div>
         <div class="piege" aria-hidden="true"><label for="entreprise_web">Ne pas remplir</label><input id="entreprise_web" name="entreprise_web" type="text" tabindex="-1" autocomplete="off"></div>
         <input type="hidden" name="demande_id"><input type="hidden" name="prov_source"><input type="hidden" name="prov_support"><input type="hidden" name="prov_campagne"><input type="hidden" name="prov_terme"><input type="hidden" name="prov_contenu"><input type="hidden" name="prov_arrivee"><input type="hidden" name="prov_referent"><input type="hidden" name="prov_date_arrivee"><input type="hidden" name="prov_gclid"><input type="hidden" name="prov_gbraid"><input type="hidden" name="prov_wbraid">
+        <div class="cf-turnstile" data-sitekey="0x4AAAAAAFX1uxcmUynbL_zn" data-language="fr"></div>
         <p class="mention">Vos informations servent uniquement à répondre à votre demande. Elles ne sont ni vendues ni partagées. <a href="/confidentialite/">Politique de confidentialité</a></p>
         <p id="alerte-envoi" class="alerte-envoi" tabindex="-1" role="alert">Votre demande n'a pas pu être envoyée. Vérifiez votre connexion et réessayez, ou écrivez-nous à <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a>.</p>
         <button type="submit" class="btn btn-plein">Envoyer ma demande</button>

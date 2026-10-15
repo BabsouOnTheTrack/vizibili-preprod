@@ -10,7 +10,8 @@ import json, os, html
 
 RACINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 SITE = 'https://vizibili.fr'
-TURNSTILE = os.environ.get('TURNSTILE_SITE_KEY', '').strip()
+# Clé publique Turnstile (widget « ViZiBiLi formulaire », préproduction + vizibili.fr), fournie le 15/10/2026. La clé secrète reste un Secret Cloudflare.
+TURNSTILE = os.environ.get('TURNSTILE_SITE_KEY', '0x4AAAAAAFX1uxcmUynbL_zn').strip()
 LOGO = '/assets/logo-vizibili.png'
 OG_IMAGE = '/assets/og-vizibili.png'
 # Logo vectoriel sans fond (15/10/2026), redessiné d'après l'ancien PNG 92 px sur fond blanc.
@@ -923,7 +924,7 @@ PAGES.append(page('/confidentialite/', 'Politique de confidentialité · ViZiBiL
       <li>Cloudflare, Inc. : hébergement du site, traitement du formulaire, protection contre les envois automatiques ;</li>
       <li>OVHcloud, hébergeur établi en France : acheminement et stockage de l'e-mail de notification.</li>
     </ul>
-    <p>Cloudflare est établi aux États-Unis. [GARANTIES DE TRANSFERT : à préciser avant publication, par exemple l'adhésion au cadre de protection des données UE et États-Unis ou des clauses contractuelles types, à vérifier pour chaque prestataire.]</p>
+    <p>Cloudflare est établi aux États-Unis. Les données qui lui sont transmises le sont dans le cadre de sa certification au cadre de protection des données UE et États-Unis (Data Privacy Framework), reconnu par la Commission européenne comme offrant un niveau de protection adéquat. L'accord de traitement des données de Cloudflare prévoit en complément les clauses contractuelles types de la Commission européenne. OVHcloud est établi en France : aucun transfert hors de l'Union européenne pour la messagerie.</p>
     <h2>Combien de temps ?</h2>
     <ul>
       <li><strong>Demande sans suite :</strong> 3 ans après notre dernier échange, puis suppression.</li>
