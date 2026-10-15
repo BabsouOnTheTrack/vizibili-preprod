@@ -34,7 +34,7 @@ const nouvelId = () => 'VZ-20261014-' + String(++n).padStart(8, '0').replace(/./
 
 function formulaire(extra = {}, id = nouvelId()) {
   const fd = new FormData();
-  const base = { demande_id: id, nom: 'Marie Test', entreprise: 'Propre & Net', email: 'marie@exemple.fr', secteur: 'Nettoyage et propreté',
+  const base = { demande_id: id, nom: 'Marie Test', entreprise: 'Propre & Net', email: `marie+${id.slice(-8).toLowerCase()}@exemple.fr`, secteur: 'Nettoyage et propreté',
     objectif: 'Développer des contrats récurrents', recherche: 'Contrats récurrents', prov_source: 'google', prov_support: 'cpc', prov_arrivee: '/entreprises-de-nettoyage/', ...extra };
   for (const [k, v] of Object.entries(base)) if (v !== null) fd.append(k, v);
   fd.append('prestations', 'Entretien de bureaux et locaux');
@@ -204,6 +204,24 @@ f = fauxSmtp();
 await envoi(formulaire({ prov_gclid: '<script>' , prov_wbraid: 'WB_abc' }), { ...pre, ...envSmtp, DESTINATAIRE: 'hello@vizibili.fr', _connecterSmtp: f.connecter });
 const corps2 = new TextDecoder().decode(Uint8Array.from(atob(f.journal.message.split('\r\n\r\n')[1].replace(/\r\n/g, '')), (c) => c.charCodeAt(0)));
 verifier('identifiant de clic invalide ignoré, wbraid retenu', !corps2.includes('<script>') && corps2.includes('wbraid:WB_abc'));
+
+console.log('Déduplication par stockage KV (préproduction workers.dev)');
+const kv = new Map();
+const KV = { async get(k) { return kv.get(k) ?? null; }, async put(k, v, o) { kv.set(k, { v, o }); } };
+const envKv = { ...pre, DEDUP: KV };
+const fd1 = () => formulaire({ email: 'Jean@Exemple.fr', entreprise: 'Nett Pro' });
+r = await envoi(fd1(), envKv);
+verifier('première demande acceptée et marquée dans KV', (await r.json()).doublon === undefined && [...kv.keys()].some((k) => k.startsWith('id:')) && [...kv.keys()].some((k) => k.startsWith('contenu:')));
+verifier('durées : 24 h pour l’identifiant, 15 min pour le contenu', [...kv.entries()].every(([k, x]) => x.o.expirationTtl === (k.startsWith('id:') ? 86400 : 900)));
+r = await envoi(formulaire({ email: 'jean@exemple.fr', entreprise: 'NETT PRO' }), envKv);
+verifier('même personne et même entreprise renvoyant un nouveau formulaire : doublon (pas de second e-mail)', (await r.json()).doublon === true);
+r = await envoi(formulaire({ email: 'autre@exemple.fr', entreprise: 'Nett Pro' }), envKv);
+verifier('autre personne de la même entreprise : nouvelle demande', (await r.json()).doublon === undefined);
+const fSmtp = fauxSmtp();
+await envoi(formulaire({ email: 'x@exemple.fr', entreprise: 'Unique SA' }), { ...pre, ...envSmtp, DESTINATAIRE: 'hello@vizibili.fr', DEDUP: KV, _connecterSmtp: fSmtp.connecter });
+const fSmtp2 = fauxSmtp();
+await envoi(formulaire({ email: 'x@exemple.fr', entreprise: 'Unique SA' }), { ...pre, ...envSmtp, DESTINATAIRE: 'hello@vizibili.fr', DEDUP: KV, _connecterSmtp: fSmtp2.connecter });
+verifier('renvoi du même contenu : un seul e-mail envoyé', fSmtp.journal.message.length > 0 && fSmtp2.journal.commandes.length === 0);
 
 console.log(`\n${ok} réussis, ${ko} échoués`);
 process.exit(ko ? 1 : 0);

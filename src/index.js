@@ -134,11 +134,31 @@ function securiser(reponse, preprod) {
 
 /* Déduplication : un identifiant déjà reçu dans les 24 h est ignoré (réponse « ok », aucun second envoi). */
 const CLE_DEDUP = (id) => new Request('https://dedup.vizibili.invalid/' + encodeURIComponent(id));
-async function dejaRecue(id) {
-  try { return !!(await caches.default.match(CLE_DEDUP(id))); } catch (e) { return false; }
+// Déduplication : stockage KV « DEDUP » si lié (global, fonctionne aussi sur workers.dev),
+// sinon Cache API (ne fonctionne que sur un domaine personnalisé, par centre de données).
+async function empreinte(texte) {
+  const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(texte));
+  return Array.from(new Uint8Array(h)).map((o) => o.toString(16).padStart(2, '0')).join('').slice(0, 32);
 }
-async function marquerRecue(id) {
-  try { await caches.default.put(CLE_DEDUP(id), new Response('1', { headers: { 'Cache-Control': 'max-age=86400' } })); } catch (e) { /* sans cache : pas de déduplication serveur */ }
+async function clesDedup(d) {
+  // 1. même envoi (identifiant), 2. même personne et même entreprise renvoyant une demande peu après
+  return [['id:' + d.demande_id, 86400], ['contenu:' + await empreinte(d.email.toLowerCase() + '|' + d.entreprise.toLowerCase()), 900]];
+}
+async function dejaRecue(env, cles) {
+  for (const [cle] of cles) {
+    try {
+      if (env.DEDUP ? await env.DEDUP.get(cle) : await caches.default.match(CLE_DEDUP(cle))) return cle.split(':')[0];
+    } catch (e) { /* stockage indisponible : on laisse passer plutôt que de perdre une demande */ }
+  }
+  return null;
+}
+async function marquerRecue(env, cles) {
+  for (const [cle, duree] of cles) {
+    try {
+      if (env.DEDUP) await env.DEDUP.put(cle, '1', { expirationTtl: Math.max(60, duree) });
+      else await caches.default.put(CLE_DEDUP(cle), new Response('1', { headers: { 'Cache-Control': 'max-age=' + duree } }));
+    } catch (e) { /* sans stockage : pas de déduplication serveur */ }
+  }
 }
 
 async function traiterDemande(request, env, preprod) {
@@ -173,7 +193,9 @@ async function traiterDemande(request, env, preprod) {
     if (!ok) return repondre(false, 403);
   }
 
-  if (await dejaRecue(d.demande_id)) return repondre(true, 200, { doublon: true });
+  const cles = await clesDedup(d);
+  const doublon = await dejaRecue(env, cles);
+  if (doublon) { console.log('[demande] doublon ignoré :', doublon, d.demande_id); return repondre(true, 200, { doublon: true }); }
 
   const date = new Date().toISOString();
   const test = preprod ? 'TEST ' : '';
@@ -218,7 +240,7 @@ async function traiterDemande(request, env, preprod) {
   if ((!smtp && !env.EMAIL) || !env.DESTINATAIRE || !expediteur) {
     // Préproduction sans e-mail configuré : la demande de test est acceptée et visible dans les journaux du Worker.
     console.log('[demande] e-mail non configuré :', JSON.stringify({ id: d.demande_id, test: preprod, secteur: d.secteur, objectif: d.objectif, source: d.prov_source, support: d.prov_support, campagne: d.prov_campagne, arrivee: d.prov_arrivee, clic: idClic ? idClic.split(':')[0] : 'aucun', date }));
-    if (preprod) { await marquerRecue(d.demande_id); return repondre(true); }
+    if (preprod) { await marquerRecue(env, cles); return repondre(true); }
     return repondre(false, 503);
   }
 
@@ -232,7 +254,7 @@ async function traiterDemande(request, env, preprod) {
       const { EmailMessage } = await import('cloudflare:email');
       await env.EMAIL.send(new EmailMessage(expediteur, env.DESTINATAIRE, brut));
     }
-    await marquerRecue(d.demande_id);
+    await marquerRecue(env, cles);
     return repondre(true);
   } catch (e) {
     console.log('[demande] échec d’envoi :', e && e.message);
