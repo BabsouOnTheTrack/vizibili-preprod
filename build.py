@@ -181,7 +181,7 @@ f'''
         <a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a>
         <a href="/methode/" class="btn btn-ligne">Découvrir notre méthode</a>
       </div>
-      <p class="reassurance">Entreprises locales de tous secteurs, avec une spécialité : la propreté. Basés dans les Vosges.</p>
+      <p class="reassurance">Pour les entreprises locales de tous secteurs, partout en France. Notre spécialité : la propreté.</p>
     </div>
     <div class="itineraire" role="img" aria-label="Le chemin que nous suivons : recherche Google, annonce ou fiche Google, page dédiée, demande puis tri, devis, client signé. Chaque étape est mesurée.">
       <p class="it-titre">Le chemin que nous suivons</p>
@@ -881,9 +881,9 @@ PAGES.append(page('/mentions-legales/', 'Mentions légales · ViZiBiLi', 'Mentio
   <div class="etroit page-simple">
     <h1>Mentions légales</h1>
     <h2>Éditeur du site</h2>
-    <p>Clément Vaillant-Hanne, entrepreneur individuel (EI), sous le régime de la micro-entreprise<br>Activité exercée sous le nom « ViZiBiLi »<br>SIREN : 822 090 486<br>5 Rue des Sapins, 88390 Darnieulles, France<br>Contact : <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a><br>[TÉLÉPHONE : numéro à indiquer avant publication]</p>
+    <p>Clément VAILLANT-HANNE, entrepreneur individuel (EI), sous le régime de la micro-entreprise<br>Activité exercée sous le nom « ViZiBiLi »<br>SIREN : 822 090 486<br>5 Rue des Sapins, 88390 Darnieulles, France<br>Contact : <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a><br>[TÉLÉPHONE : numéro à indiquer avant publication]</p>
     <h2>Directeur de la publication</h2>
-    <p>Monsieur Clément Vaillant-Hanne</p>
+    <p>Monsieur Clément VAILLANT-HANNE</p>
     <h2>Hébergement</h2>
     <p>Site hébergé par Cloudflare, Inc., 101 Townsend Street, San Francisco, CA 94107, États-Unis (<a href="https://www.cloudflare.com" rel="noopener">cloudflare.com</a>).</p>
     <h2>Données personnelles</h2>
@@ -899,7 +899,7 @@ PAGES.append(page('/confidentialite/', 'Politique de confidentialité · ViZiBiL
     <h1>Politique de confidentialité</h1>
     <p>Dernière mise à jour : [DATE DE PUBLICATION]</p>
     <h2>Qui est responsable de vos données ?</h2>
-    <p>Clément Vaillant-Hanne, entrepreneur individuel (EI), activité exercée sous le nom « ViZiBiLi », SIREN 822 090 486, 5 Rue des Sapins, 88390 Darnieulles, France. Contact pour toute question sur vos données : <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></p>
+    <p>Clément VAILLANT-HANNE, entrepreneur individuel (EI), activité exercée sous le nom « ViZiBiLi », SIREN 822 090 486, 5 Rue des Sapins, 88390 Darnieulles, France. Contact pour toute question sur vos données : <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></p>
     <h2>Quelles données collectons-nous ?</h2>
     <p><strong>Quand vous remplissez le formulaire de premier échange :</strong> votre nom et prénom, le nom de votre entreprise, votre e-mail, votre téléphone si vous l'indiquez, votre secteur d'activité, votre objectif principal, votre site internet si vous l'indiquez et, pour une entreprise de propreté, les prestations et le type de clients que vous choisissez de préciser.</p>
     <p><strong>Avec votre demande, nous enregistrons aussi sa provenance :</strong> la page par laquelle vous êtes arrivé et l'heure d'arrivée, le site qui vous a envoyé vers nous, la source de votre visite (par exemple une recherche Google, une annonce ou un lien), les paramètres de campagne présents dans le lien et, si vous venez d'une annonce Google, l'identifiant technique du clic, qui permet de rattacher votre demande à l'annonce. Ces informations sont conservées dans votre navigateur le temps de votre visite seulement, puis jointes à votre demande si vous l'envoyez. Elles ne permettent pas de vous suivre sur d'autres sites.</p>
