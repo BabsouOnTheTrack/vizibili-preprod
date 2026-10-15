@@ -422,7 +422,19 @@ ETAPES = [
     ("Adapter la stratégie", "Une seule correction à la fois, quand les résultats le justifient. Changer tout en même temps empêche de savoir ce qui a marché.", "des décisions expliquées, jamais des réglages au hasard."),
     ("Suivre les résultats jusqu'à leur valeur commerciale", "Des demandes aux rendez-vous, des devis aux contrats signés, et ce qu'ils rapportent réellement.", "la réponse la plus juste que permettent vos données à la seule question qui compte : ce que vous coûte et vous rapporte un nouveau client. Les limites de la mesure vous sont dites clairement."),
 ]
-frise = '\n'.join(f'      <li><h3>{t}</h3><p>{d}</p><p class="obtenu"><strong>Ce que vous obtenez :</strong> {o}</p></li>' for t, d, o in ETAPES)
+PHASES = ['Comprendre', 'Comprendre', 'Préparer', 'Préparer', 'Lancer', 'Lancer', 'Améliorer', 'Améliorer']
+ICONE_OK = '<svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="currentColor"/><path d="M5.8 10.3l2.7 2.7 5.7-5.9" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+frise = '\n'.join(
+    f'''      <li class="fe">
+        <span class="fe-point" aria-hidden="true">{i:02d}</span>
+        <article class="fe-carte">
+          <p class="fe-phase">Étape {i} · {PHASES[i-1]}</p>
+          <h3>{t}</h3>
+          <p class="fe-texte">{d}</p>
+          <div class="fe-obtenu"><p class="fe-obtenu-titre">{ICONE_OK}Ce que vous obtenez</p><p>{o[0].upper() + o[1:]}</p></div>
+        </article>
+      </li>''' for i, (t, d, o) in enumerate(ETAPES, 1))
+legende_phases = ''.join(f'<li><span>{n}</span> {p}<small>Étapes {a} et {b}</small></li>' for n, (p, a, b) in enumerate([('Comprendre', 1, 2), ('Préparer', 3, 4), ('Lancer', 5, 6), ('Améliorer', 7, 8)], 1))
 PAGES.append(page('/methode/', 'Notre méthode pour trouver des clients sur Google · ViZiBiLi',
     "Huit étapes, de votre activité jusqu'à la valeur des contrats signés : une méthode qui mesure avant de promettre et s'adapte à chaque entreprise.",
 f'''
@@ -437,8 +449,9 @@ f'''
 
 <section class="fond-chaud">
   <div class="contenu">
-    <div class="titre-section"><h2>Huit étapes, de votre activité jusqu'à la valeur des contrats signés.</h2></div>
-    <ol class="frise">
+    <div class="titre-section"><h2>Huit étapes, de votre activité jusqu'à la valeur des contrats signés.</h2><p>Quatre temps, toujours dans le même ordre. Chaque étape vous laisse quelque chose de concret entre les mains.</p></div>
+    <ol class="fe-phases" aria-label="Les quatre temps de la méthode">{legende_phases}</ol>
+    <ol class="frise-etapes">
 {frise}
     </ol>
   </div>

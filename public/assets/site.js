@@ -146,3 +146,30 @@
       });
   });
 })();
+
+/* Méthode : frise des huit étapes, apparition et ligne de progression au défilement */
+(function () {
+  var frise = document.querySelector('.frise-etapes');
+  if (!frise) return;
+  var calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var etapes = frise.querySelectorAll('.fe');
+  if (calme || !('IntersectionObserver' in window)) {
+    etapes.forEach(function (e) { e.classList.add('vu'); });
+    return;
+  }
+  document.documentElement.classList.add('js-anim');
+  var obs = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('vu'); obs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -15% 0px', threshold: 0.15 });
+  etapes.forEach(function (e) { obs.observe(e); });
+  var attente = false;
+  function maj() {
+    attente = false;
+    var r = frise.getBoundingClientRect();
+    var p = (window.innerHeight * 0.65 - r.top) / r.height;
+    frise.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+  window.addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(maj); } }, { passive: true });
+  window.addEventListener('resize', maj);
+  maj();
+})();

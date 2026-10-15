@@ -365,3 +365,71 @@ fieldset.complement-proprete[hidden] { display: none; }
 .pour-qui h2 { font-size: 1.4rem; }
 .pour-qui p { font-size: 16.5px; }
 .bandeau-test { background: var(--orange-vif); color: var(--encre); text-align: center; font-weight: 600; font-size: 14px; padding: 10px 16px; }
+
+/* ---------- Méthode : frise des huit étapes (V1.2) ---------- */
+.fe-phases { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 8px 0 56px; counter-reset: none; }
+.fe-phases li { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; padding: 14px 16px; background: var(--papier); border: 1px solid var(--trait); border-radius: 14px; font-family: 'Archivo', system-ui, sans-serif; font-weight: 700; font-size: 1.02rem; color: var(--encre); }
+.fe-phases li span { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--surligne); color: var(--orange-texte); font-size: .85rem; font-weight: 800; }
+.fe-phases li small { flex-basis: 100%; font-family: 'Inter', system-ui, sans-serif; font-weight: 400; font-size: .82rem; color: var(--texte); }
+.fe-phases li:not(:last-child)::after { content: ''; position: absolute; right: -10px; top: 50%; width: 8px; height: 8px; border-top: 2px solid var(--orange); border-right: 2px solid var(--orange); transform: translateY(-50%) rotate(45deg); }
+
+.frise-etapes { --p: 1; list-style: none; position: relative; display: grid; gap: 0; margin: 0; padding: 0; }
+.frise-etapes::before, .frise-etapes::after { content: ''; position: absolute; left: 50%; top: 28px; bottom: 28px; width: 2px; margin-left: -1px; border-radius: 2px; }
+.frise-etapes::before { background: var(--trait); }
+.frise-etapes::after { background: linear-gradient(var(--orange), var(--orange-vif)); transform-origin: top; transform: scaleY(var(--p)); }
+.fe { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 88px minmax(0, 1fr); align-items: start; }
+.fe + .fe { margin-top: -64px; }
+.fe-point { grid-column: 2; grid-row: 1; justify-self: center; z-index: 1; display: grid; place-items: center; width: 56px; height: 56px; border-radius: 50%; background: var(--encre); color: #fff; font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: .02em; box-shadow: 0 0 0 6px var(--papier-chaud); transition: background .4s ease, transform .4s ease; }
+.fe.vu .fe-point { background: var(--orange); transform: scale(1.06); }
+.fe-carte { grid-row: 1; position: relative; padding: 26px 28px 24px; background: var(--papier); border: 1px solid var(--trait); border-radius: 18px; box-shadow: 0 1px 2px rgba(20,20,20,.04), 0 18px 40px -22px rgba(20,20,20,.22); transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s ease, box-shadow .3s ease, border-color .3s ease; }
+.fe:nth-child(odd) .fe-carte { grid-column: 1; }
+.fe:nth-child(even) .fe-carte { grid-column: 3; }
+.fe-carte::before { content: ''; position: absolute; top: 20px; width: 14px; height: 14px; background: var(--papier); border: 1px solid var(--trait); transform: rotate(45deg); }
+.fe:nth-child(odd) .fe-carte::before { right: -8px; border-left: 0; border-bottom: 0; }
+.fe:nth-child(even) .fe-carte::before { left: -8px; border-right: 0; border-top: 0; }
+.fe-carte:hover { transform: translateY(-3px); border-color: #E2C9B3; box-shadow: 0 1px 2px rgba(20,20,20,.04), 0 24px 48px -22px rgba(20,20,20,.28); }
+.fe-phase { margin: 0 0 8px; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--orange-texte); }
+.fe-carte h3 { margin: 0 0 8px; font-family: 'Archivo', system-ui, sans-serif; font-weight: 700; font-size: 1.28rem; line-height: 1.25; color: var(--encre); }
+.fe-texte { margin: 0; font-size: 15.5px; line-height: 1.6; color: var(--texte); }
+.fe-obtenu { margin-top: 18px; padding: 14px 16px; background: var(--surligne); border-radius: 12px; }
+.fe-obtenu-titre { display: flex; align-items: center; gap: 8px; margin: 0 0 4px; color: var(--orange); font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 1.05rem; }
+.fe-obtenu p:last-child { margin: 0; font-size: 15px; line-height: 1.55; color: var(--encre); }
+
+/* Apparition au défilement, seulement si le JavaScript est actif */
+.js-anim .fe .fe-carte { opacity: 0; transform: translateY(24px); }
+.js-anim .fe.vu .fe-carte { opacity: 1; transform: none; }
+.js-anim .fe.vu .fe-carte:hover { transform: translateY(-3px); }
+
+@media (max-width: 860px) {
+  .fe-phases { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 40px; }
+  .fe-phases li:nth-child(2)::after { display: none; }
+  .frise-etapes::before, .frise-etapes::after { left: 22px; }
+  .fe { grid-template-columns: 44px minmax(0, 1fr); column-gap: 16px; }
+  .fe + .fe { margin-top: 20px; }
+  .fe-point { grid-column: 1; width: 44px; height: 44px; font-size: .95rem; box-shadow: 0 0 0 5px var(--papier-chaud); }
+  .fe:nth-child(odd) .fe-carte, .fe:nth-child(even) .fe-carte { grid-column: 2; }
+  .fe:nth-child(odd) .fe-carte::before, .fe:nth-child(even) .fe-carte::before { left: -8px; right: auto; border: 1px solid var(--trait); border-right: 0; border-top: 0; }
+  .fe-carte { padding: 20px 20px 18px; }
+  .fe-carte h3 { font-size: 1.15rem; }
+}
+@media (max-width: 860px) {
+  .fe-phases li::after { display: none; }
+  .fe-phases li { padding: 12px 12px; font-size: .95rem; }
+  .fe { grid-template-columns: 40px minmax(0, 1fr); column-gap: 12px; }
+  .fe-point { width: 40px; height: 40px; }
+  .frise-etapes::before, .frise-etapes::after { left: 20px; }
+  .fe-carte { padding: 18px 16px 16px; }
+  .fe-obtenu { padding: 12px; }
+  .fond-chaud .frise-etapes .fe-obtenu-titre { gap: 6px; font-size: 1.18rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-anim .fe .fe-carte { opacity: 1; transform: none; }
+  .frise-etapes::after { transform: none; }
+  .fe-point, .fe-carte { transition: none; }
+}
+/* Frise : couleurs protégées de la règle « texte noir sur crème » */
+.fond-chaud .frise-etapes .fe-phase { color: var(--orange-texte); }
+.fond-chaud .frise-etapes .fe-obtenu-titre { color: var(--orange); font-size: 1.2rem; }
+.fond-chaud .frise-etapes .fe-point { color: #fff; }
+.fond-chaud .frise-etapes .fe.vu .fe-point { color: var(--encre); }
+.fond-chaud .fe-phases li span { color: var(--orange-texte); }
