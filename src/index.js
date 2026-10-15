@@ -185,7 +185,7 @@ async function traiterDemande(request, env, preprod) {
   if (!RE_EMAIL.test(d.email)) return repondre(false, 422);
   if (d.telephone && !RE_TEL.test(d.telephone)) return repondre(false, 422);
   if (!SECTEURS.includes(d.secteur) || !OBJECTIFS.includes(d.objectif)) return repondre(false, 422);
-  if (!RE_ID.test(d.demande_id)) d.demande_id = 'VZ-' + new Date().toISOString().slice(0, 10).replace(/-/g, '') + '-' + crypto.randomUUID().slice(0, 8).toUpperCase();
+  if (!RE_ID.test(d.demande_id)) d.demande_id = 'VZ-' + heureParis(new Date()).jour.replace(/-/g, '') + '-' + crypto.randomUUID().slice(0, 8).toUpperCase();
 
   if (env.TURNSTILE_SECRET) {
     const jeton = (fd.get('cf-turnstile-response') || '').toString();
@@ -197,13 +197,13 @@ async function traiterDemande(request, env, preprod) {
   const doublon = await dejaRecue(env, cles);
   if (doublon) { console.log('[demande] doublon ignoré :', doublon, d.demande_id); return repondre(true, 200, { doublon: true }); }
 
-  const date = new Date().toISOString();
+  const date = new Date().toISOString(), maintenant = heureParis(date), arrivee = heureParis(d.prov_date_arrivee);
   const test = preprod ? 'TEST ' : '';
   const idClic = d.prov_gclid ? 'gclid:' + d.prov_gclid : d.prov_gbraid ? 'gbraid:' + d.prov_gbraid : d.prov_wbraid ? 'wbraid:' + d.prov_wbraid : '';
   // Même ordre de colonnes que le modèle VIZIBILI_REGISTRE_DEMANDES_modele.csv
-  const ligneRegistre = [test + d.demande_id, preprod ? 'Oui' : 'Non', date.slice(0, 10), d.entreprise, d.nom, d.email, d.telephone, d.site, d.secteur, d.objectif,
+  const ligneRegistre = [test + d.demande_id, preprod ? 'Oui' : 'Non', maintenant.jour, d.entreprise, d.nom, d.email, d.telephone, d.site, d.secteur, d.objectif,
     d.prestations.join(' | '), d.prov_source || 'inconnue', d.prov_support, d.prov_campagne, d.prov_terme, d.prov_contenu, d.prov_arrivee,
-    d.prov_referent, d.prov_date_arrivee, idClic, 'Nouveau', '', '', '', '', '', '', '', date.slice(0, 10), 'Vérifier le contact']
+    d.prov_referent, arrivee.registre, idClic, 'Nouveau', '', '', '', '', '', '', '', maintenant.jour, 'Vérifier le contact']
     .map((v) => (v || '').toString().replace(/[\t\r\n]+/g, ' ')).join('\t');
   const lignes = [
     (preprod ? 'DEMANDE DE TEST (préproduction) : ne pas compter comme prospect réel.' : 'Nouvelle demande de premier échange'),
@@ -227,9 +227,9 @@ async function traiterDemande(request, env, preprod) {
     `Contenu : ${d.prov_contenu || '(aucun)'}`,
     `Page d'arrivée : ${d.prov_arrivee || '(inconnue)'}`,
     `Site référent : ${d.prov_referent || '(aucun)'}`,
-    `Arrivée sur le site : ${d.prov_date_arrivee || '(inconnue)'}`,
+    `Arrivée sur le site : ${arrivee.lisible || '(inconnue)'}`,
     `Identifiant de clic Google : ${idClic || 'aucun'}`,
-    `Date : ${date}`,
+    `Date : ${maintenant.lisible}`,
     '',
     'Ligne à coller dans le registre des demandes (colonnes séparées par des tabulations) :',
     ligneRegistre
@@ -377,3 +377,13 @@ function mime(de, a, sujet, texte, repondreA) {
 }
 
 export { traiterDemande, mime, envoyerSmtp, REDIRECTIONS };
+
+/** Heure de Paris (heure d'été comprise) : « jour » AAAA-MM-JJ, « registre » AAAA-MM-JJ HH:MM:SS, « lisible » JJ/MM/AAAA à HH:MM:SS (heure de Paris). */
+export function heureParis(x) {
+  const t = x instanceof Date ? x : new Date(x || NaN);
+  if (isNaN(t)) return { jour: '', registre: '', lisible: '' };
+  const p = Object.fromEntries(new Intl.DateTimeFormat('fr-FR', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hourCycle: 'h23' })
+    .formatToParts(t).map(o => [o.type, o.value]));
+  const jour = `${p.year}-${p.month}-${p.day}`, heure = `${p.hour}:${p.minute}:${p.second}`;
+  return { jour, registre: `${jour} ${heure}`, lisible: `${p.day}/${p.month}/${p.year} à ${heure} (heure de Paris)` };
+}
