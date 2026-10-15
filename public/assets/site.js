@@ -187,3 +187,15 @@
     entrees.forEach(function (en) { barre.classList.toggle('cachee', en.isIntersecting); });
   }, { threshold: 0 }).observe(bouton);
 })();
+
+/* Mini-parcours « où ça casse » : la progression avance puis le maillon casse, à l'apparition de chaque carte */
+(function () {
+  var signaux = document.querySelectorAll('.symptome .signal');
+  if (!signaux.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('sig-anim');
+  var obs = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('vu'); obs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.4 });
+  signaux.forEach(function (s) { obs.observe(s); });
+})();

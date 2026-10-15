@@ -120,35 +120,50 @@ def parcours(etapes, label):
     return f'<ol class="parcours" aria-label="{label}">' + ''.join(items) + '</ol>'
 
 
+ICO_LOUPE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>'
+ICO_CLIENT = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.2" r="4" fill="currentColor"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6z" fill="currentColor"/></svg>'
+ICO_COCHE = '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.6 6.3l2.2 2.2 4.6-4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+# Maillon de chaîne cassé : deux demi-maillons écartés et trois éclats. Le symbole le plus lisible pour « le lien est rompu ».
+ICO_RUPTURE = ('<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">'
+               '<path d="M13.2 10.4l-2.6-2.6a4.6 4.6 0 0 0-6.5 6.5l2.6 2.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
+               '<path d="M18.8 21.6l2.6 2.6a4.6 4.6 0 0 0 6.5-6.5l-2.6-2.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
+               '<path class="eclats" d="M12.5 19.5l-3 3M15.5 22.5l-.6 4M19.5 12.5l3-3M16.5 9.5l.6-4" stroke-width="2.4" stroke-linecap="round"/></svg>')
+
+
 def chemin_casse(etapes, casse, legende):
-    """Mini-parcours : où le chemin casse. casse = index du segment rompu, ou None si rien n'est mesuré."""
+    """Mini-parcours ludique : progression orange jusqu'à la cassure, maillon rompu, suite perdue en pointillés.
+    casse = index du segment rompu (entre etapes[casse] et etapes[casse + 1]), ou None si rien n'est mesuré."""
     n = len(etapes)
-    w, y, x0, x1 = 300, 18, 10, 290
-    pas = (x1 - x0) / (n - 1)
-    xs = [x0 + i * pas for i in range(n)]
-    seg = []
-    for i in range(n - 1):
-        a, b = xs[i] + 6, xs[i + 1] - 6
-        if casse is None:
-            seg.append(f'<line class="flou" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
-        elif i == casse:
-            m = (a + b) / 2
-            seg.append(f'<circle class="halo" cx="{m:.1f}" cy="{y}" r="13"/>'
-                       f'<line class="rompu" x1="{a:.1f}" y1="{y}" x2="{m - 5:.1f}" y2="{y}"/>'
-                       f'<polyline class="eclair" points="{m - 5:.1f},{y} {m - 1:.1f},{y - 7} {m + 2:.1f},{y + 7} {m + 5:.1f},{y}"/>'
-                       f'<line class="perdu" x1="{m + 5:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
-        elif i > casse:
-            seg.append(f'<line class="perdu" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
-        else:
-            seg.append(f'<line class="ok" x1="{a:.1f}" y1="{y}" x2="{b:.1f}" y2="{y}"/>')
-    pts = []
-    for i, x in enumerate(xs):
-        etat = 'flou' if casse is None else ('ok' if i <= casse else 'perdu')
-        pts.append(f'<circle class="pt {etat}" cx="{x:.1f}" cy="{y}" r="5"/>')
-    lab = (f'<text x="{x0}" y="44" class="lab">{etapes[0]}</text>'
-           f'<text x="{x1}" y="44" class="lab" text-anchor="end">{etapes[-1]}</text>')
-    svg = f'<svg class="chemin-casse" viewBox="0 0 {w} 50" aria-hidden="true" focusable="false">{"".join(seg)}{"".join(pts)}{lab}</svg>'
-    return f'<div class="signal">{svg}<p class="ou">{legende}</p></div>'
+    mesure = casse is not None
+    # Le tronçon rompu est plus long que les autres : la cassure respire et saute aux yeux.
+    poids = [2.8 if (mesure and k == casse) else 1 for k in range(n - 1)]
+    cumul = [0.0]
+    for p_ in poids:
+        cumul.append(cumul[-1] + p_)
+    pos = lambda i: cumul[i] * 100 / cumul[-1]
+    b = (pos(casse) + pos(casse + 1)) / 2 if mesure else 50
+    bord = ' bord-g' if b < 22 else (' bord-d' if b > 78 else '')
+    morceaux = []
+    if mesure:
+        morceaux.append(f'<span class="rail-ok" style="width:{b:.2f}%"></span>')
+        morceaux.append(f'<span class="rail-perdu" style="left:{b:.2f}%"></span>')
+    else:
+        morceaux.append('<span class="rail-perdu" style="left:0"></span>')
+    for i in range(1, n - 1):
+        if not mesure and abs(pos(i) - 50) < 14:
+            continue  # sous le point d'interrogation central
+        etat = 'flou' if not mesure else ('ok' if i <= casse else 'perdu')
+        contenu = ICO_COCHE if etat == 'ok' else ('?' if etat == 'flou' else '')
+        morceaux.append(f'<span class="jalon {etat}" style="left:{pos(i):.2f}%;--d:{i}">{contenu}</span>')
+    morceaux.append(f'<span class="borne depart {"ok" if mesure else "flou"}" style="left:0">{ICO_LOUPE}</span>')
+    morceaux.append(f'<span class="borne arrivee {"perdu" if mesure else "flou"}" style="left:100%">{ICO_CLIENT}</span>')
+    if mesure:
+        morceaux.append(f'<span class="rupture{bord}" style="left:{b:.2f}%"><span class="bulle">Ça casse ici</span><span class="badge">{ICO_RUPTURE}</span></span>')
+    else:
+        morceaux.append(f'<span class="rupture inconnu" style="left:50%"><span class="bulle">Aucune mesure</span><span class="badge">?</span></span>')
+    rail = f'<div class="rail{" sans-mesure" if not mesure else ""}" aria-hidden="true">{"".join(morceaux)}</div>'
+    bornes = f'<div class="bornes" aria-hidden="true"><span>{etapes[0]}</span><span>{etapes[-1]}</span></div>'
+    return f'<div class="signal">{rail}{bornes}<p class="ou">{legende}</p></div>'
 
 
 def symptome(titre, texte, etapes, casse, legende):

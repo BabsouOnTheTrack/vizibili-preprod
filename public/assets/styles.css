@@ -271,19 +271,56 @@ footer.pied a { color: var(--texte-sur-encre); }
 /* ===== SYMPTÔMES : où le chemin casse ===== */
 .symptomes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
 .symptome { background: var(--papier); border: 1px solid var(--trait); border-radius: var(--rayon-carte); padding: 22px 24px 26px; display: flex; flex-direction: column; }
-.symptome .signal { background: var(--papier-chaud); border-radius: var(--rayon); padding: 12px 14px 10px; margin-bottom: 20px; }
-.chemin-casse { display: block; width: 100%; height: auto; overflow: visible; }
-.chemin-casse line { stroke-width: 2.5; stroke-linecap: round; }
-.chemin-casse .ok { stroke: var(--encre); fill: var(--encre); }
-.chemin-casse .perdu { stroke: var(--pin-inactif); fill: var(--papier); stroke-dasharray: 2 5; }
-.chemin-casse circle.perdu { stroke-dasharray: none; stroke-width: 2; }
-.chemin-casse .flou { stroke: var(--texte-2); fill: var(--papier); stroke-dasharray: 2 5; }
-.chemin-casse circle.flou { stroke-dasharray: none; stroke-width: 2; }
-.chemin-casse .rompu { stroke: var(--encre); }
-.chemin-casse .halo { fill: var(--surligne); stroke: var(--orange); stroke-width: 1.5; }
-.chemin-casse .eclair { fill: none; stroke: var(--orange-texte); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
-.chemin-casse .lab { font-family: 'Inter', system-ui, sans-serif; font-size: 10.5px; fill: var(--texte-2); }
-.symptome .ou { margin-top: 8px; font-size: 14px; font-weight: 600; color: var(--orange-texte); }
+.symptome .signal { background: var(--papier-chaud); border-radius: var(--rayon); padding: 44px 26px 12px; margin-bottom: 20px; }
+/* Mini-parcours « où ça casse » (refonte ludique du 15/10/2026) */
+.rail { position: relative; height: 34px; margin: 0 4px; }
+.rail > span { position: absolute; top: 50%; }
+.rail-ok, .rail-perdu { height: 6px; margin-top: -3px; border-radius: 3px; }
+.rail-ok { left: 0; background: linear-gradient(90deg, var(--orange), var(--orange-vif)); transform-origin: left center; }
+.rail-perdu { right: 0; background: repeating-linear-gradient(90deg, #CFC6BB 0 6px, transparent 6px 11px); }
+.jalon { width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; display: grid; place-items: center; font: 700 11px/1 'Inter', system-ui, sans-serif; }
+.jalon svg { width: 12px; height: 12px; display: block; }
+.symptome .rail .jalon.ok { background: var(--orange); color: var(--encre); box-shadow: 0 0 0 3px var(--papier-chaud); }
+.symptome .rail .jalon.perdu { background: var(--papier); border: 2px solid #CFC6BB; }
+.symptome .rail .jalon.flou { background: var(--papier); border: 2px dashed #B9AFA4; color: var(--texte-2); }
+.borne { width: 30px; height: 30px; margin: -15px 0 0 -15px; border-radius: 50%; display: grid; place-items: center; z-index: 1; }
+.borne svg { width: 16px; height: 16px; display: block; }
+.symptome .rail .borne.ok { background: var(--orange); color: var(--encre); box-shadow: 0 0 0 3px var(--papier-chaud); }
+.symptome .rail .borne.perdu { background: var(--papier); color: #CFC6BB; border: 2px dashed #CFC6BB; }
+.symptome .rail .borne.flou { background: var(--papier); color: #B9AFA4; border: 2px dashed #B9AFA4; }
+.rupture { z-index: 2; width: 0; height: 0; }
+.symptome .rail .rupture .badge { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; background: var(--encre); border: 0; color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 5px var(--papier-chaud), 0 6px 14px -6px rgba(20,20,20,.45); }
+.rupture .badge svg { width: 28px; height: 28px; display: block; }
+.symptome .rail .rupture .badge .eclats { stroke: var(--orange-vif); }
+.rupture .badge::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2.5px solid var(--orange-vif); opacity: 0; }
+.symptome .rail .rupture.inconnu .badge { font: 800 22px/1 'Archivo', system-ui, sans-serif; background: var(--papier); color: var(--encre); border: 2.5px dashed var(--texte-2); }
+.rupture .bulle { position: absolute; bottom: 30px; left: 0; transform: translateX(-50%); white-space: nowrap; background: var(--encre); font: 700 12px/1 'Inter', system-ui, sans-serif; letter-spacing: .01em; padding: 6px 9px; border-radius: 7px; }
+.rupture .bulle::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border: 5px solid transparent; border-top-color: var(--encre); }
+.rupture.bord-g .bulle { transform: translateX(-24px); }
+.rupture.bord-g .bulle::after { left: 24px; }
+.rupture.bord-d .bulle { transform: translateX(calc(-100% + 24px)); }
+.rupture.bord-d .bulle::after { left: auto; right: 19px; margin-left: 0; }
+.symptome .rupture .bulle, .fond-chaud .symptome .rupture .bulle { color: #fff; }
+.bornes { display: flex; justify-content: space-between; margin: 8px -6px 0; font: 600 11.5px/1.2 'Inter', system-ui, sans-serif; }
+.symptome .bornes span, .fond-chaud .symptome .bornes span { color: var(--texte-2); }
+/* Animation à l'apparition : la progression avance, puis le maillon casse */
+.sig-anim .signal .rail-ok { transform: scaleX(0); transition: transform .8s cubic-bezier(.3,.7,.3,1); }
+.sig-anim .signal .jalon.ok { transform: scale(0); transition: transform .3s cubic-bezier(.3,1.6,.5,1) calc(var(--d) * .13s); }
+.sig-anim .signal .rupture .badge, .sig-anim .signal .rupture .bulle { opacity: 0; }
+.sig-anim .signal.vu .rail-ok { transform: none; }
+.sig-anim .signal.vu .jalon.ok { transform: none; }
+.sig-anim .signal.vu .rupture .badge { animation: vz-casse .55s cubic-bezier(.3,1.6,.5,1) .75s both; }
+.sig-anim .signal.vu .rupture .badge::after { animation: vz-onde 1.1s ease-out 1.15s 2; }
+.sig-anim .signal.vu .rupture .bulle { animation: vz-bulle .35s ease-out 1.05s both; }
+.sig-anim .signal.vu .rupture.inconnu .badge { animation-delay: .15s; }
+.sig-anim .signal.vu .rupture.inconnu .bulle { animation-delay: .45s; }
+@keyframes vz-casse { 0% { opacity: 0; transform: scale(.3) rotate(-25deg); } 60% { opacity: 1; transform: scale(1.18) rotate(8deg); } 80% { transform: scale(.95) rotate(-4deg); } 100% { opacity: 1; transform: none; } }
+@keyframes vz-onde { 0% { opacity: .9; transform: scale(.8); } 100% { opacity: 0; transform: scale(1.5); } }
+@keyframes vz-bulle { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+.symptome:hover .rupture .badge { animation: vz-secousse .45s ease-in-out; }
+@keyframes vz-secousse { 0%,100% { rotate: 0deg; } 25% { rotate: -10deg; } 75% { rotate: 10deg; } }
+@media (prefers-reduced-motion: reduce) { .symptome:hover .rupture .badge { animation: none; } }
+.symptome .ou { margin-top: 12px; padding-top: 10px; border-top: 1px solid rgba(20,20,20,.08); font-size: 14px; font-weight: 700; color: var(--encre); }
 .symptome h3 { font-size: 1.15rem; line-height: 1.25; margin-bottom: 8px; }
 .symptome > p { color: var(--texte-2); font-size: 15.5px; }
 
@@ -332,8 +369,7 @@ footer.pied a { color: var(--texte-sur-encre); }
 .fond-chaud :is(p, li, span, cite, small, strong, a:not(.btn)) { color: var(--encre); }
 .fond-chaud .constat p { color: var(--papier); }               /* le bandeau noir garde son texte blanc */
 .fond-chaud .etiquette.en-cours::before { border-color: var(--orange-texte); }
-.symptome .ou, .chemin-casse .lab { color: var(--encre); fill: var(--encre); }
-blockquote, blockquote cite { color: var(--encre); }
+.symptome .ou, blockquote, blockquote cite { color: var(--encre); }
 .encart, .encart :is(p, li, strong, a), .encart .ecrire { color: var(--encre); }
 .article .exemple, .article .exemple strong { color: var(--encre); }
 .parcours li.fin { color: var(--encre); }
