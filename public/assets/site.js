@@ -28,8 +28,12 @@
   function lireProvenance() {
     try { return JSON.parse(sessionStorage.getItem(CLE) || 'null'); } catch (e) { return null; }
   }
-  if (!lireProvenance()) {
-    var p = new URLSearchParams(location.search);
+  /* Première page de la visite, OU arrivée par une nouvelle campagne (annonce, lien suivi) :
+     un clic publicitaire ou des paramètres de campagne remplacent toujours la provenance précédente. */
+  var pUrl = new URLSearchParams(location.search);
+  var nouvelleCampagne = ['gclid', 'gbraid', 'wbraid', 'utm_source', 'utm_medium', 'utm_campaign'].some(function (k) { return pUrl.get(k); });
+  if (!lireProvenance() || nouvelleCampagne) {
+    var p = pUrl;
     var ref = '';
     try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) { ref = ''; }
     if (ref === location.hostname) ref = '';
