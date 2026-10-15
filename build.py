@@ -205,12 +205,12 @@ f'''
       <p>Beaucoup d'entreprises sont présentes sur Google sans savoir ce que cela leur rapporte. Vous vous reconnaissez peut-être dans l'une de ces situations :</p>
     </div>
     <div class="symptomes">
-{symptome("Des visites sans demandes", "Des visites sur votre site, mais très peu de demandes.", CH_A, 2, "Ça casse entre la page et la demande")}
-{symptome("Une publicité sans résultat clair", "Une publicité qui dépense chaque mois, sans demande sérieuse au bout.", CH_A, 1, "Ça casse entre l'annonce et la demande")}
-{symptome("Des formulaires sans suite", "Des formulaires reçus, puis jamais transformés en devis.", CH_A, 3, "Ça casse entre la demande et le devis")}
 {symptome("Des demandes hors sujet", "Des demandes qui ne correspondent pas à ce que vous vendez.", CH_A, 0, "Ça casse dès la recherche ciblée")}
-{symptome("Un coût inconnu", "Aucune idée de ce que vous coûte un nouveau client.", CH_A, None, "Rien n'est mesuré, d'un bout à l'autre")}
+{symptome("Une publicité sans résultat clair", "Une publicité qui dépense chaque mois, sans demande sérieuse au bout.", CH_A, 1, "Ça casse entre l'annonce et la demande")}
+{symptome("Des visites sans demandes", "Des visites sur votre site, mais très peu de demandes.", CH_A, 2, "Ça casse entre la page et la demande")}
+{symptome("Des formulaires sans suite", "Des formulaires reçus, puis jamais transformés en devis.", CH_A, 3, "Ça casse entre la demande et le devis")}
 {symptome("Aucun lien avec vos encaissements", "Aucun lien clair entre ce que vous dépensez et ce que vous encaissez.", CH_A, 4, "Ça casse entre le devis et le client")}
+{symptome("Un coût inconnu", "Aucune idée de ce que vous coûte un nouveau client.", CH_A, None, "Rien n'est mesuré, d'un bout à l'autre")}
     </div>
     <div class="constat">
       <p>Le problème n'est presque jamais un seul outil. C'est le chemin entier, de la recherche jusqu'à la signature, que personne ne regarde.</p>
@@ -330,12 +330,12 @@ f'''
   <div class="contenu">
     <div class="titre-section"><h2>Vous connaissez sûrement l'une de ces situations.</h2></div>
     <div class="symptomes">
-{symptome("Des demandes ponctuelles", "Vous cherchez des contrats d'entretien réguliers, mais vous recevez surtout des demandes ponctuelles.", CH_N, 0, "Ça casse dès la recherche ciblée")}
 {symptome("Tout repose sur le bouche-à-oreille", "Votre activité dépend presque entièrement du bouche-à-oreille.", CH_N, 0, "Aucune entrée depuis Google")}
+{symptome("Des demandes ponctuelles", "Vous cherchez des contrats d'entretien réguliers, mais vous recevez surtout des demandes ponctuelles.", CH_N, 0, "Ça casse dès la recherche ciblée")}
 {symptome("Des demandes hors zone ou hors métier", "Des demandes arrivent pour des prestations que vous ne faites pas, ou hors de votre zone.", CH_N, 1, "Ça casse au tri des demandes")}
+{symptome("Petits ménages ou bureaux ?", "Dix demandes de petits ménages ne valent pas un contrat de bureaux, mais rien ne vous permet de faire la différence avant de vous déplacer.", CH_N, 1, "Ça casse avant la visite sur place")}
 {symptome("Des devis sans réponse", "Des prospects demandent un devis, puis ne répondent plus.", CH_N, 3, "Ça casse entre le devis et le contrat")}
 {symptome("Une visibilité sans retour connu", "Vous payez pour être visible sans savoir ce que cela vous rapporte réellement.", CH_N, None, "Rien n'est mesuré, d'un bout à l'autre")}
-{symptome("Petits ménages ou bureaux ?", "Dix demandes de petits ménages ne valent pas un contrat de bureaux, mais rien ne vous permet de faire la différence avant de vous déplacer.", CH_N, 1, "Ça casse avant la visite sur place")}
     </div>
     <div class="constat">
       <p>Ce ne sont pas des fatalités du métier. Ce sont des signaux que le chemin entre la recherche et le contrat n'est pas piloté.</p>
