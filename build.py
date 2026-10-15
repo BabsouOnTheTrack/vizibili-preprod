@@ -12,7 +12,7 @@ SITE = 'https://vizibili.fr'
 TURNSTILE = os.environ.get('TURNSTILE_SITE_KEY', '').strip()
 LOGO = '/assets/logo-vizibili.png'
 
-NAV = [('/methode/', 'Méthode'), ('/entreprises-de-nettoyage/', 'Nettoyage'), ('/offre/', 'Offre'),
+NAV = [('/methode/', 'Méthode'), ('/entreprises-de-nettoyage/', 'Spécialité nettoyage'), ('/offre/', 'Offre'),
        ('/cas-clients/', 'Cas clients'), ('/a-propos/', 'À propos')]
 
 ORG = {
@@ -181,7 +181,7 @@ f'''
         <a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a>
         <a href="/methode/" class="btn btn-ligne">Découvrir notre méthode</a>
       </div>
-      <p class="reassurance">Pour les entreprises locales de tous secteurs, partout en France. Notre spécialité : la propreté.</p>
+      <p class="reassurance">Pour les entreprises locales de tous secteurs, partout en France. Notre spécialité : les entreprises de nettoyage et de services d'entretien.</p>
     </div>
     <div class="itineraire" role="img" aria-label="Le chemin que nous suivons : recherche Google, annonce ou fiche Google, page dédiée, demande puis tri, devis, client signé. Chaque étape est mesurée.">
       <p class="it-titre">Le chemin que nous suivons</p>
