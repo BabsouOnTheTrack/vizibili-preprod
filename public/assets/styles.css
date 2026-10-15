@@ -43,7 +43,9 @@ img { max-width: 100%; }
 
 /* ===== EN-TÊTE ===== */
 .site-header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 14px 6vw; border-bottom: 1px solid var(--trait); background: var(--papier); position: relative; z-index: 20; }
-.site-header .logo img { height: 52px; width: auto; display: block; }
+.site-header .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.site-header .logo-mark { height: 46px; width: auto; display: block; }
+.site-header .logo-nom { font-family: 'Archivo', system-ui, sans-serif; font-weight: 800; font-size: 25px; letter-spacing: -0.015em; color: var(--encre); white-space: nowrap; }
 .site-nav { display: flex; gap: 28px; font-size: 15px; font-weight: 500; }
 .site-nav a { text-decoration: none; color: var(--texte-2); padding-bottom: 4px; border-bottom: 2px solid transparent; }
 .site-nav a[aria-current="page"] { color: var(--encre); border-bottom-color: var(--orange); }
@@ -256,7 +258,8 @@ footer.pied a { color: var(--texte-sur-encre); }
 @media (max-width: 640px) {
   section { padding: 56px 24px; }
   .site-header { padding: 10px 16px; }
-  .site-header .logo img { height: 44px; }
+  .site-header .logo-mark { height: 38px; }
+  .site-header .logo-nom { font-size: 22px; }
   .grille-3, .grille-4, .grille-2, .modules, .preuves, .differences, .ressources, .cas .blocs { grid-template-columns: 1fr; }
   .cas, .preuve, .formulaire, .encart { padding: 24px 20px; }
   .bloc-encre { padding: 32px 22px; }

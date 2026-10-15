@@ -12,6 +12,9 @@ RACINE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public')
 SITE = 'https://vizibili.fr'
 TURNSTILE = os.environ.get('TURNSTILE_SITE_KEY', '').strip()
 LOGO = '/assets/logo-vizibili.png'
+OG_IMAGE = '/assets/og-vizibili.png'
+# Logo vectoriel sans fond (15/10/2026), redessiné d'après l'ancien PNG 92 px sur fond blanc.
+LOGO_MARK = '<svg class="logo-mark" xmlns="http://www.w3.org/2000/svg" viewBox="14 14 72 100" width="72" height="100" aria-hidden="true" focusable="false"><path d="M50 112C40 96 16 78 16 50A34 34 0 1 1 84 50C84 78 60 96 50 112Z" fill="#141414"/><path d="M25 50A25 25 0 1 0 75 50A25 25 0 1 0 25 50Z" fill="#6B635B"/><path d="M27.5 50A22.5 22.5 0 1 0 72.5 50A22.5 22.5 0 1 0 27.5 50Z" fill="#141414"/><path d="M29.3 57.5A22 22 0 0 0 70.7 42.5Q58 78 29.3 57.5Z" fill="#D77229"/><path d="M50 59C36 50 37.5 37 45.5 37.5C48 37.7 49.6 39.6 50 42C50.4 39.6 52 37.7 54.5 37.5C62.5 37 64 50 50 59Z" fill="#FF9A4D"/></svg>'
 
 NAV = [('/methode/', 'Méthode'), ('/entreprises-de-nettoyage/', 'Spécialité nettoyage'), ('/offre/', 'Offre'),
        ('/cas-clients/', 'Cas clients'), ('/a-propos/', 'À propos')]
@@ -49,7 +52,8 @@ def page(chemin, titre, desc, corps, actif=None, jsonld=None, indexer=True, form
 <title>{esc(titre)}</title>
 <meta name="description" content="{esc(desc)}">
 <link rel="canonical" href="{canon}">{robots}
-<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="preload" href="/fonts/archivo-800.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -59,7 +63,9 @@ def page(chemin, titre, desc, corps, actif=None, jsonld=None, indexer=True, form
 <meta property="og:url" content="{canon}">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
-<meta property="og:image" content="{SITE}{LOGO}">
+<meta property="og:image" content="{SITE}{OG_IMAGE}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <script type="application/ld+json">
 {ld_txt}
 </script>{turnstile}
@@ -68,7 +74,7 @@ def page(chemin, titre, desc, corps, actif=None, jsonld=None, indexer=True, form
 <body>
 <a class="evitement" href="#contenu">Aller au contenu</a>
 <header class="site-header">
-  <a href="/" class="logo" aria-label="ViZiBiLi, accueil"><img src="{LOGO}" alt="ViZiBiLi" width="92" height="92"></a>
+  <a href="/" class="logo" aria-label="ViZiBiLi, accueil">{LOGO_MARK}<span class="logo-nom">ViZiBiLi</span></a>
   <nav class="site-nav" id="navigation" aria-label="Navigation principale">
 {nav}
   </nav>
