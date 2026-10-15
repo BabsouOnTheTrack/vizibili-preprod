@@ -433,3 +433,9 @@ fieldset.complement-proprete[hidden] { display: none; }
 .fond-chaud .frise-etapes .fe-point { color: #fff; }
 .fond-chaud .frise-etapes .fe.vu .fe-point { color: var(--encre); }
 .fond-chaud .fe-phases li span { color: var(--orange-texte); }
+/* Barre mobile : masquée tant que le bouton principal du haut de page est visible (évite deux boutons empilés) */
+@media (max-width: 860px) {
+  .barre-mobile { transition: transform .25s ease, opacity .25s ease; }
+  .barre-mobile.cachee { transform: translateY(110%); opacity: 0; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) { .barre-mobile { transition: none; } }

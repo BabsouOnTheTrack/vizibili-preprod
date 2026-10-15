@@ -177,3 +177,13 @@
   window.addEventListener('resize', maj);
   maj();
 })();
+
+/* Barre mobile « Demander un premier échange » : cachée tant que le bouton du haut de page est à l'écran */
+(function () {
+  var barre = document.querySelector('.barre-mobile');
+  var bouton = Array.prototype.find.call(document.querySelectorAll('main .btn-plein'), function (b) { return !barre || !barre.contains(b); });
+  if (!barre || !bouton || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (en) { barre.classList.toggle('cachee', en.isIntersecting); });
+  }, { threshold: 0 }).observe(bouton);
+})();
