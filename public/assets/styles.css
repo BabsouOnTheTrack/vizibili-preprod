@@ -53,9 +53,10 @@ img { max-width: 100%; }
 .bouton-menu { display: none; width: 48px; height: 48px; border: 1.5px solid var(--texte-2); border-radius: var(--rayon); background: var(--papier); cursor: pointer; place-items: center; }
 .bouton-menu svg { display: block; }
 
-.btn { display: inline-block; font-family: 'Inter', system-ui, sans-serif; font-weight: 600; font-size: 15px; line-height: 1.2; padding: 14px 26px; border-radius: var(--rayon); text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease; text-align: center; }
-.btn-plein { background: var(--orange); color: var(--encre); }
-.btn-plein:hover { background: var(--orange-vif); }
+.btn { display: inline-block; font-family: 'Inter', system-ui, sans-serif; font-weight: 600; font-size: 15px; line-height: 1.2; padding: 14px 26px; border-radius: var(--rayon); text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: background .15s ease, border-color .15s ease, box-shadow .15s ease; text-align: center; }
+/* Boutons : orange vif au repos (demande du fondateur, 15/10/2026), plus clair et légèrement soulevé au survol. */
+.btn-plein { background: var(--orange-vif); color: var(--encre); }
+.btn-plein:hover { background: #FFAD6B; box-shadow: 0 6px 16px -8px rgba(215,114,41,.55); }
 .btn-ligne { border-color: var(--texte-2); color: var(--encre); background: transparent; }
 .btn-ligne:hover { border-color: var(--encre); }
 
