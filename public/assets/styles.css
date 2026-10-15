@@ -184,7 +184,7 @@ blockquote cite { display: block; margin-top: 10px; font-style: normal; font-wei
 .champ .requis { color: var(--orange-texte); }
 .champ .facultatif { font-weight: 400; color: var(--texte-2); }
 .champ .aide { font-size: 13px; color: var(--texte-2); }
-.champ input[type=text], .champ input[type=url], .champ input[type=email], .champ textarea { font: inherit; font-size: 16px; color: var(--texte); background: var(--papier); border: 1.5px solid var(--texte-2); border-radius: var(--rayon); padding: 12px 14px; min-height: 48px; width: 100%; }
+.champ input[type=text], .champ input[type=url], .champ input[type=email], .champ input[type=tel], .champ textarea { font: inherit; font-size: 16px; color: var(--texte); background: var(--papier); border: 1.5px solid var(--texte-2); border-radius: var(--rayon); padding: 12px 14px; min-height: 48px; width: 100%; }
 .champ fieldset { border: 0; display: grid; gap: 8px; }
 .champ legend { margin-bottom: 8px; }
 .choix { display: flex; align-items: center; gap: 10px; border: 1.5px solid var(--texte-2); border-radius: var(--rayon); padding: 12px 14px; min-height: 48px; font-size: 15px; cursor: pointer; }
