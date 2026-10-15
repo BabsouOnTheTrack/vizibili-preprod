@@ -14,6 +14,10 @@
     "run_worker_first": true,
     "not_found_handling": "404-page"
   },
+  // Stockage anti-doublon des demandes (identifiant : 24 h ; même e-mail et même entreprise : 15 min).
+  "kv_namespaces": [
+    { "binding": "DEDUP", "id": "eedd0ac1f5ca42abb9d23f90ddade144" }
+  ],
   "vars": {
     "ENVIRONNEMENT": "preproduction",
     "PROTECTION": "aucune",
