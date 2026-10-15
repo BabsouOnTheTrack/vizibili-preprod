@@ -1,3 +1,4 @@
+import re
 #!/usr/bin/env python3
 """Génère le site statique ViZiBiLi (refonte octobre 2026) dans public/.
 
@@ -175,7 +176,7 @@ f'''
   <div class="contenu heros">
     <div>
       <p class="repere">Acquisition et croissance locale</p>
-      <h1>Votre visibilité sur Google doit servir votre développement commercial.</h1>
+      <h1>Votre visibilité sur Google doit servir votre <em>développement commercial.</em></h1>
       <p class="sous-titre">ViZiBiLi accompagne les entreprises dans la construction de parcours d'acquisition mesurables : attirer les bonnes recherches, transformer les visites en demandes sérieuses et mieux suivre les résultats commerciaux.</p>
       <div class="actions">
         <a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a>
@@ -441,7 +442,7 @@ f'''
 <section>
   <div class="contenu heros-seul">
     <p class="repere">Notre méthode</p>
-    <h1>La stratégie doit s'adapter à l'entreprise. Pas l'entreprise à une recette marketing.</h1>
+    <h1>La stratégie doit <em>s'adapter à l'entreprise.</em> Pas l'entreprise à une recette marketing.</h1>
     <p class="sous-titre">Nous suivons une méthode en huit étapes, qui part de votre réalité, ne lance rien sans contrôle et ne change rien sans raison mesurée.</p>
     <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a></div>
   </div>
@@ -498,7 +499,7 @@ f'''
 <section>
   <div class="contenu heros-seul">
     <p class="repere">Notre accompagnement</p>
-    <h1>Un accompagnement construit autour d'un seul objectif : des clients qui vous correspondent.</h1>
+    <h1>Un accompagnement construit autour d'un seul objectif : des <em>clients qui vous correspondent.</em></h1>
     <p class="sous-titre">Nous ne vendons pas un pack identique pour tous. Nous assemblons ce dont votre entreprise a besoin, dans le bon ordre, et nous mesurons ce que cela vous rapporte.</p>
     <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a></div>
   </div>
@@ -574,7 +575,7 @@ f'''
 <section>
   <div class="contenu heros-seul">
     <p class="repere">Cas clients</p>
-    <h1>Des histoires vraies, racontées honnêtement.</h1>
+    <h1>Des histoires vraies, racontées <em>honnêtement.</em></h1>
     <p class="sous-titre">Vous ne trouverez pas de pourcentages spectaculaires sur cette page, et c'est un choix. Un chiffre sans date, sans source et sans contexte ne prouve rien. Nous republierons nos résultats chiffrés quand chacun pourra être daté, sourcé et validé par le client concerné.</p>
     <p class="sous-titre" style="margin-bottom:0">En attendant, voici ce que nous avons fait, et ce que nos clients en disent.</p>
   </div>
@@ -613,7 +614,7 @@ f'''
 <section>
   <div class="contenu heros-seul">
     <p class="repere">À propos</p>
-    <h1>Derrière ViZiBiLi, un dirigeant qui cherche lui aussi ses clients.</h1>
+    <h1>Derrière ViZiBiLi, un dirigeant qui cherche lui aussi <em>ses clients.</em></h1>
     <p class="sous-titre">ViZiBiLi n'a pas été imaginée dans une agence. Elle est née dans une entreprise de nettoyage des Vosges, face à une question très concrète : comment trouver des clients sérieux sans gaspiller ni temps ni argent ?</p>
   </div>
 </section>
@@ -665,7 +666,7 @@ f'''
 <section>
   <div class="contenu heros-seul">
     <p class="repere">Premier échange et diagnostic</p>
-    <h1>Commençons par un premier échange. Offert, et sans détour.</h1>
+    <h1>Commençons par un premier échange. <em>Offert, et sans détour.</em></h1>
     <p class="sous-titre">Ce qui est offert, ce qui est payant et ce qui vous engage sont clairement séparés. Vous savez toujours où vous en êtes.</p>
   </div>
 </section>
@@ -747,7 +748,7 @@ PAGES.append(page('/premier-echange/merci/', 'Demande reçue · ViZiBiLi', "Votr
 <section>
   <div class="centre">
     <div class="pin-grand" aria-hidden="true"></div>
-    <h1>Votre demande est bien reçue.</h1>
+    <h1>Votre demande est bien <em>reçue.</em></h1>
     <p class="sous-titre" style="margin:0 auto">Elle est arrivée chez nous et nous allons la lire attentivement.</p>
     <div class="encart">
       <h2>Et maintenant ?</h2>
@@ -766,8 +767,9 @@ PAGES.append(page('/premier-echange/merci/', 'Demande reçue · ViZiBiLi', "Votr
 ARTICLES = []
 
 def article(slug, titre, desc, h1, corps, chapo):
-    ARTICLES.append((slug, h1, chapo))
-    art_ld = {"@type": "Article", "headline": h1, "description": desc, "inLanguage": "fr-FR",
+    h1_texte = re.sub(r'<[^>]+>', '', h1)  # balises d'accent retirées hors du titre affiché
+    ARTICLES.append((slug, h1_texte, chapo))
+    art_ld = {"@type": "Article", "headline": h1_texte, "description": desc, "inLanguage": "fr-FR",
               "author": {"@id": SITE + "/#organisation"}, "publisher": {"@id": SITE + "/#organisation"},
               "mainEntityOfPage": SITE + f"/ressources/{slug}/"}
     return page(f'/ressources/{slug}/', titre, desc, f'''
@@ -781,7 +783,7 @@ def article(slug, titre, desc, h1, corps, chapo):
 
 PAGES.append(article('trouver-clients-entreprise-de-nettoyage', 'Comment trouver des clients pour une entreprise de nettoyage',
     "Contrats de bureaux, ménage à domicile, vitres : les sources de clients qui fonctionnent vraiment pour une entreprise de nettoyage, et comment les piloter.",
-    "Comment trouver des clients pour une entreprise de nettoyage ?", '''
+    "Comment trouver des <em>clients</em> pour une entreprise de nettoyage ?", '''
 <p>Trouver des clients n'est pas le plus difficile dans le nettoyage. Le plus difficile, c'est de trouver <strong>les bons</strong> : ceux dont les demandes correspondent à vos prestations, à votre zone et à votre capacité. Voici ce que nous avons appris sur le terrain, dans l'entreprise de nettoyage de notre fondateur.</p>
 <h2>1. Décidez d'abord quels clients vous voulez</h2>
 <p>Un contrat d'entretien de bureaux, un ménage à domicile chaque semaine, un grand ménage avant déménagement, un lavage de vitrine : ce ne sont pas les mêmes clients, ni les mêmes recherches, ni la même rentabilité.</p>
@@ -807,7 +809,7 @@ PAGES.append(article('trouver-clients-entreprise-de-nettoyage', 'Comment trouver
 
 PAGES.append(article('publicite-google-rapporte-t-elle-des-clients', 'Votre publicité Google vous rapporte-t-elle des clients ?',
     "Clics, demandes, devis, contrats : comment savoir si votre publicité Google vous rapporte vraiment des clients, et ce qu'elle vous coûte par client signé.",
-    "Votre publicité Google vous rapporte-t-elle vraiment des clients ?", '''
+    "Votre publicité Google vous rapporte-t-elle <em>vraiment des clients</em> ?", '''
 <p>Beaucoup d'entreprises paient chaque mois des annonces Google sans pouvoir répondre à cette question simple. Elles voient des clics, parfois des appels, mais ne savent pas combien de clients ces annonces leur ont réellement apportés. Voici comment le savoir.</p>
 <h2>Un clic n'est pas un client</h2>
 <p>Entre la recherche et la signature, il y a plusieurs étapes, et chacune perd du monde :</p>
@@ -834,7 +836,7 @@ PAGES.append(article('publicite-google-rapporte-t-elle-des-clients', 'Votre publ
 
 PAGES.append(article('entreprise-absente-google-maps', "Pourquoi votre entreprise n'apparaît pas sur Google Maps",
     "Fiche non validée, mauvaise catégorie, informations incohérentes : les raisons les plus fréquentes pour lesquelles une entreprise est absente de Google Maps.",
-    "Pourquoi votre entreprise n'apparaît pas sur Google Maps ?", '''
+    "Pourquoi votre entreprise <em>n'apparaît pas</em> sur Google Maps ?", '''
 <p>Vous cherchez votre métier et votre ville sur Google, et votre entreprise n'apparaît pas sur la carte, alors que vos concurrents y sont. C'est l'une des questions que nous entendons le plus souvent. Les causes sont presque toujours les mêmes, et la plupart se corrigent.</p>
 <h2>1. Votre fiche n'existe pas, ou n'est pas validée</h2>
 <p>Une fiche Google doit être créée, puis validée par Google. Une fiche jamais validée, ou créée par quelqu'un d'autre et laissée à l'abandon, n'apparaîtra pas correctement. Vérifiez d'abord que vous avez bien accès à votre fiche et qu'elle est validée.</p>
@@ -864,7 +866,7 @@ f'''
   <div class="contenu">
     <div class="titre-section">
       <p class="repere">Ressources</p>
-      <h1>Des réponses concrètes, issues du terrain.</h1>
+      <h1>Des réponses concrètes, <em>issues du terrain.</em></h1>
       <p>Ce que nous apprenons en cherchant nos propres clients, partagé sans jargon.</p>
     </div>
     <div class="ressources">
@@ -936,7 +938,7 @@ p404 = page('/404-gabarit/', 'Page introuvable · ViZiBiLi', "Cette page n'exist
 <section>
   <div class="centre">
     <div class="pin-grand" aria-hidden="true"></div>
-    <h1>Cette page n'existe pas, ou plus.</h1>
+    <h1>Cette page n'existe pas, <em>ou plus.</em></h1>
     <p class="sous-titre" style="margin:0 auto 28px">Le site a évolué. Vous trouverez sans doute ce que vous cherchez à partir de l'accueil.</p>
     <div class="actions" style="justify-content:center"><a href="/" class="btn btn-plein">Retour à l'accueil</a><a href="/ressources/" class="btn btn-ligne">Voir les ressources</a></div>
   </div>
