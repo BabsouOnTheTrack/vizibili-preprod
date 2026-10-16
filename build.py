@@ -718,7 +718,7 @@ f'''
 ''', actif='/offre/', jsonld=svc_o))
 
 # ---------------------------------------------------------------- CAS CLIENTS
-def cas(ancre, icone, etiq, nom, lieu, depart, fait, change, suite=''):
+def cas(ancre, icone, etiq, nom, lieu, depart, fait, change, suite='', site=None):
     return f'''
     <article class="cas rv" id="{ancre}">
       <div class="cas-tete"><span class="tu-ico">{icone}</span><div><span class="etiquette">{etiq}</span><h2>{nom}</h2><p class="lieu">{lieu}</p></div></div>
@@ -726,7 +726,7 @@ def cas(ancre, icone, etiq, nom, lieu, depart, fait, change, suite=''):
         <li><span class="cf-ico">{I_DRAPEAU}</span><h3>Point de départ</h3><p>{depart}</p></li>
         <li><span class="cf-ico">{I_CONSTR}</span><h3>Ce que nous avons fait</h3><p>{fait}</p></li>
         <li class="cf-fin"><span class="cf-ico">{I_HAUSSE}</span><h3>Ce qui a changé</h3><p>{change}</p></li>
-      </ol>{suite}
+      </ol>{suite}{f'<a class="lire voir-site" href="{site}" target="_blank" rel="noopener" aria-label="Voir le site : {nom} (nouvel onglet)">Voir le site{I_FLECHE}</a>' if site else ''}
     </article>'''
 
 # Témoignages publiés : diffusion autorisée par les clients (fondateur, 16/10/2026). Orthographe corrigée à la marge, sans changer le sens.
@@ -751,12 +751,12 @@ f'''
      "Limpid est l'entreprise de nettoyage de notre fondateur. À son lancement, sa fiche Google était presque invisible sur Maps : peu d'avis, aucune preuve visible, aucun contact.",
      "Mise en conformité complète de la fiche Google : catégories, zone d'intervention, éléments de confiance. Pour le lancement, une annonce payante de Google dédiée aux services locaux. Puis une démarche régulière pour recueillir des avis authentiques auprès des clients.",
      "Les premières demandes sérieuses sont arrivées de clients proches, dans la zone d'intervention, et l'entreprise a signé ses premiers clients.",
-     '\n      <p class="pourquoi"><strong>Pourquoi commencer par ce cas.</strong> Avant de proposer cette méthode, notre fondateur l\'a appliquée à sa propre entreprise, avec son propre argent. C\'est aussi sur Limpid qu\'est testée, depuis septembre 2026, notre méthode de campagnes Google. Ce test fera l\'objet d\'un cas séparé, publié seulement quand ses résultats seront mesurés. <a href="/methode/">Découvrir notre méthode</a></p>')}
+     '\n      <p class="pourquoi"><strong>Pourquoi commencer par ce cas.</strong> Avant de proposer cette méthode, notre fondateur l\'a appliquée à sa propre entreprise, avec son propre argent. C\'est aussi sur Limpid qu\'est testée, depuis septembre 2026, notre méthode de campagnes Google. Ce test fera l\'objet d\'un cas séparé, publié seulement quand ses résultats seront mesurés. <a href="/methode/">Découvrir notre méthode</a></p>', site="https://limpid-nettoyage.fr/")}
 {cas("un-cadeau-une-histoire", I_CADEAU, "Site internet et fiche Google", "Un Cadeau Une Histoire", "Boutique de cadeaux personnalisés · Darnieulles (88)",
      "Une boutique appréciée de sa clientèle, mais une présence en ligne qui ne reflétait ni la qualité de son travail ni la richesse de ses créations.",
      "Création d'un nouveau site, rafraîchissement complet de la fiche Google, et des conseils concrets pour entretenir cette présence dans la durée.",
      "Selon sa gérante, la boutique est désormais plus visible, plus attractive, et davantage recommandée par ses clients.",
-     TEMOIN.format(q="Le travail de ViZiBiLi a véritablement transformé notre présence locale. Grâce au nouveau site et à la fiche Google rafraîchie, nous sommes désormais visibles, attractifs et recommandés par nos clients locaux. De plus, tout au long de notre collaboration, Clément, le gérant de l'agence, nous a accompagnés et donné des conseils utiles à appliquer pour maintenir la qualité de notre visibilité. Une vraie réussite !", a="Annie, gérante"))}
+     TEMOIN.format(q="Le travail de ViZiBiLi a véritablement transformé notre présence locale. Grâce au nouveau site et à la fiche Google rafraîchie, nous sommes désormais visibles, attractifs et recommandés par nos clients locaux. De plus, tout au long de notre collaboration, Clément, le gérant de l'agence, nous a accompagnés et donné des conseils utiles à appliquer pour maintenir la qualité de notre visibilité. Une vraie réussite !", a="Annie, gérante"), site="https://uncadeau-unehistoire.com/")}
 {cas("gite-chez-paul", I_MAISON, "Fiche Google", "Gîte Chez Paul", "Location de gîte touristique · Épinal (88)",
      "Un gîte bien tenu, mais une fiche Google qui ne le mettait pas en valeur auprès des voyageurs.",
      "Optimisation complète de la fiche Google et mise en avant des avis clients.",

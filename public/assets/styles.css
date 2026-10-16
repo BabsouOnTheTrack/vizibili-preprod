@@ -962,3 +962,4 @@ footer.pied .pied-pages a { font-size: 14px; }
 @media (max-width: 899px) {
   .anim .heros-zone .repere, .anim .heros-zone h1, .anim .heros-zone .sous-titre, .anim .heros-zone .actions, .anim .heros-zone .reassurance { animation: none; }
 }
+.cas .voir-site { margin-top: 20px; }
