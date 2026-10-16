@@ -507,69 +507,132 @@ f'''
 ''', actif='/methode/'))
 
 # ---------------------------------------------------------------- OFFRE
-MODS = [
-    ("Diagnostic d'acquisition", "Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer."),
-    ("Construction du parcours", "Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site."),
-    ("Pilotage et amélioration", "Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête."),
-    ("Suivi commercial", "Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client."),
+def ico(corps, vb='0 0 24 24'):
+    return f'<svg viewBox="{vb}" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{corps}</svg>'
+
+I_ANNONCE = ico('<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>')
+I_PAGE = ico('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>')
+I_SUIVI = ico('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor"/>')
+I_FICHE = ico('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>')
+I_DIAG = ico('<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/>')
+I_CONSTR = ico('<path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/>')
+I_PILOT = ico('<path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/>')
+I_COMM = ico('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/>')
+I_DRAPEAU = ico('<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>')
+I_MAILLON = ico('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>')
+I_CLE = ico('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/>')
+I_VOUS = ico('<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6"/>')
+I_GOOGLE = ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')
+I_COCHE = ico('<path d="M5 12.5l4.5 4.5L19 7.5"/>')
+I_NETTOYAGE = ico('<path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/>')
+I_BOUTIQUE = ico('<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2.5a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v8h13v-8M10 21v-5h4v5"/>')
+
+LEVIERS = [
+    (I_ANNONCE, "Les annonces Google", "Pour apparaître au moment précis où quelqu'un cherche votre service, dans votre zone. C'est le moyen d'être visible le plus vite, à condition d'être bien préparé et bien suivi. Un clic ne prouve rien : seules les demandes et les contrats comptent."),
+    (I_PAGE, "Une page dédiée à votre offre", "Pour que la personne qui clique trouve immédiatement ce qu'elle cherche, et puisse vous écrire facilement."),
+    (I_SUIVI, "Le suivi des demandes", "Pour savoir d'où viennent vos demandes, si elles sont sérieuses et ce qu'elles deviennent. Sans ce suivi, personne ne peut dire si la publicité est rentable."),
+    (I_FICHE, "Votre fiche Google et votre site", "Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin."),
 ]
-mods_html = '\n'.join(f'      <li><h3>{t}</h3><p>{d}</p></li>' for t, d in MODS)
-svc_o = [{"@type": "Service", "name": t, "description": d, "provider": {"@id": SITE + "/#organisation"}} for t, d in MODS]
+MODS = [
+    (I_DIAG, "Diagnostic d'acquisition", "Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.", "Vos priorités, par écrit"),
+    (I_CONSTR, "Construction du parcours", "Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site.", "Un parcours prêt à recevoir des demandes"),
+    (I_PILOT, "Pilotage et amélioration", "Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête.", "Un point régulier, clair et honnête"),
+    (I_COMM, "Suivi commercial", "Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client.", "Vos demandes reliées à vos contrats"),
+]
+leviers_html = '\n'.join(
+    f'''      <article class="of-levier of-rev" style="--i:{k}">
+        <span class="of-ico">{i}</span>
+        <h3>{t}</h3>
+        <p>{d}</p>
+        {f'<span class="of-lien" aria-hidden="true">{I_MAILLON}</span>' if k < len(LEVIERS) - 1 else ''}
+      </article>''' for k, (i, t, d) in enumerate(LEVIERS))
+etapes_html = '\n'.join(
+    f'''      <li class="of-etape of-rev" style="--i:{k}">
+        <span class="of-jeton"><span class="of-num">{k + 1}</span>{i}</span>
+        <div class="of-carte">
+          <p class="of-tag">Étape {k + 1}</p>
+          <h3>{t}</h3>
+          <p>{d}</p>
+          <p class="of-gain">{I_COCHE}<span><strong>Vous obtenez :</strong> {g}</span></p>
+        </div>
+      </li>''' for k, (i, t, d, g) in enumerate(MODS))
+PROPRIETE = ["Compte publicitaire", "Page dédiée", "Site", "Fiche Google", "Données de suivi"]
+propriete_html = ''.join(f'<li class="of-rev" style="--i:{k}">{I_CLE}<span>{p}</span></li>' for k, p in enumerate(PROPRIETE))
+svc_o = [{"@type": "Service", "name": t, "description": d, "provider": {"@id": SITE + "/#organisation"}} for _, t, d, _ in MODS]
 PAGES.append(page('/offre/', 'Notre accompagnement pour trouver des clients · ViZiBiLi',
     "Annonces Google, page dédiée, suivi des demandes jusqu'au devis signé : un accompagnement en quatre étapes, adapté à votre entreprise, partout en France.",
 f'''
 <section>
-  <div class="contenu heros-seul">
-    <p class="repere">Notre accompagnement</p>
-    <h1>Un accompagnement construit autour d'un seul objectif : des <em>clients qui vous correspondent.</em></h1>
-    <p class="sous-titre">Nous ne vendons pas un pack identique pour tous. Nous assemblons ce dont votre entreprise a besoin, dans le bon ordre, et nous mesurons ce que cela vous rapporte.</p>
-    <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a></div>
+  <div class="contenu of-heros">
+    <div>
+      <p class="repere">Notre accompagnement</p>
+      <h1>Un accompagnement construit autour d'un seul objectif : des <em>clients qui vous correspondent.</em></h1>
+      <p class="sous-titre">Nous ne vendons pas un pack identique pour tous. Nous assemblons ce dont votre entreprise a besoin, dans le bon ordre, et nous mesurons ce que cela vous rapporte.</p>
+      <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="#etapes" class="btn btn-ligne">Voir les 4 étapes</a></div>
+    </div>
+    <div class="of-apercu" aria-hidden="true">
+      <span class="of-pion p1">{I_DIAG}</span><span class="of-pion p2">{I_CONSTR}</span><span class="of-pion p3">{I_PILOT}</span><span class="of-pion p4">{I_COMM}</span><span class="of-pion fin">{I_DRAPEAU}</span>
+      <svg class="of-sentier" viewBox="0 0 300 300" preserveAspectRatio="none"><path d="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"/></svg>
+    </div>
   </div>
 </section>
 
 <section class="fond-chaud">
   <div class="contenu">
-    <div class="titre-section"><h2>Les leviers, et la place de chacun.</h2></div>
-    <div class="grille-4">
-      <div class="pilier"><h3>Les annonces Google</h3><p>Pour apparaître au moment précis où quelqu'un cherche votre service, dans votre zone. C'est le moyen d'être visible le plus vite, à condition d'être bien préparé et bien suivi. Un clic ne prouve rien : seules les demandes et les contrats comptent.</p></div>
-      <div class="pilier"><h3>Une page dédiée à votre offre</h3><p>Pour que la personne qui clique trouve immédiatement ce qu'elle cherche, et puisse vous écrire facilement.</p></div>
-      <div class="pilier"><h3>Le suivi des demandes</h3><p>Pour savoir d'où viennent vos demandes, si elles sont sérieuses et ce qu'elles deviennent. Sans ce suivi, personne ne peut dire si la publicité est rentable.</p></div>
-      <div class="pilier"><h3>Votre fiche Google et votre site</h3><p>Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin.</p></div>
+    <div class="titre-section"><h2>Les leviers, et la place de chacun.</h2><p>Chaque levier est un maillon. Seul, il ne fait pas un client ; reliés dans le bon ordre, ils forment une chaîne solide.</p></div>
+    <div class="of-chaine">
+{leviers_html}
     </div>
   </div>
 </section>
 
-<section>
+<section id="etapes">
   <div class="contenu">
-    <div class="titre-section"><h2>Quatre étapes, à votre rythme.</h2></div>
-    <ol class="modules">
-{mods_html}
+    <div class="titre-section"><h2>Quatre étapes, à votre rythme.</h2><p>Vous avancez d'une étape à l'autre quand la précédente est en place. Vous pouvez vous arrêter après chacune.</p></div>
+    <ol class="of-route">
+{etapes_html}
+      <li class="of-arrivee of-rev" style="--i:4"><span class="of-jeton">{I_DRAPEAU}</span><strong>Des clients qui vous correspondent</strong></li>
     </ol>
     <a href="/methode/" class="lien-suite">En savoir plus sur notre méthode</a>
   </div>
 </section>
 
 <section class="fond-chaud">
-  <div class="contenu grille-2" style="align-items:start">
-    <div>
-      <h2>Ce que vous payez, et à qui.</h2>
-      <p style="margin-top:16px"><strong>Le budget publicitaire</strong> est payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p>
-      <p style="margin-top:12px"><strong>Notre accompagnement</strong> est facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p>
-      <p style="margin-top:12px">Pas de frais cachés, pas de pourcentage prélevé sur votre budget publicitaire.</p>
+  <div class="contenu">
+    <div class="titre-section"><h2>Ce que vous payez, et à qui.</h2></div>
+    <div class="of-flux">
+      <div class="of-noeud of-vous">{I_VOUS}<strong>Vous</strong></div>
+      <div class="of-voies">
+        <div class="of-voie of-rev" style="--i:0">
+          <span class="of-fleche" aria-hidden="true"></span>
+          <div class="of-destination"><span class="of-ico">{I_GOOGLE}</span><div><strong>Le budget publicitaire, à Google</strong><p>Payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p></div></div>
+        </div>
+        <div class="of-voie of-rev" style="--i:1">
+          <span class="of-fleche" aria-hidden="true"></span>
+          <div class="of-destination"><span class="of-ico of-ico-vz">{LOGO_MARK.replace('class="logo-mark" ', '')}</span><div><strong>Notre accompagnement, à ViZiBiLi</strong><p>Facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p></div></div>
+        </div>
+      </div>
     </div>
-    <div>
-      <h2>Tout ce que nous construisons vous appartient.</h2>
-      <p style="margin-top:16px">Compte publicitaire, page dédiée, site, fiche Google, données de suivi : tout est à votre nom dès le premier jour. Si vous décidez d'arrêter, vous repartez avec l'ensemble, prêt à fonctionner.</p>
-    </div>
+    <p class="of-promesse of-rev" style="--i:2"><span>Pas de frais cachés</span><span>Pas de pourcentage prélevé sur votre budget publicitaire</span></p>
   </div>
 </section>
 
 <section>
+  <div class="contenu of-proprio">
+    <div>
+      <h2>Tout ce que nous construisons <em>vous appartient.</em></h2>
+      <p class="chapo" style="margin-top:16px">Tout est à votre nom dès le premier jour. Si vous décidez d'arrêter, vous repartez avec l'ensemble, prêt à fonctionner.</p>
+    </div>
+    <ul class="of-cles">{propriete_html}</ul>
+  </div>
+</section>
+
+<section class="fond-chaud">
   <div class="contenu">
     <div class="titre-section"><h2>Pour qui nous travaillons.</h2></div>
     <div class="grille-2">
-      <div class="carte"><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
-      <div class="carte"><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
+      <div class="of-cible of-rev" style="--i:0"><span class="of-badge">Notre spécialité</span><span class="of-ico">{I_NETTOYAGE}</span><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
+      <div class="of-cible of-rev" style="--i:1"><span class="of-ico">{I_BOUTIQUE}</span><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
     </div>
   </div>
 </section>

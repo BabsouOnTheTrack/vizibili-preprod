@@ -199,3 +199,28 @@
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0.4 });
   signaux.forEach(function (s) { obs.observe(s); });
 })();
+
+/* Page Offre : apparition des blocs et route des étapes qui se remplit au défilement */
+(function () {
+  var blocs = document.querySelectorAll('.of-rev');
+  var route = document.querySelector('.of-route');
+  if (!blocs.length && !route) return;
+  var calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (calme || !('IntersectionObserver' in window)) { if (route) route.style.setProperty('--p', 1); return; }
+  document.documentElement.classList.add('of-anim');
+  var obs = new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('vu'); obs.unobserve(en.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.15 });
+  blocs.forEach(function (b) { obs.observe(b); });
+  if (!route) return;
+  var attente = false;
+  function maj() {
+    attente = false;
+    var r = route.getBoundingClientRect(), vertical = window.innerWidth <= 980;
+    var p = vertical ? (window.innerHeight * 0.7 - r.top) / r.height : (window.innerHeight * 0.85 - r.top) / (r.height * 0.9);
+    route.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(3));
+  }
+  window.addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(maj); } }, { passive: true });
+  window.addEventListener('resize', maj);
+  maj();
+})();
