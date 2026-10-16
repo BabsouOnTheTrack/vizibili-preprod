@@ -127,7 +127,7 @@
   </button>
 </header>
 <main id="contenu">
-<section>
+<section class="heros-zone">
   <div class="contenu heros">
     <div>
       <p class="repere">Acquisition et croissance locale</p>
@@ -141,14 +141,17 @@
     </div>
     <div class="itineraire" role="img" aria-label="Le chemin que nous suivons : recherche Google, annonce ou fiche Google, page dédiée, demande puis tri, devis, client signé. Chaque étape est mesurée.">
       <p class="it-titre">Le chemin que nous suivons</p>
+      <div class="it-piste">
+      <span class="it-voyageur" aria-hidden="true"></span>
       <ol class="it-etapes" aria-hidden="true">
-        <li><span class="it-pin"></span><span class="it-nom">Recherche Google</span><span class="it-mesure">ce qui a été tapé</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Annonce ou fiche Google</span><span class="it-mesure">les clics</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Page dédiée</span><span class="it-mesure">les visites</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Demande, puis tri</span><span class="it-mesure">les demandes sérieuses</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Devis</span><span class="it-mesure">les devis émis</span></li>
-        <li class="it-fin"><span class="it-pin"></span><span class="it-nom">Client signé</span><span class="it-mesure">ce qu'il rapporte</span></li>
+        <li style="--i:0"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><span class="it-nom">Recherche Google</span><span class="it-mesure">ce qui a été tapé</span></li>
+        <li style="--i:1"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span><span class="it-nom">Annonce ou fiche Google</span><span class="it-mesure">les clics</span></li>
+        <li style="--i:2"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span><span class="it-nom">Page dédiée</span><span class="it-mesure">les visites</span></li>
+        <li style="--i:3"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 7v6l-4 2v-8z"/></svg></span><span class="it-nom">Demande, puis tri</span><span class="it-mesure">les demandes sérieuses</span></li>
+        <li style="--i:4"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M14.5 12.2a2.7 2.7 0 1 0 0 3.6M9.3 13.3h3.8M9.3 14.9h3.8"/></svg></span><span class="it-nom">Devis</span><span class="it-mesure">les devis émis</span></li>
+        <li class="it-fin" style="--i:5"><span class="it-pin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.6A6.6 6.6 0 1 0 17.5 17.4"/><path d="M4.5 10.4h8.5M4.5 13.6h8.5"/></svg></span><span class="it-nom">Client signé</span><span class="it-mesure">ce qu'il rapporte</span></li>
       </ol>
+      </div>
       <p class="it-legende">Chaque étape se mesure. C'est là que se joue la différence.</p>
     </div>
   </div>
@@ -192,7 +195,8 @@
         <p>Aucune idée de ce que vous coûte un nouveau client.</p>
       </article>
     </div>
-    <div class="constat">
+    <div class="constat rv">
+      <span class="constat-ico" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
       <p>Le problème n'est presque jamais un seul outil. C'est le chemin entier, de la recherche jusqu'à la signature, que personne ne regarde.</p>
       <a href="/methode/" class="btn btn-plein">Découvrir notre méthode</a>
     </div>
@@ -205,7 +209,7 @@
       <h2>Une méthode structurée, de la dépense jusqu'au revenu signé.</h2>
       <p>Un clic n'est jamais l'objectif. Nous suivons chaque étape jusqu'à ce qu'elle rapporte, pour savoir où les clients se perdent et corriger au bon endroit.</p>
     </div>
-    <ol class="parcours" aria-label="De la dépense au revenu"><li>Dépense</li><li class="fleche" aria-hidden="true">→</li><li>Clic</li><li class="fleche" aria-hidden="true">→</li><li>Demande</li><li class="fleche" aria-hidden="true">→</li><li>Prospect qualifié</li><li class="fleche" aria-hidden="true">→</li><li>Rendez-vous ou visite</li><li class="fleche" aria-hidden="true">→</li><li>Devis</li><li class="fleche" aria-hidden="true">→</li><li>Contrat signé</li><li class="fleche" aria-hidden="true">→</li><li class="fin">Revenu</li></ol>
+    <ol class="piste" aria-label="De la dépense au revenu"><li style="--i:0"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Dépense</span></li><li style="--i:1"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Clic</span></li><li style="--i:2"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Demande</span></li><li style="--i:3"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Prospect qualifié</span></li><li style="--i:4"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Rendez-vous ou visite</span></li><li style="--i:5"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Devis</span></li><li style="--i:6"><span class="pi-point" aria-hidden="true"></span><span class="pi-nom">Contrat signé</span></li><li class="fin" style="--i:7"><span class="pi-point" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.6A6.6 6.6 0 1 0 17.5 17.4"/><path d="M4.5 10.4h8.5M4.5 13.6h8.5"/></svg></span><span class="pi-nom">Revenu</span></li></ol>
     <p class="note">Le dispositif s'adapte aux outils que vous utilisez déjà. Nous ne mettons en place que ce qui est utile à votre situation. <a href="/methode/">Voir la méthode en 8 étapes</a></p>
   </div>
 </section>
@@ -213,17 +217,17 @@
 <section class="fond-chaud">
   <div class="contenu">
     <div class="titre-section"><h2>Quatre leviers, un seul objectif : des clients qui vous correspondent.</h2></div>
-    <div class="grille-4">
-      <div class="pilier"><h3>Attirer les bonnes recherches</h3><p>Des annonces Google ciblées sur ce que vos clients tapent vraiment, dans votre zone d'intervention, complétées par votre fiche Google et votre site.</p></div>
-      <div class="pilier"><h3>Transformer les visites en demandes</h3><p>Une page claire pour chaque offre, un message qui répond aux vraies questions, un formulaire simple qui vous dit qui vous contacte et pourquoi.</p></div>
-      <div class="pilier"><h3>Mesurer ce qui se passe vraiment</h3><p>Nous suivons d'où viennent vos demandes, si elles sont sérieuses, et ce qu'elles deviennent. Vous voyez la différence entre un clic, une demande et un client.</p></div>
-      <div class="pilier"><h3>Améliorer selon les résultats</h3><p>Nous corrigeons une chose à la fois, quand les résultats le justifient, et nous vous expliquons pourquoi. Votre budget reste sous contrôle.</p></div>
+    <div class="tuiles t4">
+      <article class="tuile rv" style="--i:0"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><span class="tu-num">01</span><h3>Attirer les bonnes recherches</h3><p>Des annonces Google ciblées sur ce que vos clients tapent vraiment, dans votre zone d'intervention, complétées par votre fiche Google et votre site.</p></article>
+      <article class="tuile rv" style="--i:1"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg></span><span class="tu-num">02</span><h3>Transformer les visites en demandes</h3><p>Une page claire pour chaque offre, un message qui répond aux vraies questions, un formulaire simple qui vous dit qui vous contacte et pourquoi.</p></article>
+      <article class="tuile rv" style="--i:2"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6.5" width="3" height="11.5" rx=".5"/><rect x="16" y="13" width="3" height="5" rx=".5"/></svg></span><span class="tu-num">03</span><h3>Mesurer ce qui se passe vraiment</h3><p>Nous suivons d'où viennent vos demandes, si elles sont sérieuses, et ce qu'elles deviennent. Vous voyez la différence entre un clic, une demande et un client.</p></article>
+      <article class="tuile rv" style="--i:3"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span class="tu-num">04</span><h3>Améliorer selon les résultats</h3><p>Nous corrigeons une chose à la fois, quand les résultats le justifient, et nous vous expliquons pourquoi. Votre budget reste sous contrôle.</p></article>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="contenu bloc-encre encre">
+  <div class="contenu bloc-encre encre brillant">
     <div class="disposition">
       <div>
         <p class="repere">Notre spécialité</p>
@@ -231,8 +235,11 @@
         <p>Notre fondateur dirige lui-même une entreprise de nettoyage. Les contrats d'entretien de bureaux, le ménage à domicile, le lavage de vitres, les demandes ponctuelles qui ne débouchent sur rien, les devis à relancer : nous connaissons ces réalités de l'intérieur.</p>
         <p style="margin-top:12px">C'est sur ce terrain que notre méthode est née et qu'elle continue de s'améliorer. Si vous dirigez une entreprise de propreté, nous parlons le même langage.</p>
       </div>
-      <a href="/entreprises-de-nettoyage/" class="btn btn-plein">Découvrir notre approche pour les entreprises de nettoyage</a>
+      <div class="terrain" aria-hidden="true">
+        <span style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M11 21v-3h2v3"/></svg><em>Bureaux</em></span><span style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11L12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg><em>Domicile</em></span><span style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M12 4v16M4 12h16"/><path d="M6.8 9.2l2.4-2.4M14.8 17.2l2.4-2.4"/></svg><em>Vitres</em></span><span style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M14.5 12.2a2.7 2.7 0 1 0 0 3.6M9.3 13.3h3.8M9.3 14.9h3.8"/></svg><em>Devis</em></span>
+      </div>
     </div>
+    <a href="/entreprises-de-nettoyage/" class="btn btn-plein" style="margin-top:32px">Découvrir notre approche pour les entreprises de nettoyage</a>
   </div>
 </section>
 
@@ -240,14 +247,16 @@
   <div class="contenu">
     <div class="titre-section"><h2>Des résultats racontés honnêtement.</h2></div>
     <div class="preuves">
-      <div class="preuve">
+      <div class="preuve rv" style="--i:0">
         <span class="etiquette">Visibilité locale · missions terminées</span>
+        <div class="mini-clients" aria-hidden="true"><span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/></svg></span><span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11L12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span><span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11L12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg></span><span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18M12 9v11"/><path d="M12 9C10.5 6 7 5.5 7 7.6S12 9 12 9zM12 9c1.5-3 5-3.5 5-1.4S12 9 12 9z"/></svg></span></div>
         <p>Quatre entreprises accompagnées sur leur présence locale, dont celle de notre fondateur : une entreprise de nettoyage, deux gîtes et une boutique de cadeaux, dans les Vosges.</p>
         <p>Leur point commun : une présence locale remise en ordre, et des clients qui repartent propriétaires de tout ce qui a été construit.</p>
         <a href="/cas-clients/" class="btn btn-ligne">Voir les cas clients</a>
       </div>
-      <div class="preuve en-cours">
+      <div class="preuve en-cours rv" style="--i:1">
         <span class="etiquette en-cours">Campagnes Google · étude en cours</span>
+        <div class="en-cours-barre" aria-hidden="true"><span></span></div>
         <p>Depuis septembre 2026, nous testons notre méthode de campagnes Google sur l'entreprise de nettoyage de notre fondateur. Nous publierons les résultats quand ils auront été mesurés sur une période suffisante, avec leurs dates et leurs limites. <strong>Pas avant.</strong></p>
       </div>
     </div>
@@ -260,11 +269,35 @@
       <h2>Comment se passe le premier contact.</h2>
       <p>Trois étapes distinctes, pour que vous sachiez toujours ce qui est offert, ce qui est payant, et ce qui vous engage.</p>
     </div>
-    <ol class="etapes-contact">
-      <li><span class="ec-statut">Offert</span><h3>Premier échange</h3><p>15 à 30 minutes pour comprendre votre situation et vous dire honnêtement si nous pouvons vous aider.</p></li>
-      <li><span class="ec-statut">Prestation distincte</span><h3>Diagnostic approfondi</h3><p>Si c'est utile : analyse de l'existant, blocages, opportunités et feuille de route. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p></li>
-      <li><span class="ec-statut">Sur proposition</span><h3>Accompagnement</h3><p>Une proposition séparée : périmètre, honoraires, et budget publicitaire payé directement par vous à Google.</p></li>
+    <div class="route-zone" data-route style="--n:3">
+    <span class="rt-ligne" aria-hidden="true"></span><span class="rt-pion" aria-hidden="true"></span>
+    <ol class="route" aria-label="Les trois étapes du premier contact">
+      <li class="rt-etape rv" style="--i:0">
+        <span class="rt-jeton"><span class="rt-num">1</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9.5L4 20.5z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut offert">Offert</span></p>
+          <h3>Premier échange</h3>
+          <p class="rt-texte">15 à 30 minutes pour comprendre votre situation et vous dire honnêtement si nous pouvons vous aider.</p>
+        </div>
+      </li>
+      <li class="rt-etape rv" style="--i:1">
+        <span class="rt-jeton"><span class="rt-num">2</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut">Prestation distincte</span></p>
+          <h3>Diagnostic approfondi</h3>
+          <p class="rt-texte">Si c'est utile : analyse de l'existant, blocages, opportunités et feuille de route. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p>
+        </div>
+      </li>
+      <li class="rt-etape rv" style="--i:2">
+        <span class="rt-jeton"><span class="rt-num">3</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut">Sur proposition</span></p>
+          <h3>Accompagnement</h3>
+          <p class="rt-texte">Une proposition séparée : périmètre, honoraires, et budget publicitaire payé directement par vous à Google.</p>
+        </div>
+      </li>
     </ol>
+  </div>
     <div class="actions" style="margin-top:28px"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="/premier-echange/#diagnostic" class="btn btn-ligne">Le diagnostic en détail</a></div>
   </div>
 </section>

@@ -79,7 +79,7 @@
   </button>
 </header>
 <main id="contenu">
-<section>
+<section class="heros-zone">
   <div class="contenu heros-seul">
     <p class="repere">Premier échange et diagnostic</p>
     <h1>Commençons par un premier échange. <em>Offert, et sans détour.</em></h1>
@@ -89,11 +89,35 @@
 
 <section class="fond-chaud" style="padding-top:56px">
   <div class="contenu">
-    <ol class="etapes-contact">
-      <li id="premier-echange"><span class="ec-statut">Offert</span><h3>Premier échange</h3><p><strong>15 à 30 minutes</strong>, par téléphone ou en visio. Nous cherchons à comprendre votre situation et à déterminer si un accompagnement est réellement pertinent. Si ce n'est pas le cas, nous vous le disons.</p></li>
-      <li id="diagnostic"><span class="ec-statut">Prestation distincte</span><h3>Diagnostic approfondi</h3><p>Analyse de l'existant, identification des blocages, étude des opportunités, priorisation, et une <strong>feuille de route exploitable</strong>, même si vous continuez seul. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p></li>
-      <li id="ensuite"><span class="ec-statut">Sur proposition</span><h3>Et ensuite ?</h3><p>Si un accompagnement a du sens, il fait l'objet d'une <strong>proposition séparée</strong> : périmètre, honoraires, et budget publicitaire payé directement par vous à Google, sur votre propre compte.</p></li>
+    <div class="route-zone" data-route style="--n:3">
+    <span class="rt-ligne" aria-hidden="true"></span><span class="rt-pion" aria-hidden="true"></span>
+    <ol class="route" aria-label="Ce qui est offert, ce qui est payant, ce qui vous engage">
+      <li class="rt-etape rv" id="premier-echange" style="--i:0">
+        <span class="rt-jeton"><span class="rt-num">1</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9.5L4 20.5z"/><path d="M8 9.5h8M8 12.5h5"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut offert">Offert</span></p>
+          <h3>Premier échange</h3>
+          <p class="rt-texte"><strong>15 à 30 minutes</strong>, par téléphone ou en visio. Nous cherchons à comprendre votre situation et à déterminer si un accompagnement est réellement pertinent. Si ce n'est pas le cas, nous vous le disons.</p>
+        </div>
+      </li>
+      <li class="rt-etape rv" id="diagnostic" style="--i:1">
+        <span class="rt-jeton"><span class="rt-num">2</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut">Prestation distincte</span></p>
+          <h3>Diagnostic approfondi</h3>
+          <p class="rt-texte">Analyse de l'existant, identification des blocages, étude des opportunités, priorisation, et une <strong>feuille de route exploitable</strong>, même si vous continuez seul. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p>
+        </div>
+      </li>
+      <li class="rt-etape rv" id="ensuite" style="--i:2">
+        <span class="rt-jeton"><span class="rt-num">3</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag"><span class="statut">Sur proposition</span></p>
+          <h3>Et ensuite ?</h3>
+          <p class="rt-texte">Si un accompagnement a du sens, il fait l'objet d'une <strong>proposition séparée</strong> : périmètre, honoraires, et budget publicitaire payé directement par vous à Google, sur votre propre compte.</p>
+        </div>
+      </li>
     </ol>
+  </div>
     <div class="pour-qui">
       <h2>Pour qui ?</h2>
       <p>Pour les entreprises qui veulent vraiment développer leurs demandes, et qui ont la capacité de les traiter quand elles arrivent. La propreté est notre spécialité, mais <strong>aucun secteur n'est exclu d'avance</strong> : le premier échange sert à le vérifier ensemble.</p>
@@ -106,6 +130,7 @@
     <div>
       <h2>Votre demande de premier échange</h2>
       <p class="chapo" style="margin-bottom:24px">Sept questions, une minute. Le reste, nous en parlerons de vive voix.</p>
+      <div class="jauge" aria-hidden="true"><div class="jauge-barre"><span></span></div><p class="jauge-texte">5 réponses obligatoires, c'est parti.</p></div>
       <form id="formulaire-demande" class="formulaire" action="/api/demande" method="post" novalidate>
         <div class="champ"><label for="nom">Nom et prénom <span class="requis" aria-hidden="true">*</span></label><input id="nom" name="nom" type="text" autocomplete="name" data-requis required aria-describedby="nom-err"><span class="message-erreur" id="nom-err">Indiquez votre nom.</span></div>
         <div class="champ"><label for="entreprise">Entreprise <span class="requis" aria-hidden="true">*</span></label><input id="entreprise" name="entreprise" type="text" autocomplete="organization" data-requis required aria-describedby="entreprise-err"><span class="message-erreur" id="entreprise-err">Indiquez le nom de votre entreprise.</span></div>

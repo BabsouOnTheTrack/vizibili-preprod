@@ -110,16 +110,6 @@ def bande(titre, texte, cta, lien='/premier-echange/'):
 </section>'''
 
 
-def parcours(etapes, label):
-    items = []
-    for i, e in enumerate(etapes):
-        if i:
-            items.append('<li class="fleche" aria-hidden="true">→</li>')
-        cls = ' class="fin"' if i == len(etapes) - 1 else ''
-        items.append(f'<li{cls}>{e}</li>')
-    return f'<ol class="parcours" aria-label="{label}">' + ''.join(items) + '</ol>'
-
-
 ICO_LOUPE = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M15 15l5 5" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg>'
 ICO_CLIENT = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8.2" r="4" fill="currentColor"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6z" fill="currentColor"/></svg>'
 ICO_COCHE = '<svg viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M2.6 6.3l2.2 2.2 4.6-4.8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -128,6 +118,89 @@ ICO_RUPTURE = ('<svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">'
                '<path d="M13.2 10.4l-2.6-2.6a4.6 4.6 0 0 0-6.5 6.5l2.6 2.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
                '<path d="M18.8 21.6l2.6 2.6a4.6 4.6 0 0 0 6.5-6.5l-2.6-2.6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
                '<path class="eclats" d="M12.5 19.5l-3 3M15.5 22.5l-.6 4M19.5 12.5l3-3M16.5 9.5l.6-4" stroke-width="2.4" stroke-linecap="round"/></svg>')
+
+
+# ================================================================ COMPOSANTS LUDIQUES (V2, 16/10/2026)
+def ico(corps, vb='0 0 24 24'):
+    return f'<svg viewBox="{vb}" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{corps}</svg>'
+
+I_ANNONCE = ico('<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>')
+I_PAGE = ico('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>')
+I_SUIVI = ico('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor"/>')
+I_FICHE = ico('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>')
+I_DIAG = ico('<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/>')
+I_CONSTR = ico('<path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/>')
+I_PILOT = ico('<path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/>')
+I_COMM = ico('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/>')
+I_DRAPEAU = ico('<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>')
+I_MAILLON = ico('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>')
+I_CLE = ico('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/>')
+I_VOUS = ico('<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6"/>')
+I_LOUPE = ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')
+I_COCHE = ico('<path d="M5 12.5l4.5 4.5L19 7.5"/>')
+I_NETTOYAGE = ico('<path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/>')
+I_BOUTIQUE = ico('<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2.5a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v8h13v-8M10 21v-5h4v5"/>')
+I_BUREAU = ico('<rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2M11 21v-3h2v3"/>')
+I_VITRE = ico('<rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M12 4v16M4 12h16"/><path d="M6.8 9.2l2.4-2.4M14.8 17.2l2.4-2.4"/>')
+I_MAISON = ico('<path d="M3.5 11L12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>')
+I_RECURRENT = ico('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M15.5 14.5a3.5 3.5 0 1 1-1.2-2.6"/><path d="M14.8 10.6l-.5 1.4 1.4.4"/>')
+I_DEVIS = ico('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M14.5 12.2a2.7 2.7 0 1 0 0 3.6M9.3 13.3h3.8M9.3 14.9h3.8"/>')
+I_EURO = ico('<path d="M17.5 6.6A6.6 6.6 0 1 0 17.5 17.4"/><path d="M4.5 10.4h8.5M4.5 13.6h8.5"/>')
+I_CLIC = ico('<path d="M7 3.5l11 6.8-5 1.3-2.1 4.9z"/><path d="M13 11.6l5 5"/>')
+I_DEMANDE = ico('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/>')
+I_TRI = ico('<path d="M4 5h16l-6 7v6l-4 2v-8z"/>')
+I_RDV = ico('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/><path d="M9 14.5l2 2 4-4"/>')
+I_MESURE = ico('<path d="M4 20h16"/><rect x="6" y="11" width="3" height="7" rx=".5"/><rect x="11" y="6.5" width="3" height="11.5" rx=".5"/><rect x="16" y="13" width="3" height="5" rx=".5"/>')
+I_HAUSSE = ico('<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>')
+I_BULLE = ico('<path d="M4 5h16v11H9.5L4 20.5z"/><path d="M8 9.5h8M8 12.5h5"/>')
+I_OEIL = ico('<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>')
+I_CADEAU = ico('<rect x="4" y="9" width="16" height="11" rx="1"/><path d="M3 9h18M12 9v11"/><path d="M12 9C10.5 6 7 5.5 7 7.6S12 9 12 9zM12 9c1.5-3 5-3.5 5-1.4S12 9 12 9z"/>')
+I_LIVRE = ico('<path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5V5.5M8 7.5h8"/>')
+I_HORLOGE = ico('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>')
+I_FLECHE = ico('<path d="M5 12h14M13 6l6 6-6 6"/>')
+I_CROIX = ico('<path d="M6 6l12 12M18 6L6 18"/>')
+I_ECLAT = ico('<path d="M12 3.5l1.8 5.2 5.2 1.8-5.2 1.8L12 17.5l-1.8-5.2L5 10.5l5.2-1.8z"/><path d="M18.5 15.5l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"/>')
+
+
+def tuiles(items, cols=3, numeros=False):
+    """Cartes à pictogramme : (icône, titre, texte)."""
+    t = []
+    for k, (i, titre, texte) in enumerate(items):
+        num = f'<span class="tu-num">{k + 1:02d}</span>' if numeros else ''
+        t.append(f'      <article class="tuile rv" style="--i:{k}"><span class="tu-ico">{i}</span>{num}<h3>{titre}</h3><p>{texte}</p></article>')
+    return f'<div class="tuiles t{cols}">\n' + '\n'.join(t) + '\n    </div>'
+
+
+def route(etapes, arrivee=None, aria=''):
+    """Route de jeu : jetons reliés par une ligne qui se remplit au défilement, pion voyageur, drapeau d'arrivée.
+    etapes : (icône, étiquette, titre, texte, gain ou None, id ou None)."""
+    n = len(etapes) + (1 if arrivee else 0)
+    lis = []
+    for k, (i, tag, titre, texte, gain, ident) in enumerate(etapes):
+        g = f'<p class="rt-gain">{I_COCHE}<span><strong>Vous obtenez :</strong> {gain}</span></p>' if gain else ''
+        idattr = f' id="{ident}"' if ident else ''
+        lis.append(f'''      <li class="rt-etape rv"{idattr} style="--i:{k}">
+        <span class="rt-jeton"><span class="rt-num">{k + 1}</span>{i}</span>
+        <div class="rt-carte">
+          <p class="rt-tag">{tag}</p>
+          <h3>{titre}</h3>
+          <p class="rt-texte">{texte}</p>{g}
+        </div>
+      </li>''')
+    if arrivee:
+        lis.append(f'      <li class="rt-arrivee rv" style="--i:{len(etapes)}"><span class="rt-jeton">{I_DRAPEAU}<span class="rt-confettis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><strong>{arrivee}</strong></li>')
+    lab = f' aria-label="{aria}"' if aria else ''
+    return (f'<div class="route-zone" data-route style="--n:{n}">\n    <span class="rt-ligne" aria-hidden="true"></span><span class="rt-pion" aria-hidden="true"></span>\n'
+            f'    <ol class="route{" avec-fin" if arrivee else ""}"{lab}>\n' + '\n'.join(lis) + '\n    </ol>\n  </div>')
+
+
+def parcours(etapes, label):
+    """Piste de la dépense au revenu : les étapes s'allument une à une, la dernière (le revenu) en orange."""
+    items = []
+    for i, e in enumerate(etapes):
+        fin = i == len(etapes) - 1
+        items.append(f'<li{" class=\"fin\"" if fin else ""} style="--i:{i}"><span class="pi-point" aria-hidden="true">{I_EURO if fin else ""}</span><span class="pi-nom">{e}</span></li>')
+    return f'<ol class="piste" aria-label="{label}">' + ''.join(items) + '</ol>'
 
 
 def chemin_casse(etapes, casse, legende):
@@ -191,10 +264,25 @@ FAQ_A = [
 faq_accueil = '\n'.join(f'      <details{" open" if i == 0 else ""}><summary>{q}</summary><p>{r}</p></details>' for i, (q, r) in enumerate(FAQ_A))
 faq_ld_accueil = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}} for q, r in FAQ_A]}
 
+IT_ETAPES = [(I_LOUPE, "Recherche Google", "ce qui a été tapé"), (I_ANNONCE, "Annonce ou fiche Google", "les clics"), (I_PAGE, "Page dédiée", "les visites"),
+             (I_TRI, "Demande, puis tri", "les demandes sérieuses"), (I_DEVIS, "Devis", "les devis émis")]
+it_html = '\n'.join(f'        <li style="--i:{k}"><span class="it-pin">{i}</span><span class="it-nom">{n}</span><span class="it-mesure">{m}</span></li>' for k, (i, n, m) in enumerate(IT_ETAPES))
+CONTACT = [
+    (I_BULLE, '<span class="statut offert">Offert</span>', "Premier échange", "15 à 30 minutes pour comprendre votre situation et vous dire honnêtement si nous pouvons vous aider.", None, None),
+    (I_DIAG, '<span class="statut">Prestation distincte</span>', "Diagnostic approfondi", "Si c'est utile : analyse de l'existant, blocages, opportunités et feuille de route. Son contenu et son prix vous sont donnés par écrit, avant de commencer.", None, None),
+    (I_COMM, '<span class="statut">Sur proposition</span>', "Accompagnement", "Une proposition séparée : périmètre, honoraires, et budget publicitaire payé directement par vous à Google.", None, None),
+]
+LEVIERS_A = [
+    (I_LOUPE, "Attirer les bonnes recherches", "Des annonces Google ciblées sur ce que vos clients tapent vraiment, dans votre zone d'intervention, complétées par votre fiche Google et votre site."),
+    (I_DEMANDE, "Transformer les visites en demandes", "Une page claire pour chaque offre, un message qui répond aux vraies questions, un formulaire simple qui vous dit qui vous contacte et pourquoi."),
+    (I_MESURE, "Mesurer ce qui se passe vraiment", "Nous suivons d'où viennent vos demandes, si elles sont sérieuses, et ce qu'elles deviennent. Vous voyez la différence entre un clic, une demande et un client."),
+    (I_HAUSSE, "Améliorer selon les résultats", "Nous corrigeons une chose à la fois, quand les résultats le justifient, et nous vous expliquons pourquoi. Votre budget reste sous contrôle."),
+]
+
 PAGES.append(page('/', 'ViZiBiLi · Acquisition de clients sur Google, mesurée',
     "ViZiBiLi aide les entreprises locales à transformer les recherches Google en demandes sérieuses, et à suivre les résultats jusqu'au contrat signé.",
 f'''
-<section>
+<section class="heros-zone">
   <div class="contenu heros">
     <div>
       <p class="repere">Acquisition et croissance locale</p>
@@ -208,14 +296,13 @@ f'''
     </div>
     <div class="itineraire" role="img" aria-label="Le chemin que nous suivons : recherche Google, annonce ou fiche Google, page dédiée, demande puis tri, devis, client signé. Chaque étape est mesurée.">
       <p class="it-titre">Le chemin que nous suivons</p>
+      <div class="it-piste">
+      <span class="it-voyageur" aria-hidden="true"></span>
       <ol class="it-etapes" aria-hidden="true">
-        <li><span class="it-pin"></span><span class="it-nom">Recherche Google</span><span class="it-mesure">ce qui a été tapé</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Annonce ou fiche Google</span><span class="it-mesure">les clics</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Page dédiée</span><span class="it-mesure">les visites</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Demande, puis tri</span><span class="it-mesure">les demandes sérieuses</span></li>
-        <li><span class="it-pin"></span><span class="it-nom">Devis</span><span class="it-mesure">les devis émis</span></li>
-        <li class="it-fin"><span class="it-pin"></span><span class="it-nom">Client signé</span><span class="it-mesure">ce qu'il rapporte</span></li>
+{it_html}
+        <li class="it-fin" style="--i:5"><span class="it-pin">{I_EURO}</span><span class="it-nom">Client signé</span><span class="it-mesure">ce qu'il rapporte</span></li>
       </ol>
+      </div>
       <p class="it-legende">Chaque étape se mesure. C'est là que se joue la différence.</p>
     </div>
   </div>
@@ -235,7 +322,8 @@ f'''
 {symptome("Aucun lien avec vos encaissements", "Aucun lien clair entre ce que vous dépensez et ce que vous encaissez.", CH_A, 4, "Ça casse entre le devis et le client")}
 {symptome("Un coût inconnu", "Aucune idée de ce que vous coûte un nouveau client.", CH_A, None, "Rien n'est mesuré, d'un bout à l'autre")}
     </div>
-    <div class="constat">
+    <div class="constat rv">
+      <span class="constat-ico" aria-hidden="true">{I_MAILLON}</span>
       <p>Le problème n'est presque jamais un seul outil. C'est le chemin entier, de la recherche jusqu'à la signature, que personne ne regarde.</p>
       <a href="/methode/" class="btn btn-plein">Découvrir notre méthode</a>
     </div>
@@ -256,17 +344,12 @@ f'''
 <section class="fond-chaud">
   <div class="contenu">
     <div class="titre-section"><h2>Quatre leviers, un seul objectif : des clients qui vous correspondent.</h2></div>
-    <div class="grille-4">
-      <div class="pilier"><h3>Attirer les bonnes recherches</h3><p>Des annonces Google ciblées sur ce que vos clients tapent vraiment, dans votre zone d'intervention, complétées par votre fiche Google et votre site.</p></div>
-      <div class="pilier"><h3>Transformer les visites en demandes</h3><p>Une page claire pour chaque offre, un message qui répond aux vraies questions, un formulaire simple qui vous dit qui vous contacte et pourquoi.</p></div>
-      <div class="pilier"><h3>Mesurer ce qui se passe vraiment</h3><p>Nous suivons d'où viennent vos demandes, si elles sont sérieuses, et ce qu'elles deviennent. Vous voyez la différence entre un clic, une demande et un client.</p></div>
-      <div class="pilier"><h3>Améliorer selon les résultats</h3><p>Nous corrigeons une chose à la fois, quand les résultats le justifient, et nous vous expliquons pourquoi. Votre budget reste sous contrôle.</p></div>
-    </div>
+    {tuiles(LEVIERS_A, 4, numeros=True)}
   </div>
 </section>
 
 <section>
-  <div class="contenu bloc-encre encre">
+  <div class="contenu bloc-encre encre brillant">
     <div class="disposition">
       <div>
         <p class="repere">Notre spécialité</p>
@@ -274,8 +357,11 @@ f'''
         <p>Notre fondateur dirige lui-même une entreprise de nettoyage. Les contrats d'entretien de bureaux, le ménage à domicile, le lavage de vitres, les demandes ponctuelles qui ne débouchent sur rien, les devis à relancer : nous connaissons ces réalités de l'intérieur.</p>
         <p style="margin-top:12px">C'est sur ce terrain que notre méthode est née et qu'elle continue de s'améliorer. Si vous dirigez une entreprise de propreté, nous parlons le même langage.</p>
       </div>
-      <a href="/entreprises-de-nettoyage/" class="btn btn-plein">Découvrir notre approche pour les entreprises de nettoyage</a>
+      <div class="terrain" aria-hidden="true">
+        <span style="--i:0">{I_BUREAU}<em>Bureaux</em></span><span style="--i:1">{I_MAISON}<em>Domicile</em></span><span style="--i:2">{I_VITRE}<em>Vitres</em></span><span style="--i:3">{I_DEVIS}<em>Devis</em></span>
+      </div>
     </div>
+    <a href="/entreprises-de-nettoyage/" class="btn btn-plein" style="margin-top:32px">Découvrir notre approche pour les entreprises de nettoyage</a>
   </div>
 </section>
 
@@ -283,14 +369,16 @@ f'''
   <div class="contenu">
     <div class="titre-section"><h2>Des résultats racontés honnêtement.</h2></div>
     <div class="preuves">
-      <div class="preuve">
+      <div class="preuve rv" style="--i:0">
         <span class="etiquette">Visibilité locale · missions terminées</span>
+        <div class="mini-clients" aria-hidden="true"><span>{I_NETTOYAGE}</span><span>{I_MAISON}</span><span>{I_MAISON}</span><span>{I_CADEAU}</span></div>
         <p>Quatre entreprises accompagnées sur leur présence locale, dont celle de notre fondateur : une entreprise de nettoyage, deux gîtes et une boutique de cadeaux, dans les Vosges.</p>
         <p>Leur point commun : une présence locale remise en ordre, et des clients qui repartent propriétaires de tout ce qui a été construit.</p>
         <a href="/cas-clients/" class="btn btn-ligne">Voir les cas clients</a>
       </div>
-      <div class="preuve en-cours">
+      <div class="preuve en-cours rv" style="--i:1">
         <span class="etiquette en-cours">Campagnes Google · étude en cours</span>
+        <div class="en-cours-barre" aria-hidden="true"><span></span></div>
         <p>Depuis septembre 2026, nous testons notre méthode de campagnes Google sur l'entreprise de nettoyage de notre fondateur. Nous publierons les résultats quand ils auront été mesurés sur une période suffisante, avec leurs dates et leurs limites. <strong>Pas avant.</strong></p>
       </div>
     </div>
@@ -303,11 +391,7 @@ f'''
       <h2>Comment se passe le premier contact.</h2>
       <p>Trois étapes distinctes, pour que vous sachiez toujours ce qui est offert, ce qui est payant, et ce qui vous engage.</p>
     </div>
-    <ol class="etapes-contact">
-      <li><span class="ec-statut">Offert</span><h3>Premier échange</h3><p>15 à 30 minutes pour comprendre votre situation et vous dire honnêtement si nous pouvons vous aider.</p></li>
-      <li><span class="ec-statut">Prestation distincte</span><h3>Diagnostic approfondi</h3><p>Si c'est utile : analyse de l'existant, blocages, opportunités et feuille de route. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p></li>
-      <li><span class="ec-statut">Sur proposition</span><h3>Accompagnement</h3><p>Une proposition séparée : périmètre, honoraires, et budget publicitaire payé directement par vous à Google.</p></li>
-    </ol>
+    {route(CONTACT, aria="Les trois étapes du premier contact")}
     <div class="actions" style="margin-top:28px"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="/premier-echange/#diagnostic" class="btn btn-ligne">Le diagnostic en détail</a></div>
   </div>
 </section>
@@ -335,17 +419,35 @@ faq_html = '\n'.join(f'      <details{" open" if i == 0 else ""}><summary>{q}</s
 faq_ld = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}} for q, r in FAQ_N]}
 svc_n = {"@type": "Service", "name": "Acquisition de clients pour entreprises de nettoyage", "provider": {"@id": SITE + "/#organisation"},
          "areaServed": {"@type": "Country", "name": "France"}, "serviceType": "Acquisition de clients sur Google"}
+SUJETS_N = [
+    (I_BUREAU, "Entretien de bureaux et locaux professionnels", "Cibler les entreprises qui cherchent un prestataire régulier, et trier les demandes selon la taille des locaux et la fréquence souhaitée."),
+    (I_VITRE, "Nettoyage de vitres", "Viser les particuliers comme les commerces avec vitrine, sur des recherches précises, pour des demandes faciles à chiffrer."),
+    (I_MAISON, "Ménage à domicile", "Toucher les particuliers de votre zone au bon moment, et distinguer les demandes régulières des demandes ponctuelles."),
+    (I_RECURRENT, "Acquisition de contrats récurrents", "Faire passer en priorité ce qui construit votre chiffre d'affaires dans la durée, plutôt que le volume de demandes."),
+    (I_DEVIS, "Gestion des demandes et des devis", "Répondre vite, qualifier avant de se déplacer, relancer les devis : c'est souvent là que se perdent les contrats déjà gagnés à moitié."),
+]
+MOIS = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
+mois_html = ''.join(f'<span style="--i:{k}">{m}</span>' for k, m in enumerate(MOIS))
+TERRAIN_N = [(I_DEVIS, "Les devis à chiffrer"), (I_FICHE, "Les visites sur place"), (I_RECURRENT, "Les clients à fidéliser"), (I_HORLOGE, "Les demandes qui font perdre du temps")]
+terrain_n = ''.join(f'<li class="rv" style="--i:{k}"><span>{i}</span>{t}</li>' for k, (i, t) in enumerate(TERRAIN_N))
 
 PAGES.append(page('/entreprises-de-nettoyage/', 'Trouver des clients pour une entreprise de nettoyage · ViZiBiLi',
     "Bureaux, ménage à domicile, vitres : nous aidons les entreprises de nettoyage à obtenir des demandes sérieuses et à savoir ce qu'elles leur rapportent.",
 f'''
-<section>
-  <div class="contenu heros-seul">
-    <p class="repere">Pour les entreprises de nettoyage et de propreté</p>
-    <h1>Développez votre <em>entreprise de nettoyage</em> avec des demandes que vous pouvez <em>mesurer.</em></h1>
-    <p class="sous-titre">Plus de contrats qui vous correspondent, moins de demandes inutiles, et une vision claire de ce que chaque nouveau client vous coûte et vous rapporte.</p>
-    <div class="actions"><a href="/premier-echange/?secteur=proprete" class="btn btn-plein">Parlons de votre entreprise de nettoyage</a><a href="#pourquoi-la-signature" class="btn btn-ligne">Pourquoi suivre jusqu'à la signature</a></div>
-    <p class="reassurance">Partout en France, à distance. Premier échange offert.</p>
+<section class="heros-zone">
+  <div class="contenu heros">
+    <div>
+      <p class="repere">Pour les entreprises de nettoyage et de propreté</p>
+      <h1>Développez votre <em>entreprise de nettoyage</em> avec des demandes que vous pouvez <em>mesurer.</em></h1>
+      <p class="sous-titre">Plus de contrats qui vous correspondent, moins de demandes inutiles, et une vision claire de ce que chaque nouveau client vous coûte et vous rapporte.</p>
+      <div class="actions"><a href="/premier-echange/?secteur=proprete" class="btn btn-plein">Parlons de votre entreprise de nettoyage</a><a href="#pourquoi-la-signature" class="btn btn-ligne">Pourquoi suivre jusqu'à la signature</a></div>
+      <p class="reassurance">Partout en France, à distance. Premier échange offert.</p>
+    </div>
+    <div class="fil-notif" aria-hidden="true">
+      <div class="notif" style="--i:0"><span class="nt-ico">{I_LOUPE}</span><div><small>Une recherche</small><strong>« entreprise de nettoyage de bureaux »</strong></div></div>
+      <div class="notif" style="--i:1"><span class="nt-ico">{I_DEMANDE}</span><div><small>Une demande sérieuse</small><strong>Entretien de bureaux, chaque semaine</strong></div></div>
+      <div class="notif nt-fin" style="--i:2"><span class="nt-ico">{I_COCHE}</span><div><small>Un contrat signé</small><strong>Récurrent, suivi jusqu'au revenu</strong></div></div>
+    </div>
   </div>
 </section>
 
@@ -360,7 +462,8 @@ f'''
 {symptome("Des devis sans réponse", "Des prospects demandent un devis, puis ne répondent plus.", CH_N, 3, "Ça casse entre le devis et le contrat")}
 {symptome("Une visibilité sans retour connu", "Vous payez pour être visible sans savoir ce que cela vous rapporte réellement.", CH_N, None, "Rien n'est mesuré, d'un bout à l'autre")}
     </div>
-    <div class="constat">
+    <div class="constat rv">
+      <span class="constat-ico" aria-hidden="true">{I_MAILLON}</span>
       <p>Ce ne sont pas des fatalités du métier. Ce sont des signaux que le chemin entre la recherche et le contrat n'est pas piloté.</p>
       <a href="/premier-echange/?secteur=proprete" class="btn btn-plein">Parlons de votre entreprise de nettoyage</a>
     </div>
@@ -368,11 +471,15 @@ f'''
 </section>
 
 <section>
-  <div class="contenu">
+  <div class="contenu deux-temps">
     <div class="titre-section">
       <h2>Notre méthode est née dans une entreprise de nettoyage.</h2>
       <p>Notre fondateur dirige une entreprise de nettoyage dans les Vosges : bureaux, commerces, vitres, ménage à domicile, grands ménages. Il vit chaque semaine ce que vous vivez : les devis à chiffrer, les visites sur place, les clients à fidéliser, les demandes qui font perdre du temps.</p>
       <p style="margin-top:12px">C'est là que notre méthode a été construite, testée et corrigée. Nous savons qu'une demande n'a pas la même valeur selon la prestation, la fréquence et la distance, et que votre temps est votre ressource la plus rare.</p>
+    </div>
+    <div class="carnet" aria-hidden="true">
+      <p class="carnet-titre">{I_NETTOYAGE}La semaine d'un dirigeant</p>
+      <ul>{terrain_n}</ul>
     </div>
   </div>
 </section>
@@ -380,13 +487,7 @@ f'''
 <section class="fond-chaud">
   <div class="contenu">
     <div class="titre-section"><h2>Cinq sujets, cinq approches différentes.</h2><p>Chaque activité a ses recherches, ses clients et sa valeur. Nous les séparons quand leur valeur diffère et que le volume de recherches le permet, sans éparpiller un petit budget.</p></div>
-    <div class="grille-3">
-      <div class="pilier"><h3>Entretien de bureaux et locaux professionnels</h3><p>Cibler les entreprises qui cherchent un prestataire régulier, et trier les demandes selon la taille des locaux et la fréquence souhaitée.</p></div>
-      <div class="pilier"><h3>Nettoyage de vitres</h3><p>Viser les particuliers comme les commerces avec vitrine, sur des recherches précises, pour des demandes faciles à chiffrer.</p></div>
-      <div class="pilier"><h3>Ménage à domicile</h3><p>Toucher les particuliers de votre zone au bon moment, et distinguer les demandes régulières des demandes ponctuelles.</p></div>
-      <div class="pilier"><h3>Acquisition de contrats récurrents</h3><p>Faire passer en priorité ce qui construit votre chiffre d'affaires dans la durée, plutôt que le volume de demandes.</p></div>
-      <div class="pilier"><h3>Gestion des demandes et des devis</h3><p>Répondre vite, qualifier avant de se déplacer, relancer les devis : c'est souvent là que se perdent les contrats déjà gagnés à moitié.</p></div>
-    </div>
+    {tuiles(SUJETS_N, 3)}
   </div>
 </section>
 
@@ -397,10 +498,10 @@ f'''
       <p>Dans votre métier, deux demandes peuvent avoir une valeur sans commune mesure. Les compter de la même façon fausse toutes les décisions.</p>
     </div>
     <div class="comparatif">
-      <div class="cmp-col"><p class="cmp-titre">Une prestation ponctuelle</p><p class="cmp-valeur">1 facture</p><p>Un grand ménage, un lavage de vitres unique. Utile, mais terminé une fois réalisé.</p></div>
-      <div class="cmp-col cmp-fort"><p class="cmp-titre">Un contrat récurrent</p><p class="cmp-valeur">12 factures par an</p><p>L'entretien mensuel de bureaux. Il se renouvelle, et sa valeur se compte sur l'année.</p></div>
+      <div class="cmp-col rv" style="--i:0"><p class="cmp-titre">Une prestation ponctuelle</p><p class="cmp-valeur">1 facture</p><div class="cmp-factures" aria-hidden="true"><span class="plein" style="--i:0">{I_DEVIS}</span></div><p>Un grand ménage, un lavage de vitres unique. Utile, mais terminé une fois réalisé.</p></div>
+      <div class="cmp-col cmp-fort rv" style="--i:1"><p class="cmp-titre">Un contrat récurrent</p><p class="cmp-valeur">12 factures par an</p><div class="cmp-mois" aria-hidden="true">{mois_html}</div><p>L'entretien mensuel de bureaux. Il se renouvelle, et sa valeur se compte sur l'année.</p></div>
     </div>
-    <p class="exemple-fictif"><strong>Exemple fictif, pour illustrer :</strong> un grand ménage facturé 300 € et un contrat de bureaux à 300 € par mois arrivent tous deux comme « une demande ». Sur un an, le second représente 3 600 €. Un suivi qui s'arrête au nombre de demandes ne voit pas cette différence.</p>
+    <p class="exemple-fictif rv"><strong>Exemple fictif, pour illustrer :</strong> un grand ménage facturé 300 € et un contrat de bureaux à 300 € par mois arrivent tous deux comme « une demande ». Sur un an, le second représente 3 600 €. Un suivi qui s'arrête au nombre de demandes ne voit pas cette différence.</p>
     <p class="conclusion">C'est pourquoi nous évaluons chaque source de clients sur la valeur des contrats réellement signés, et non sur le nombre de clics ou de demandes.</p>
     {parcours(["Dépense", "Clic", "Demande", "Prospect qualifié", "Visite sur place", "Devis", "Contrat signé", "Revenu"], "De la dépense au revenu")}
     <p class="note">Le suivi s'appuie sur les outils que vous utilisez déjà. Nous ne vous imposons pas de logiciel.</p>
@@ -461,16 +562,23 @@ legende_phases = ''.join(f'<li><span>{n}</span> {p}<small>Étapes {a} et {b}</sm
 PAGES.append(page('/methode/', 'Notre méthode pour trouver des clients sur Google · ViZiBiLi',
     "Huit étapes, de votre activité jusqu'à la valeur des contrats signés : une méthode qui mesure avant de promettre et s'adapte à chaque entreprise.",
 f'''
-<section>
-  <div class="contenu heros-seul">
-    <p class="repere">Notre méthode</p>
-    <h1>La stratégie doit <em>s'adapter à l'entreprise.</em> Pas l'entreprise à une recette marketing.</h1>
-    <p class="sous-titre">Nous suivons une méthode en huit étapes, qui part de votre réalité, ne lance rien sans contrôle et ne change rien sans raison mesurée.</p>
-    <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a></div>
+<section class="heros-zone">
+  <div class="contenu heros">
+    <div>
+      <p class="repere">Notre méthode</p>
+      <h1>La stratégie doit <em>s'adapter à l'entreprise.</em> Pas l'entreprise à une recette marketing.</h1>
+      <p class="sous-titre">Nous suivons une méthode en huit étapes, qui part de votre réalité, ne lance rien sans contrôle et ne change rien sans raison mesurée.</p>
+      <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="#huit-etapes" class="btn btn-ligne">Voir les 8 étapes</a></div>
+    </div>
+    <div class="orbite" aria-hidden="true">
+      <span class="ob-anneau"></span>
+      <span class="ob-centre">8<small>étapes</small></span>
+      <span class="ob-temps t1">{I_OEIL}<em>Comprendre</em></span><span class="ob-temps t2">{I_CONSTR}<em>Préparer</em></span><span class="ob-temps t3">{I_ANNONCE}<em>Lancer</em></span><span class="ob-temps t4">{I_HAUSSE}<em>Améliorer</em></span>
+    </div>
   </div>
 </section>
 
-<section class="fond-chaud">
+<section class="fond-chaud" id="huit-etapes">
   <div class="contenu">
     <div class="titre-section"><h2>Huit étapes, de votre activité jusqu'à la valeur des contrats signés.</h2><p>Quatre temps, toujours dans le même ordre. Chaque étape vous laisse quelque chose de concret entre les mains.</p></div>
     <ol class="fe-phases" aria-label="Les quatre temps de la méthode">{legende_phases}</ol>
@@ -507,26 +615,6 @@ f'''
 ''', actif='/methode/'))
 
 # ---------------------------------------------------------------- OFFRE
-def ico(corps, vb='0 0 24 24'):
-    return f'<svg viewBox="{vb}" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">{corps}</svg>'
-
-I_ANNONCE = ico('<path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>')
-I_PAGE = ico('<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>')
-I_SUIVI = ico('<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor"/>')
-I_FICHE = ico('<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/>')
-I_DIAG = ico('<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/>')
-I_CONSTR = ico('<path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/>')
-I_PILOT = ico('<path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/>')
-I_COMM = ico('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/>')
-I_DRAPEAU = ico('<path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/>')
-I_MAILLON = ico('<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>')
-I_CLE = ico('<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/>')
-I_VOUS = ico('<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6"/>')
-I_GOOGLE = ico('<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>')
-I_COCHE = ico('<path d="M5 12.5l4.5 4.5L19 7.5"/>')
-I_NETTOYAGE = ico('<path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/>')
-I_BOUTIQUE = ico('<path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2.5a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v8h13v-8M10 21v-5h4v5"/>')
-
 LEVIERS = [
     (I_ANNONCE, "Les annonces Google", "Pour apparaître au moment précis où quelqu'un cherche votre service, dans votre zone. C'est le moyen d'être visible le plus vite, à condition d'être bien préparé et bien suivi. Un clic ne prouve rien : seules les demandes et les contrats comptent."),
     (I_PAGE, "Une page dédiée à votre offre", "Pour que la personne qui clique trouve immédiatement ce qu'elle cherche, et puisse vous écrire facilement."),
@@ -534,36 +622,27 @@ LEVIERS = [
     (I_FICHE, "Votre fiche Google et votre site", "Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin."),
 ]
 MODS = [
-    (I_DIAG, "Diagnostic d'acquisition", "Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.", "Vos priorités, par écrit"),
-    (I_CONSTR, "Construction du parcours", "Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site.", "Un parcours prêt à recevoir des demandes"),
-    (I_PILOT, "Pilotage et amélioration", "Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête.", "Un point régulier, clair et honnête"),
-    (I_COMM, "Suivi commercial", "Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client.", "Vos demandes reliées à vos contrats"),
+    (I_DIAG, "Étape 1", "Diagnostic d'acquisition", "Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.", "Vos priorités, par écrit", None),
+    (I_CONSTR, "Étape 2", "Construction du parcours", "Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site.", "Un parcours prêt à recevoir des demandes", None),
+    (I_PILOT, "Étape 3", "Pilotage et amélioration", "Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête.", "Un point régulier, clair et honnête", None),
+    (I_COMM, "Étape 4", "Suivi commercial", "Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client.", "Vos demandes reliées à vos contrats", None),
 ]
 leviers_html = '\n'.join(
-    f'''      <article class="of-levier of-rev" style="--i:{k}">
-        <span class="of-ico">{i}</span>
+    f'''      <article class="of-levier rv" style="--i:{k}">
+        <span class="tu-ico">{i}</span>
         <h3>{t}</h3>
         <p>{d}</p>
         {f'<span class="of-lien" aria-hidden="true">{I_MAILLON}</span>' if k < len(LEVIERS) - 1 else ''}
       </article>''' for k, (i, t, d) in enumerate(LEVIERS))
-etapes_html = '\n'.join(
-    f'''      <li class="of-etape of-rev" style="--i:{k}">
-        <span class="of-jeton"><span class="of-num">{k + 1}</span>{i}</span>
-        <div class="of-carte">
-          <p class="of-tag">Étape {k + 1}</p>
-          <h3>{t}</h3>
-          <p>{d}</p>
-          <p class="of-gain">{I_COCHE}<span><strong>Vous obtenez :</strong> {g}</span></p>
-        </div>
-      </li>''' for k, (i, t, d, g) in enumerate(MODS))
 PROPRIETE = ["Compte publicitaire", "Page dédiée", "Site", "Fiche Google", "Données de suivi"]
-propriete_html = ''.join(f'<li class="of-rev" style="--i:{k}">{I_CLE}<span>{p}</span></li>' for k, p in enumerate(PROPRIETE))
-svc_o = [{"@type": "Service", "name": t, "description": d, "provider": {"@id": SITE + "/#organisation"}} for _, t, d, _ in MODS]
+propriete_html = ''.join(f'<li class="rv" style="--i:{k}">{I_CLE}<span>{p}</span></li>' for k, p in enumerate(PROPRIETE))
+svc_o = [{"@type": "Service", "name": t, "description": d, "provider": {"@id": SITE + "/#organisation"}} for _, _, t, d, _, _ in MODS]
+SENTIER = "M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"
 PAGES.append(page('/offre/', 'Notre accompagnement pour trouver des clients · ViZiBiLi',
     "Annonces Google, page dédiée, suivi des demandes jusqu'au devis signé : un accompagnement en quatre étapes, adapté à votre entreprise, partout en France.",
 f'''
-<section>
-  <div class="contenu of-heros">
+<section class="heros-zone">
+  <div class="contenu heros">
     <div>
       <p class="repere">Notre accompagnement</p>
       <h1>Un accompagnement construit autour d'un seul objectif : des <em>clients qui vous correspondent.</em></h1>
@@ -571,8 +650,8 @@ f'''
       <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="#etapes" class="btn btn-ligne">Voir les 4 étapes</a></div>
     </div>
     <div class="of-apercu" aria-hidden="true">
-      <span class="of-pion p1">{I_DIAG}</span><span class="of-pion p2">{I_CONSTR}</span><span class="of-pion p3">{I_PILOT}</span><span class="of-pion p4">{I_COMM}</span><span class="of-pion fin">{I_DRAPEAU}</span>
-      <svg class="of-sentier" viewBox="0 0 300 300" preserveAspectRatio="none"><path d="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"/></svg>
+      <svg class="of-sentier" viewBox="0 0 300 300"><path class="fond" d="{SENTIER}"/><path class="trace" pathLength="1" d="{SENTIER}"/><circle class="bille" r="7"><animateMotion dur="5s" begin="1.6s" repeatCount="indefinite" path="{SENTIER}" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg>
+      <span class="of-pion p1" style="--i:0">{I_DIAG}</span><span class="of-pion p2" style="--i:1">{I_CONSTR}</span><span class="of-pion p3" style="--i:2">{I_PILOT}</span><span class="of-pion p4" style="--i:3">{I_COMM}</span><span class="of-pion fin" style="--i:4">{I_DRAPEAU}</span>
     </div>
   </div>
 </section>
@@ -589,10 +668,7 @@ f'''
 <section id="etapes">
   <div class="contenu">
     <div class="titre-section"><h2>Quatre étapes, à votre rythme.</h2><p>Vous avancez d'une étape à l'autre quand la précédente est en place. Vous pouvez vous arrêter après chacune.</p></div>
-    <ol class="of-route">
-{etapes_html}
-      <li class="of-arrivee of-rev" style="--i:4"><span class="of-jeton">{I_DRAPEAU}</span><strong>Des clients qui vous correspondent</strong></li>
-    </ol>
+    {route(MODS, arrivee="Des clients qui vous correspondent", aria="Les quatre étapes de l'accompagnement")}
     <a href="/methode/" class="lien-suite">En savoir plus sur notre méthode</a>
   </div>
 </section>
@@ -601,25 +677,25 @@ f'''
   <div class="contenu">
     <div class="titre-section"><h2>Ce que vous payez, et à qui.</h2></div>
     <div class="of-flux">
-      <div class="of-noeud of-vous">{I_VOUS}<strong>Vous</strong></div>
+      <div class="of-noeud of-vous rv">{I_VOUS}<strong>Vous</strong></div>
       <div class="of-voies">
-        <div class="of-voie of-rev" style="--i:0">
+        <div class="of-voie rv" style="--i:1">
           <span class="of-fleche" aria-hidden="true"></span>
-          <div class="of-destination"><span class="of-ico">{I_GOOGLE}</span><div><strong>Le budget publicitaire, à Google</strong><p>Payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p></div></div>
+          <div class="of-destination"><span class="tu-ico">{I_LOUPE}</span><div><strong>Le budget publicitaire, à Google</strong><p>Payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p></div></div>
         </div>
-        <div class="of-voie of-rev" style="--i:1">
+        <div class="of-voie rv" style="--i:2">
           <span class="of-fleche" aria-hidden="true"></span>
-          <div class="of-destination"><span class="of-ico of-ico-vz">{LOGO_MARK.replace('class="logo-mark" ', '')}</span><div><strong>Notre accompagnement, à ViZiBiLi</strong><p>Facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p></div></div>
+          <div class="of-destination"><span class="tu-ico of-ico-vz">{LOGO_MARK.replace('class="logo-mark" ', '')}</span><div><strong>Notre accompagnement, à ViZiBiLi</strong><p>Facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p></div></div>
         </div>
       </div>
     </div>
-    <p class="of-promesse of-rev" style="--i:2"><span>Pas de frais cachés</span><span>Pas de pourcentage prélevé sur votre budget publicitaire</span></p>
+    <p class="of-promesse rv" style="--i:3"><span>Pas de frais cachés</span><span>Pas de pourcentage prélevé sur votre budget publicitaire</span></p>
   </div>
 </section>
 
 <section>
   <div class="contenu of-proprio">
-    <div>
+    <div class="rv">
       <h2>Tout ce que nous construisons <em>vous appartient.</em></h2>
       <p class="chapo" style="margin-top:16px">Tout est à votre nom dès le premier jour. Si vous décidez d'arrêter, vous repartez avec l'ensemble, prêt à fonctionner.</p>
     </div>
@@ -631,8 +707,8 @@ f'''
   <div class="contenu">
     <div class="titre-section"><h2>Pour qui nous travaillons.</h2></div>
     <div class="grille-2">
-      <div class="of-cible of-rev" style="--i:0"><span class="of-badge">Notre spécialité</span><span class="of-ico">{I_NETTOYAGE}</span><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
-      <div class="of-cible of-rev" style="--i:1"><span class="of-ico">{I_BOUTIQUE}</span><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
+      <div class="of-cible rv" style="--i:0"><span class="of-badge">Notre spécialité</span><span class="tu-ico">{I_NETTOYAGE}</span><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
+      <div class="of-cible rv" style="--i:1"><span class="tu-ico">{I_BOUTIQUE}</span><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
     </div>
   </div>
 </section>
@@ -640,67 +716,83 @@ f'''
 ''', actif='/offre/', jsonld=svc_o))
 
 # ---------------------------------------------------------------- CAS CLIENTS
-def cas(etiq, nom, lieu, depart, fait, change, suite=''):
+def cas(ancre, icone, etiq, nom, lieu, depart, fait, change, suite=''):
     return f'''
-    <article class="cas">
-      <span class="etiquette">{etiq}</span>
-      <h2>{nom}</h2>
-      <p class="lieu">{lieu}</p>
-      <div class="blocs">
-        <div><h3>Point de départ</h3><p>{depart}</p></div>
-        <div><h3>Ce que nous avons fait</h3><p>{fait}</p></div>
-        <div><h3>Ce qui a changé</h3><p>{change}</p></div>
-      </div>{suite}
+    <article class="cas rv" id="{ancre}">
+      <div class="cas-tete"><span class="tu-ico">{icone}</span><div><span class="etiquette">{etiq}</span><h2>{nom}</h2><p class="lieu">{lieu}</p></div></div>
+      <ol class="cas-fil">
+        <li><span class="cf-ico">{I_DRAPEAU}</span><h3>Point de départ</h3><p>{depart}</p></li>
+        <li><span class="cf-ico">{I_CONSTR}</span><h3>Ce que nous avons fait</h3><p>{fait}</p></li>
+        <li class="cf-fin"><span class="cf-ico">{I_HAUSSE}</span><h3>Ce qui a changé</h3><p>{change}</p></li>
+      </ol>{suite}
     </article>'''
 
-TEMOIN = '\n      <!-- TÉMOIGNAGE : à publier uniquement après accord écrit (SOP_PREUVE)\n      <blockquote>{q}<cite>{a}</cite></blockquote>\n      -->'
+# Témoignages publiés : diffusion autorisée par les clients (fondateur, 16/10/2026). Orthographe corrigée à la marge, sans changer le sens.
+TEMOIN = '\n      <blockquote class="temoin"><span class="guillemet" aria-hidden="true">“</span><p>{q}</p><cite>{a}</cite></blockquote>'
+CAS_LISTE = [("limpid", I_NETTOYAGE, "Limpid"), ("un-cadeau-une-histoire", I_CADEAU, "Un Cadeau Une Histoire"), ("gite-chez-paul", I_MAISON, "Gîte Chez Paul"), ("gite-de-la-marie", I_MAISON, "Gîte de la Marie")]
+sommaire_cas = ''.join(f'<a href="#{a}" class="rv" style="--i:{k}"><span>{i}</span>{n}</a>' for k, (a, i, n) in enumerate(CAS_LISTE))
 PAGES.append(page('/cas-clients/', 'Cas clients racontés honnêtement · ViZiBiLi',
     "Quatre entreprises accompagnées, dont celle de notre fondateur : ce qui a été mis en place et ce qui a changé, raconté sans chiffres impossibles à vérifier.",
 f'''
-<section>
+<section class="heros-zone">
   <div class="contenu heros-seul">
     <p class="repere">Cas clients</p>
     <h1>Des histoires vraies, racontées <em>honnêtement.</em></h1>
     <p class="sous-titre">Vous ne trouverez pas de pourcentages spectaculaires sur cette page, et c'est un choix. Un chiffre sans date, sans source et sans contexte ne prouve rien. Nous republierons nos résultats chiffrés quand chacun pourra être daté, sourcé et validé par le client concerné.</p>
     <p class="sous-titre" style="margin-bottom:0">En attendant, voici ce que nous avons fait, et ce que nos clients en disent.</p>
+    <nav class="sommaire-cas" aria-label="Les quatre cas">{sommaire_cas}</nav>
   </div>
 </section>
 <section class="fond-chaud">
   <div class="contenu">
-{cas("Fiche Google et lancement · Entreprise de notre fondateur", "Limpid", "Entreprise de nettoyage · Darnieulles (88)",
+{cas("limpid", I_NETTOYAGE, "Fiche Google et lancement · Entreprise de notre fondateur", "Limpid", "Entreprise de nettoyage · Darnieulles (88)",
      "Limpid est l'entreprise de nettoyage de notre fondateur. À son lancement, sa fiche Google était presque invisible sur Maps : peu d'avis, aucune preuve visible, aucun contact.",
      "Mise en conformité complète de la fiche Google : catégories, zone d'intervention, éléments de confiance. Pour le lancement, une annonce payante de Google dédiée aux services locaux. Puis une démarche régulière pour recueillir des avis authentiques auprès des clients.",
      "Les premières demandes sérieuses sont arrivées de clients proches, dans la zone d'intervention, et l'entreprise a signé ses premiers clients.",
      '\n      <p class="pourquoi"><strong>Pourquoi commencer par ce cas.</strong> Avant de proposer cette méthode, notre fondateur l\'a appliquée à sa propre entreprise, avec son propre argent. C\'est aussi sur Limpid qu\'est testée, depuis septembre 2026, notre méthode de campagnes Google. Ce test fera l\'objet d\'un cas séparé, publié seulement quand ses résultats seront mesurés. <a href="/methode/">Découvrir notre méthode</a></p>')}
-{cas("Site internet et fiche Google", "Un Cadeau Une Histoire", "Boutique de cadeaux personnalisés · Darnieulles (88)",
+{cas("un-cadeau-une-histoire", I_CADEAU, "Site internet et fiche Google", "Un Cadeau Une Histoire", "Boutique de cadeaux personnalisés · Darnieulles (88)",
      "Une boutique appréciée de sa clientèle, mais une présence en ligne qui ne reflétait ni la qualité de son travail ni la richesse de ses créations.",
      "Création d'un nouveau site, rafraîchissement complet de la fiche Google, et des conseils concrets pour entretenir cette présence dans la durée.",
      "Selon sa gérante, la boutique est désormais plus visible, plus attractive, et davantage recommandée par ses clients.",
-     TEMOIN.format(q="« Le travail de ViZiBiLi a véritablement transformé notre présence locale. Grâce au nouveau site et à la fiche Google rafraîchit, nous sommes désormais visibles, attractifs et recommandés par nos clients locaux, de plus, tout au long de notre collaboration, Clément le gérant de l'agence nous a accompagné et donné des conseils utiles à appliquer pour maintenir la qualité de notre visibilité. Une vraie réussite ! »", a="Annie, gérante"))}
-{cas("Fiche Google", "Gîte Chez Paul", "Location de gîte touristique · Épinal (88)",
+     TEMOIN.format(q="Le travail de ViZiBiLi a véritablement transformé notre présence locale. Grâce au nouveau site et à la fiche Google rafraîchie, nous sommes désormais visibles, attractifs et recommandés par nos clients locaux. De plus, tout au long de notre collaboration, Clément, le gérant de l'agence, nous a accompagnés et donné des conseils utiles à appliquer pour maintenir la qualité de notre visibilité. Une vraie réussite !", a="Annie, gérante"))}
+{cas("gite-chez-paul", I_MAISON, "Fiche Google", "Gîte Chez Paul", "Location de gîte touristique · Épinal (88)",
      "Un gîte bien tenu, mais une fiche Google qui ne le mettait pas en valeur auprès des voyageurs.",
      "Optimisation complète de la fiche Google et mise en avant des avis clients.",
      "Selon sa propriétaire, la fiche est devenue un vrai levier de réservations.",
-     TEMOIN.format(q="« ViZiBiLi a su transformer notre fiche Google en un vrai levier de réservations. Le travail est sérieux, structuré et orienté résultats. On voit clairement la différence. »", a="La propriétaire"))}
-{cas("Fiche Google", "Gîte de la Marie", "Location de gîte touristique · Épinal (88)",
+     TEMOIN.format(q="ViZiBiLi a su transformer notre fiche Google en un vrai levier de réservations. Le travail est sérieux, structuré et orienté résultats. On voit clairement la différence.", a="La propriétaire"))}
+{cas("gite-de-la-marie", I_MAISON, "Fiche Google", "Gîte de la Marie", "Location de gîte touristique · Épinal (88)",
      "Une fiche Google qui n'était pas à la hauteur du gîte qu'elle présentait.",
      "Remise en cohérence et optimisation de la fiche Google, avec une présentation claire et structurée.",
      "Selon sa propriétaire, le gîte a gagné en visibilité, en cohérence et en réservations.",
-     TEMOIN.format(q="« Grâce à l'accompagnement de ViZiBiLi, notre fiche Google est enfin à la hauteur de notre gîte. Nous avons gagné en visibilité, en cohérence et en réservations. Tout est clair, structuré et surtout efficace. »", a="La propriétaire"))}
+     TEMOIN.format(q="Grâce à l'accompagnement de ViZiBiLi, notre fiche Google est enfin à la hauteur de notre gîte. Nous avons gagné en visibilité, en cohérence et en réservations. Tout est clair, structuré et surtout efficace.", a="La propriétaire"))}
   </div>
 </section>
 {bande("Votre entreprise pourrait être la prochaine histoire.", "", "Demander un premier échange")}
 ''', actif='/cas-clients/'))
 
 # ---------------------------------------------------------------- À PROPOS
+PRINCIPES = [
+    (I_OEIL, "Dire la vérité, même quand elle est moins vendeuse.", "Nous ne publions pas un résultat avant de l'avoir mesuré, y compris les nôtres."),
+    (I_MESURE, "Mesurer avant de promettre.", "Une décision s'appuie sur ce que disent vos demandes, vos devis et vos contrats, pas sur une impression."),
+    (I_CLE, "Vous laisser propriétaire de tout.", "Compte publicitaire, site, fiche Google, données : tout est à votre nom, dès le premier jour."),
+]
 PAGES.append(page('/a-propos/', 'À propos de ViZiBiLi, née du terrain · Vosges',
     "ViZiBiLi est née dans une entreprise de nettoyage des Vosges. Une structure à taille humaine, où vous échangez toujours directement avec son fondateur.",
 f'''
-<section>
-  <div class="contenu heros-seul">
-    <p class="repere">À propos</p>
-    <h1>Derrière ViZiBiLi, un dirigeant qui cherche lui aussi <em>ses clients.</em></h1>
-    <p class="sous-titre">ViZiBiLi n'a pas été imaginée dans une agence. Elle est née dans une entreprise de nettoyage des Vosges, face à une question très concrète : comment trouver des clients sérieux sans gaspiller ni temps ni argent ?</p>
+<section class="heros-zone">
+  <div class="contenu heros">
+    <div>
+      <p class="repere">À propos</p>
+      <h1>Derrière ViZiBiLi, un dirigeant qui cherche lui aussi <em>ses clients.</em></h1>
+      <p class="sous-titre">ViZiBiLi n'a pas été imaginée dans une agence. Elle est née dans une entreprise de nettoyage des Vosges, face à une question très concrète : comment trouver des clients sérieux sans gaspiller ni temps ni argent ?</p>
+    </div>
+    <div class="origine" aria-hidden="true">
+      <span class="og-noeud og-a">{I_NETTOYAGE}<em>Une entreprise de nettoyage</em></span>
+      <span class="og-trait"></span>
+      <span class="og-noeud og-q"><b>?</b><em>Comment trouver des clients sérieux</em></span>
+      <span class="og-trait"></span>
+      <span class="og-noeud og-b">{LOGO_MARK.replace('class="logo-mark" ', '')}<em>ViZiBiLi</em></span>
+    </div>
   </div>
 </section>
 <section class="fond-chaud">
@@ -713,18 +805,21 @@ f'''
 <section>
   <div class="contenu">
     <div class="titre-section"><h2>Trois principes, sans exception.</h2></div>
-    <div class="grille-3">
-      <div class="pilier"><h3>Dire la vérité, même quand elle est moins vendeuse.</h3><p>Nous ne publions pas un résultat avant de l'avoir mesuré, y compris les nôtres.</p></div>
-      <div class="pilier"><h3>Mesurer avant de promettre.</h3><p>Une décision s'appuie sur ce que disent vos demandes, vos devis et vos contrats, pas sur une impression.</p></div>
-      <div class="pilier"><h3>Vous laisser propriétaire de tout.</h3><p>Compte publicitaire, site, fiche Google, données : tout est à votre nom, dès le premier jour.</p></div>
-    </div>
+    {tuiles(PRINCIPES, 3)}
   </div>
 </section>
 <section class="fond-chaud">
-  <div class="contenu titre-section">
-    <h2>Vous parlez toujours à la même personne.</h2>
-    <p>ViZiBiLi est une structure à taille humaine. Vous échangez directement avec son fondateur, du premier échange au suivi de vos résultats. Pas d'intermédiaire, pas de dossier qui passe de main en main.</p>
-    <p style="margin-top:12px">Nous accompagnons les entreprises de nettoyage partout en France, à distance, et les entreprises locales des Vosges.</p>
+  <div class="contenu deux-temps">
+    <div class="titre-section">
+      <h2>Vous parlez toujours à la même personne.</h2>
+      <p>ViZiBiLi est une structure à taille humaine. Vous échangez directement avec son fondateur, du premier échange au suivi de vos résultats. Pas d'intermédiaire, pas de dossier qui passe de main en main.</p>
+      <p style="margin-top:12px">Nous accompagnons les entreprises de nettoyage partout en France, à distance, et les entreprises locales des Vosges.</p>
+    </div>
+    <div class="direct" aria-hidden="true">
+      <span class="dr-noeud">{I_VOUS}<em>Vous</em></span>
+      <span class="dr-ligne"><i></i><i></i><b class="dr-barre">{I_CROIX}<small>Intermédiaires</small></b></span>
+      <span class="dr-noeud dr-fond">{I_VOUS}<em>Clément, fondateur</em></span>
+    </div>
   </div>
 </section>
 {bande("Faisons connaissance.", "Le premier échange est offert. Nous vous dirons franchement si nous pouvons vous aider.", "Demander un premier échange")}
@@ -748,7 +843,7 @@ faq_pe = '\n'.join(f'      <details><summary>{q}</summary><p>{r}</p></details>' 
 PAGES.append(page('/premier-echange/', "Demander un premier échange · ViZiBiLi",
     "Un premier échange offert de 15 à 30 minutes pour comprendre votre situation. Le diagnostic approfondi est une prestation distincte, au prix connu d'avance.",
 f'''
-<section>
+<section class="heros-zone">
   <div class="contenu heros-seul">
     <p class="repere">Premier échange et diagnostic</p>
     <h1>Commençons par un premier échange. <em>Offert, et sans détour.</em></h1>
@@ -758,11 +853,11 @@ f'''
 
 <section class="fond-chaud" style="padding-top:56px">
   <div class="contenu">
-    <ol class="etapes-contact">
-      <li id="premier-echange"><span class="ec-statut">Offert</span><h3>Premier échange</h3><p><strong>15 à 30 minutes</strong>, par téléphone ou en visio. Nous cherchons à comprendre votre situation et à déterminer si un accompagnement est réellement pertinent. Si ce n'est pas le cas, nous vous le disons.</p></li>
-      <li id="diagnostic"><span class="ec-statut">Prestation distincte</span><h3>Diagnostic approfondi</h3><p>Analyse de l'existant, identification des blocages, étude des opportunités, priorisation, et une <strong>feuille de route exploitable</strong>, même si vous continuez seul. Son contenu et son prix vous sont donnés par écrit, avant de commencer.</p></li>
-      <li id="ensuite"><span class="ec-statut">Sur proposition</span><h3>Et ensuite ?</h3><p>Si un accompagnement a du sens, il fait l'objet d'une <strong>proposition séparée</strong> : périmètre, honoraires, et budget publicitaire payé directement par vous à Google, sur votre propre compte.</p></li>
-    </ol>
+    {route([
+      (I_BULLE, '<span class="statut offert">Offert</span>', "Premier échange", "<strong>15 à 30 minutes</strong>, par téléphone ou en visio. Nous cherchons à comprendre votre situation et à déterminer si un accompagnement est réellement pertinent. Si ce n'est pas le cas, nous vous le disons.", None, "premier-echange"),
+      (I_DIAG, '<span class="statut">Prestation distincte</span>', "Diagnostic approfondi", "Analyse de l'existant, identification des blocages, étude des opportunités, priorisation, et une <strong>feuille de route exploitable</strong>, même si vous continuez seul. Son contenu et son prix vous sont donnés par écrit, avant de commencer.", None, "diagnostic"),
+      (I_COMM, '<span class="statut">Sur proposition</span>', "Et ensuite ?", "Si un accompagnement a du sens, il fait l'objet d'une <strong>proposition séparée</strong> : périmètre, honoraires, et budget publicitaire payé directement par vous à Google, sur votre propre compte.", None, "ensuite"),
+    ], aria="Ce qui est offert, ce qui est payant, ce qui vous engage")}
     <div class="pour-qui">
       <h2>Pour qui ?</h2>
       <p>Pour les entreprises qui veulent vraiment développer leurs demandes, et qui ont la capacité de les traiter quand elles arrivent. La propreté est notre spécialité, mais <strong>aucun secteur n'est exclu d'avance</strong> : le premier échange sert à le vérifier ensemble.</p>
@@ -775,6 +870,7 @@ f'''
     <div>
       <h2>Votre demande de premier échange</h2>
       <p class="chapo" style="margin-bottom:24px">Sept questions, une minute. Le reste, nous en parlerons de vive voix.</p>
+      <div class="jauge" aria-hidden="true"><div class="jauge-barre"><span></span></div><p class="jauge-texte">5 réponses obligatoires, c'est parti.</p></div>
       <form id="formulaire-demande" class="formulaire" action="/api/demande" method="post" novalidate>
         <div class="champ"><label for="nom">Nom et prénom <span class="requis" aria-hidden="true">*</span></label><input id="nom" name="nom" type="text" autocomplete="name" data-requis required aria-describedby="nom-err"><span class="message-erreur" id="nom-err">Indiquez votre nom.</span></div>
         <div class="champ"><label for="entreprise">Entreprise <span class="requis" aria-hidden="true">*</span></label><input id="entreprise" name="entreprise" type="text" autocomplete="organization" data-requis required aria-describedby="entreprise-err"><span class="message-erreur" id="entreprise-err">Indiquez le nom de votre entreprise.</span></div>
@@ -829,10 +925,10 @@ f'''
 ''', actif=None, jsonld=[{"@type": "ContactPage", "url": SITE + "/premier-echange/"}], formulaire=True))
 
 PAGES.append(page('/premier-echange/merci/', 'Demande reçue · ViZiBiLi', "Votre demande de premier échange a bien été reçue.",
-'''
+f'''
 <section>
   <div class="centre">
-    <div class="pin-grand" aria-hidden="true"></div>
+    <div class="succes" aria-hidden="true"><span class="succes-coche">{I_COCHE}</span><span class="confettis"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div>
     <h1>Votre demande est bien <em>reçue.</em></h1>
     <p class="sous-titre" style="margin:0 auto">Elle est arrivée chez nous et nous allons la lire attentivement.</p>
     <div class="encart">
@@ -943,7 +1039,8 @@ PAGES.append(article('entreprise-absente-google-maps', "Pourquoi votre entrepris
 <p style="margin-top:28px">Vous voulez comprendre pourquoi vos clients ne vous trouvent pas, et ce qui vous ferait gagner des demandes ? <a href="/premier-echange/" class="btn btn-plein" style="margin-left:6px">Demander un premier échange</a></p>
 ''', "Les sept causes les plus fréquentes, et par où commencer pour les corriger."))
 
-cartes = '\n'.join(f'      <a href="/ressources/{s}/"><h2>{h}</h2><p>{c}</p></a>' for s, h, c in ARTICLES)
+ICO_ART = [I_NETTOYAGE, I_EURO, I_FICHE]
+cartes = '\n'.join(f'      <a href="/ressources/{s}/" class="rv" style="--i:{k}"><span class="tu-ico">{ICO_ART[k % 3]}</span><h2>{h}</h2><p>{c}</p><span class="lire">Lire l\'article{I_FLECHE}</span></a>' for k, (s, h, c) in enumerate(ARTICLES))
 PAGES.append(page('/ressources/', 'Ressources pour trouver des clients sur Google · ViZiBiLi',
     "Des conseils concrets, issus du terrain, pour trouver des clients sur Google et savoir ce que chaque action vous rapporte vraiment.",
 f'''
@@ -1019,10 +1116,10 @@ PAGES.append(page('/confidentialite/', 'Politique de confidentialité · ViZiBiL
 '''))
 
 # 404 (servie par le Worker pour toute adresse inconnue)
-p404 = page('/404-gabarit/', 'Page introuvable · ViZiBiLi', "Cette page n'existe pas ou plus.", '''
+p404 = page('/404-gabarit/', 'Page introuvable · ViZiBiLi', "Cette page n'existe pas ou plus.", f'''
 <section>
   <div class="centre">
-    <div class="pin-grand" aria-hidden="true"></div>
+    <div class="casse-404" aria-hidden="true">{ICO_RUPTURE}</div>
     <h1>Cette page n'existe pas, <em>ou plus.</em></h1>
     <p class="sous-titre" style="margin:0 auto 28px">Le site a évolué. Vous trouverez sans doute ce que vous cherchez à partir de l'accueil.</p>
     <div class="actions" style="justify-content:center"><a href="/" class="btn btn-plein">Retour à l'accueil</a><a href="/ressources/" class="btn btn-ligne">Voir les ressources</a></div>

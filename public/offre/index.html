@@ -106,8 +106,8 @@
   </button>
 </header>
 <main id="contenu">
-<section>
-  <div class="contenu of-heros">
+<section class="heros-zone">
+  <div class="contenu heros">
     <div>
       <p class="repere">Notre accompagnement</p>
       <h1>Un accompagnement construit autour d'un seul objectif : des <em>clients qui vous correspondent.</em></h1>
@@ -115,8 +115,8 @@
       <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="#etapes" class="btn btn-ligne">Voir les 4 étapes</a></div>
     </div>
     <div class="of-apercu" aria-hidden="true">
-      <span class="of-pion p1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="of-pion p2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/></svg></span><span class="of-pion p3"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/></svg></span><span class="of-pion p4"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span><span class="of-pion fin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg></span>
-      <svg class="of-sentier" viewBox="0 0 300 300" preserveAspectRatio="none"><path d="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"/></svg>
+      <svg class="of-sentier" viewBox="0 0 300 300"><path class="fond" d="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"/><path class="trace" pathLength="1" d="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262"/><circle class="bille" r="7"><animateMotion dur="5s" begin="1.6s" repeatCount="indefinite" path="M40 40 C 160 40, 260 60, 240 120 S 60 150, 70 210 S 200 270, 262 262" keyPoints="0;1" keyTimes="0;1" calcMode="linear"/></circle></svg>
+      <span class="of-pion p1" style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span><span class="of-pion p2" style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/></svg></span><span class="of-pion p3" style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/></svg></span><span class="of-pion p4" style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span><span class="of-pion fin" style="--i:4"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg></span>
     </div>
   </div>
 </section>
@@ -125,26 +125,26 @@
   <div class="contenu">
     <div class="titre-section"><h2>Les leviers, et la place de chacun.</h2><p>Chaque levier est un maillon. Seul, il ne fait pas un client ; reliés dans le bon ordre, ils forment une chaîne solide.</p></div>
     <div class="of-chaine">
-      <article class="of-levier of-rev" style="--i:0">
-        <span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
+      <article class="of-levier rv" style="--i:0">
+        <span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10v4a1 1 0 0 0 1 1h2l5 4V5L7 9H5a1 1 0 0 0-1 1z"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg></span>
         <h3>Les annonces Google</h3>
         <p>Pour apparaître au moment précis où quelqu'un cherche votre service, dans votre zone. C'est le moyen d'être visible le plus vite, à condition d'être bien préparé et bien suivi. Un clic ne prouve rien : seules les demandes et les contrats comptent.</p>
         <span class="of-lien" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
       </article>
-      <article class="of-levier of-rev" style="--i:1">
-        <span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span>
+      <article class="of-levier rv" style="--i:1">
+        <span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/></svg></span>
         <h3>Une page dédiée à votre offre</h3>
         <p>Pour que la personne qui clique trouve immédiatement ce qu'elle cherche, et puisse vous écrire facilement.</p>
         <span class="of-lien" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
       </article>
-      <article class="of-levier of-rev" style="--i:2">
-        <span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor"/></svg></span>
+      <article class="of-levier rv" style="--i:2">
+        <span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r=".9" fill="currentColor"/></svg></span>
         <h3>Le suivi des demandes</h3>
         <p>Pour savoir d'où viennent vos demandes, si elles sont sérieuses et ce qu'elles deviennent. Sans ce suivi, personne ne peut dire si la publicité est rentable.</p>
         <span class="of-lien" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
       </article>
-      <article class="of-levier of-rev" style="--i:3">
-        <span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+      <article class="of-levier rv" style="--i:3">
+        <span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
         <h3>Votre fiche Google et votre site</h3>
         <p>Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin.</p>
         
@@ -156,45 +156,44 @@
 <section id="etapes">
   <div class="contenu">
     <div class="titre-section"><h2>Quatre étapes, à votre rythme.</h2><p>Vous avancez d'une étape à l'autre quand la précédente est en place. Vous pouvez vous arrêter après chacune.</p></div>
-    <ol class="of-route">
-      <li class="of-etape of-rev" style="--i:0">
-        <span class="of-jeton"><span class="of-num">1</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <div class="of-carte">
-          <p class="of-tag">Étape 1</p>
+    <div class="route-zone" data-route style="--n:5">
+    <span class="rt-ligne" aria-hidden="true"></span><span class="rt-pion" aria-hidden="true"></span>
+    <ol class="route avec-fin" aria-label="Les quatre étapes de l'accompagnement">
+      <li class="rt-etape rv" style="--i:0">
+        <span class="rt-jeton"><span class="rt-num">1</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4.5h6v2.5H9z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag">Étape 1</p>
           <h3>Diagnostic d'acquisition</h3>
-          <p>Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.</p>
-          <p class="of-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Vos priorités, par écrit</span></p>
+          <p class="rt-texte">Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.</p><p class="rt-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Vos priorités, par écrit</span></p>
         </div>
       </li>
-      <li class="of-etape of-rev" style="--i:1">
-        <span class="of-jeton"><span class="of-num">2</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/></svg></span>
-        <div class="of-carte">
-          <p class="of-tag">Étape 2</p>
+      <li class="rt-etape rv" style="--i:1">
+        <span class="rt-jeton"><span class="rt-num">2</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><rect x="5" y="13" width="6" height="8"/><rect x="13" y="9" width="6" height="12"/><path d="M8 13V9M16 9V5"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag">Étape 2</p>
           <h3>Construction du parcours</h3>
-          <p>Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site.</p>
-          <p class="of-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Un parcours prêt à recevoir des demandes</span></p>
+          <p class="rt-texte">Nous préparons et lançons ce qui manque : annonces Google, page dédiée, suivi des demandes, et si besoin votre fiche Google ou votre site.</p><p class="rt-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Un parcours prêt à recevoir des demandes</span></p>
         </div>
       </li>
-      <li class="of-etape of-rev" style="--i:2">
-        <span class="of-jeton"><span class="of-num">3</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/></svg></span>
-        <div class="of-carte">
-          <p class="of-tag">Étape 3</p>
+      <li class="rt-etape rv" style="--i:2">
+        <span class="rt-jeton"><span class="rt-num">3</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 17a8 8 0 1 1 15 0"/><path d="M12 13l4-4"/><circle cx="12" cy="13" r="1.3" fill="currentColor"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag">Étape 3</p>
           <h3>Pilotage et amélioration</h3>
-          <p>Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête.</p>
-          <p class="of-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Un point régulier, clair et honnête</span></p>
+          <p class="rt-texte">Nous surveillons les dépenses, trions les demandes avec vous et corrigeons une chose à la fois. Vous recevez un point régulier, clair et honnête.</p><p class="rt-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Un point régulier, clair et honnête</span></p>
         </div>
       </li>
-      <li class="of-etape of-rev" style="--i:3">
-        <span class="of-jeton"><span class="of-num">4</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span>
-        <div class="of-carte">
-          <p class="of-tag">Étape 4</p>
+      <li class="rt-etape rv" style="--i:3">
+        <span class="rt-jeton"><span class="rt-num">4</span><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M8.5 16.5c1.2-1.6 2.2-1.6 2.8 0s1.6 1.6 2.8 0 1.6-1.6 2.4 0"/></svg></span>
+        <div class="rt-carte">
+          <p class="rt-tag">Étape 4</p>
           <h3>Suivi commercial</h3>
-          <p>Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client.</p>
-          <p class="of-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Vos demandes reliées à vos contrats</span></p>
+          <p class="rt-texte">Nous relions les demandes à vos devis et à vos contrats signés, avec les outils que vous utilisez déjà. C'est là que vous voyez, autant que vos données le permettent, ce que vous coûte et vous rapporte un nouveau client.</p><p class="rt-gain"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><strong>Vous obtenez :</strong> Vos demandes reliées à vos contrats</span></p>
         </div>
       </li>
-      <li class="of-arrivee of-rev" style="--i:4"><span class="of-jeton"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg></span><strong>Des clients qui vous correspondent</strong></li>
+      <li class="rt-arrivee rv" style="--i:4"><span class="rt-jeton"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4"/><path d="M5 4h12l-2.5 4L17 12H5"/></svg><span class="rt-confettis" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><strong>Des clients qui vous correspondent</strong></li>
     </ol>
+  </div>
     <a href="/methode/" class="lien-suite">En savoir plus sur notre méthode</a>
   </div>
 </section>
@@ -203,29 +202,29 @@
   <div class="contenu">
     <div class="titre-section"><h2>Ce que vous payez, et à qui.</h2></div>
     <div class="of-flux">
-      <div class="of-noeud of-vous"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6"/></svg><strong>Vous</strong></div>
+      <div class="of-noeud of-vous rv"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c.8-4.3 3.8-6.6 7.5-6.6s6.7 2.3 7.5 6.6"/></svg><strong>Vous</strong></div>
       <div class="of-voies">
-        <div class="of-voie of-rev" style="--i:0">
+        <div class="of-voie rv" style="--i:1">
           <span class="of-fleche" aria-hidden="true"></span>
-          <div class="of-destination"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><div><strong>Le budget publicitaire, à Google</strong><p>Payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p></div></div>
+          <div class="of-destination"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></span><div><strong>Le budget publicitaire, à Google</strong><p>Payé directement par vous à Google, sur votre propre compte. Il ne passe jamais par nous, et vous le voyez en temps réel.</p></div></div>
         </div>
-        <div class="of-voie of-rev" style="--i:1">
+        <div class="of-voie rv" style="--i:2">
           <span class="of-fleche" aria-hidden="true"></span>
-          <div class="of-destination"><span class="of-ico of-ico-vz"><svg xmlns="http://www.w3.org/2000/svg" viewBox="14 14 72 100" width="72" height="100" aria-hidden="true" focusable="false"><path d="M50 112C40 96 16 78 16 50A34 34 0 1 1 84 50C84 78 60 96 50 112Z" fill="#141414"/><path d="M25 50A25 25 0 1 0 75 50A25 25 0 1 0 25 50Z" fill="#6B635B"/><path d="M27.5 50A22.5 22.5 0 1 0 72.5 50A22.5 22.5 0 1 0 27.5 50Z" fill="#141414"/><path d="M29.3 57.5A22 22 0 0 0 70.7 42.5Q58 78 29.3 57.5Z" fill="#D77229"/><path d="M50 59C36 50 37.5 37 45.5 37.5C48 37.7 49.6 39.6 50 42C50.4 39.6 52 37.7 54.5 37.5C62.5 37 64 50 50 59Z" fill="#FF9A4D"/></svg></span><div><strong>Notre accompagnement, à ViZiBiLi</strong><p>Facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p></div></div>
+          <div class="of-destination"><span class="tu-ico of-ico-vz"><svg xmlns="http://www.w3.org/2000/svg" viewBox="14 14 72 100" width="72" height="100" aria-hidden="true" focusable="false"><path d="M50 112C40 96 16 78 16 50A34 34 0 1 1 84 50C84 78 60 96 50 112Z" fill="#141414"/><path d="M25 50A25 25 0 1 0 75 50A25 25 0 1 0 25 50Z" fill="#6B635B"/><path d="M27.5 50A22.5 22.5 0 1 0 72.5 50A22.5 22.5 0 1 0 27.5 50Z" fill="#141414"/><path d="M29.3 57.5A22 22 0 0 0 70.7 42.5Q58 78 29.3 57.5Z" fill="#D77229"/><path d="M50 59C36 50 37.5 37 45.5 37.5C48 37.7 49.6 39.6 50 42C50.4 39.6 52 37.7 54.5 37.5C62.5 37 64 50 50 59Z" fill="#FF9A4D"/></svg></span><div><strong>Notre accompagnement, à ViZiBiLi</strong><p>Facturé séparément. Son prix dépend de votre situation et des étapes retenues : il vous est donné par écrit, avant de commencer, à l'issue du diagnostic.</p></div></div>
         </div>
       </div>
     </div>
-    <p class="of-promesse of-rev" style="--i:2"><span>Pas de frais cachés</span><span>Pas de pourcentage prélevé sur votre budget publicitaire</span></p>
+    <p class="of-promesse rv" style="--i:3"><span>Pas de frais cachés</span><span>Pas de pourcentage prélevé sur votre budget publicitaire</span></p>
   </div>
 </section>
 
 <section>
   <div class="contenu of-proprio">
-    <div>
+    <div class="rv">
       <h2>Tout ce que nous construisons <em>vous appartient.</em></h2>
       <p class="chapo" style="margin-top:16px">Tout est à votre nom dès le premier jour. Si vous décidez d'arrêter, vous repartez avec l'ensemble, prêt à fonctionner.</p>
     </div>
-    <ul class="of-cles"><li class="of-rev" style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Compte publicitaire</span></li><li class="of-rev" style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Page dédiée</span></li><li class="of-rev" style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Site</span></li><li class="of-rev" style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Fiche Google</span></li><li class="of-rev" style="--i:4"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Données de suivi</span></li></ul>
+    <ul class="of-cles"><li class="rv" style="--i:0"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Compte publicitaire</span></li><li class="rv" style="--i:1"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Page dédiée</span></li><li class="rv" style="--i:2"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Site</span></li><li class="rv" style="--i:3"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Fiche Google</span></li><li class="rv" style="--i:4"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l2 2M15 8l2 2"/></svg><span>Données de suivi</span></li></ul>
   </div>
 </section>
 
@@ -233,8 +232,8 @@
   <div class="contenu">
     <div class="titre-section"><h2>Pour qui nous travaillons.</h2></div>
     <div class="grille-2">
-      <div class="of-cible of-rev" style="--i:0"><span class="of-badge">Notre spécialité</span><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/></svg></span><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
-      <div class="of-cible of-rev" style="--i:1"><span class="of-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2.5a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v8h13v-8M10 21v-5h4v5"/></svg></span><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
+      <div class="of-cible rv" style="--i:0"><span class="of-badge">Notre spécialité</span><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h4v4H9z"/><path d="M8 7h6l1 4v9a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-9z"/><path d="M17 5h3M18.5 3.5v3M17.5 9.5h2"/></svg></span><strong>Les entreprises de nettoyage et de propreté</strong><p>Partout en France, à distance. C'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p></div>
+      <div class="of-cible rv" style="--i:1"><span class="tu-ico"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9l1.5-5h13L20 9"/><path d="M4 9h16v2.5a2.7 2.7 0 0 1-5.3 0 2.7 2.7 0 0 1-5.4 0 2.7 2.7 0 0 1-5.3 0z"/><path d="M5.5 13v8h13v-8M10 21v-5h4v5"/></svg></span><strong>Les entreprises locales de tous secteurs</strong><p>Artisans, commerçants, indépendants, professions libérales et services, partout en France à distance, et sur place dans les Vosges. Pour celles qui veulent des demandes sérieuses plutôt que de simples visites.</p></div>
     </div>
   </div>
 </section>

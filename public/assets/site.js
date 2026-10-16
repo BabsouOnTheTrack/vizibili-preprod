@@ -200,27 +200,115 @@
   signaux.forEach(function (s) { obs.observe(s); });
 })();
 
-/* Page Offre : apparition des blocs et route des étapes qui se remplit au défilement */
+/* V2 ludique (16/10/2026) : en-tête vivant, apparitions au défilement, routes de jeu, pistes, jauge du formulaire.
+   Sans JavaScript ou si le visiteur limite les animations, tout s'affiche directement dans son état final. */
 (function () {
-  var blocs = document.querySelectorAll('.of-rev');
-  var route = document.querySelector('.of-route');
-  if (!blocs.length && !route) return;
+  var doc = document.documentElement;
   var calme = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (calme || !('IntersectionObserver' in window)) { if (route) route.style.setProperty('--p', 1); return; }
-  document.documentElement.classList.add('of-anim');
-  var obs = new IntersectionObserver(function (entrees) {
-    entrees.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('vu'); obs.unobserve(en.target); } });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.15 });
-  blocs.forEach(function (b) { obs.observe(b); });
-  if (!route) return;
-  var attente = false;
-  function maj() {
-    attente = false;
-    var r = route.getBoundingClientRect(), vertical = window.innerWidth <= 980;
-    var p = vertical ? (window.innerHeight * 0.7 - r.top) / r.height : (window.innerHeight * 0.85 - r.top) / (r.height * 0.9);
-    route.style.setProperty('--p', Math.max(0, Math.min(1, p)).toFixed(3));
+  var io = 'IntersectionObserver' in window;
+
+  /* En-tête : ombre au défilement et barre de progression de lecture */
+  var tete = document.querySelector('.site-header');
+  if (tete) {
+    var lu = document.createElement('span');
+    lu.className = 'progression'; lu.setAttribute('aria-hidden', 'true');
+    tete.appendChild(lu);
   }
-  window.addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(maj); } }, { passive: true });
-  window.addEventListener('resize', maj);
-  maj();
+  function enTete() {
+    if (!tete) return;
+    var h = doc.scrollHeight - window.innerHeight, y = window.scrollY || 0;
+    tete.classList.toggle('defile', y > 8);
+    tete.style.setProperty('--lu', h > 0 ? Math.min(1, y / h).toFixed(4) : '0');
+  }
+
+  /* Éléments qui apparaissent au défilement, avec un léger décalage entre voisins */
+  var AUTO = ['.titre-section', '.liste-refus li', '.faq details', '.symptome', '.etapes li', '.fe-phases li', '.pour-qui', '.encart', '.formulaire',
+              '.bloc-encre', '.carte', '.note', '.conclusion', '.constat', '.lien-suite', '.article h2', '.article .exemple', '.article .formule'];
+  AUTO.forEach(function (sel) {
+    document.querySelectorAll(sel).forEach(function (el) {
+      if (el.classList.contains('rv')) return;
+      var rang = 0, frere = el.previousElementSibling;
+      while (frere && rang < 6) { if (frere.matches(sel)) rang++; frere = frere.previousElementSibling; }
+      el.classList.add('rv');
+      if (!el.style.getPropertyValue('--i')) el.style.setProperty('--i', rang);
+    });
+  });
+
+  var routes = Array.prototype.slice.call(document.querySelectorAll('[data-route]')).map(function (z) {
+    return { zone: z, etapes: Array.prototype.slice.call(z.querySelectorAll('.rt-etape, .rt-arrivee')), centres: [], vert: false };
+  });
+  function geometrie(r) {
+    var zr = r.zone.getBoundingClientRect();
+    r.centres = r.etapes.map(function (li) {
+      var j = li.querySelector('.rt-jeton').getBoundingClientRect();
+      return { x: j.left + j.width / 2 - zr.left, y: j.top + j.height / 2 - zr.top };
+    });
+    if (r.centres.length < 2) return;
+    var a = r.centres[0], b = r.centres[r.centres.length - 1];
+    r.vert = Math.abs(b.x - a.x) < 10;
+    r.zone.classList.toggle('vert', r.vert);
+    var s = r.zone.style;
+    if (r.vert) { s.setProperty('--x0', (a.x - 3) + 'px'); s.setProperty('--y0', a.y + 'px'); s.setProperty('--lw', '6px'); s.setProperty('--lh', (b.y - a.y) + 'px'); }
+    else { s.setProperty('--x0', a.x + 'px'); s.setProperty('--y0', (a.y - 3) + 'px'); s.setProperty('--lw', (b.x - a.x) + 'px'); s.setProperty('--lh', '6px'); }
+  }
+  function avancer(r, p) {
+    var c = r.centres, m = c.length - 1;
+    if (m < 1) return;
+    r.zone.style.setProperty('--p', p.toFixed(3));
+    var t = p * m, k = Math.min(m - 1, Math.floor(t)), f = t - k;
+    r.zone.style.setProperty('--px', (c[k].x + (c[k + 1].x - c[k].x) * f).toFixed(1) + 'px');
+    r.zone.style.setProperty('--py', (c[k].y + (c[k + 1].y - c[k].y) * f).toFixed(1) + 'px');
+    r.zone.classList.toggle('actif', p > 0.001 && p < 0.999);
+    r.etapes.forEach(function (li, j) { li.classList.toggle('atteint', t >= j - 0.02); });
+  }
+  function suivreRoutes() {
+    var vh = window.innerHeight;
+    routes.forEach(function (r) {
+      if (r.centres.length < 2) return;
+      var top = r.zone.getBoundingClientRect().top, p;
+      if (r.vert) { var a = r.centres[0].y, b = r.centres[r.centres.length - 1].y; p = (vh * 0.62 - (top + a)) / (b - a); }
+      else p = (vh * 0.82 - top) / (vh * 0.42);
+      avancer(r, Math.max(0, Math.min(1, p)));
+    });
+  }
+
+  if (calme || !io) {
+    doc.classList.add('sans-anim');
+    routes.forEach(function (r) { geometrie(r); avancer(r, 1); });
+    window.addEventListener('resize', function () { routes.forEach(function (r) { geometrie(r); avancer(r, 1); }); });
+    window.addEventListener('scroll', enTete, { passive: true });
+    enTete();
+  } else {
+    doc.classList.add('anim');
+    var obs = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('vu'); obs.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    document.querySelectorAll('.rv, .piste').forEach(function (el) { obs.observe(el); });
+    var attente = false;
+    var tout = function () { attente = false; enTete(); suivreRoutes(); };
+    window.addEventListener('scroll', function () { if (!attente) { attente = true; requestAnimationFrame(tout); } }, { passive: true });
+    window.addEventListener('resize', function () { routes.forEach(geometrie); tout(); });
+    routes.forEach(geometrie);
+    tout();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { routes.forEach(geometrie); tout(); });
+    window.addEventListener('load', function () { routes.forEach(geometrie); tout(); });
+  }
+
+  /* Jauge du formulaire : combien de réponses obligatoires restent */
+  var form = document.getElementById('formulaire-demande'), jauge = document.querySelector('.jauge');
+  if (form && jauge) {
+    var texte = jauge.querySelector('.jauge-texte');
+    var maj = function () {
+      var ok = 0;
+      ['nom', 'entreprise'].forEach(function (id) { var c = document.getElementById(id); if (c && c.value.trim().length > 1) ok++; });
+      var em = document.getElementById('email'); if (em && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em.value.trim())) ok++;
+      var se = document.getElementById('secteur'); if (se && se.value) ok++;
+      if (form.querySelector('input[name="objectif"]:checked')) ok++;
+      jauge.style.setProperty('--j', (ok / 5).toFixed(2));
+      jauge.classList.toggle('complet', ok === 5);
+      var reste = 5 - ok;
+      texte.textContent = ok === 0 ? '5 réponses obligatoires, c\'est parti.' : (reste === 0 ? 'Tout est prêt : vous pouvez envoyer.' : 'Encore ' + reste + ' réponse' + (reste > 1 ? 's' : '') + ' obligatoire' + (reste > 1 ? 's' : '') + '.');
+    };
+    form.addEventListener('input', maj); form.addEventListener('change', maj); maj();
+  }
 })();
