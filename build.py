@@ -89,7 +89,8 @@ def page(chemin, titre, desc, corps, actif=None, jsonld=None, indexer=True, form
 </main>
 <footer class="pied">
   <div>© 2026 ViZiBiLi · 5 Rue des Sapins, 88390 Darnieulles · <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></div>
-  <nav aria-label="Liens de pied de page"><a href="/ressources/">Ressources</a><a href="/premier-echange/">Premier échange</a><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a></nav>
+  <nav aria-label="Nos pages" class="pied-pages"><a href="/methode/">Méthode</a><a href="/offre/">Offre</a><a href="/entreprises-de-nettoyage/">Entreprises de nettoyage</a><a href="/fiche-google-vosges/">Fiche Google dans les Vosges</a><a href="/cas-clients/">Cas clients</a><a href="/a-propos/">À propos</a><a href="/ressources/">Ressources</a><a href="/premier-echange/">Premier échange</a></nav>
+  <nav aria-label="Informations légales"><a href="/mentions-legales/">Mentions légales</a><a href="/confidentialite/">Confidentialité</a></nav>
 </footer>{barre}
 </body>
 </html>
@@ -279,7 +280,7 @@ LEVIERS_A = [
     (I_HAUSSE, "Améliorer selon les résultats", "Nous corrigeons une chose à la fois, quand les résultats le justifient, et nous vous expliquons pourquoi. Votre budget reste sous contrôle."),
 ]
 
-PAGES.append(page('/', 'ViZiBiLi · Acquisition de clients sur Google, mesurée',
+PAGES.append(page('/', 'ViZiBiLi · Agence d\'acquisition de clients sur Google, Vosges',
     "ViZiBiLi aide les entreprises locales à transformer les recherches Google en demandes sérieuses, et à suivre les résultats jusqu'au contrat signé.",
 f'''
 <section class="heros-zone">
@@ -372,7 +373,7 @@ f'''
       <div class="preuve rv" style="--i:0">
         <span class="etiquette">Visibilité locale · missions terminées</span>
         <div class="mini-clients" aria-hidden="true"><span>{I_NETTOYAGE}</span><span>{I_MAISON}</span><span>{I_MAISON}</span><span>{I_CADEAU}</span></div>
-        <p>Quatre entreprises accompagnées sur leur présence locale, dont celle de notre fondateur : une entreprise de nettoyage, deux gîtes et une boutique de cadeaux, dans les Vosges.</p>
+        <p>Quatre entreprises accompagnées sur leur présence locale, dont celle de notre fondateur : une entreprise de nettoyage, deux gîtes et une boutique de cadeaux, dans les Vosges. <a href="/fiche-google-vosges/">Notre travail sur les fiches Google</a></p>
         <p>Leur point commun : une présence locale remise en ordre, et des clients qui repartent propriétaires de tout ce qui a été construit.</p>
         <a href="/cas-clients/" class="btn btn-ligne">Voir les cas clients</a>
       </div>
@@ -530,6 +531,7 @@ f'''
     <div class="faq">
 {faq_html}
     </div>
+    <p class="note">À lire aussi : <a href="/ressources/trouver-clients-entreprise-de-nettoyage/">comment trouver des clients pour une entreprise de nettoyage</a>, <a href="/ressources/contrats-entretien-bureaux/">comment obtenir des contrats d'entretien de bureaux</a> et <a href="/ressources/publicite-google-entreprise-de-nettoyage/">publicité Google : ce qu'il faut vérifier</a>.</p>
   </div>
 </section>
 {bande("Parlons de votre entreprise de nettoyage.", "Dites-nous quelles prestations vous faites et quels clients vous cherchez. Le premier échange est offert : nous vous dirons honnêtement ce qui peut être amélioré, et par où commencer.", "Demander un premier échange", "/premier-echange/?secteur=proprete")}
@@ -619,7 +621,7 @@ LEVIERS = [
     (I_ANNONCE, "Les annonces Google", "Pour apparaître au moment précis où quelqu'un cherche votre service, dans votre zone. C'est le moyen d'être visible le plus vite, à condition d'être bien préparé et bien suivi. Un clic ne prouve rien : seules les demandes et les contrats comptent."),
     (I_PAGE, "Une page dédiée à votre offre", "Pour que la personne qui clique trouve immédiatement ce qu'elle cherche, et puisse vous écrire facilement."),
     (I_SUIVI, "Le suivi des demandes", "Pour savoir d'où viennent vos demandes, si elles sont sérieuses et ce qu'elles deviennent. Sans ce suivi, personne ne peut dire si la publicité est rentable."),
-    (I_FICHE, "Votre fiche Google et votre site", "Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin."),
+    (I_FICHE, "Votre fiche Google et votre site", "Ils restent des appuis essentiels, et nous les améliorons quand c'est nécessaire. Mais ils ne sont qu'une partie du chemin. <a href=\"/fiche-google-vosges/\">La fiche Google, dans le détail</a>"),
 ]
 MODS = [
     (I_DIAG, "Étape 1", "Diagnostic d'acquisition", "Nous analysons votre situation : vos clients actuels, vos canaux, vos dépenses et ce qui bloque. Vous repartez avec des priorités claires, même si vous décidez de continuer seul. Prestation distincte du premier échange offert, au prix communiqué par écrit avant de commencer.", "Vos priorités, par écrit", None),
@@ -731,7 +733,7 @@ def cas(ancre, icone, etiq, nom, lieu, depart, fait, change, suite=''):
 TEMOIN = '\n      <blockquote class="temoin"><span class="guillemet" aria-hidden="true">“</span><p>{q}</p><cite>{a}</cite></blockquote>'
 CAS_LISTE = [("limpid", I_NETTOYAGE, "Limpid"), ("un-cadeau-une-histoire", I_CADEAU, "Un Cadeau Une Histoire"), ("gite-chez-paul", I_MAISON, "Gîte Chez Paul"), ("gite-de-la-marie", I_MAISON, "Gîte de la Marie")]
 sommaire_cas = ''.join(f'<a href="#{a}" class="rv" style="--i:{k}"><span>{i}</span>{n}</a>' for k, (a, i, n) in enumerate(CAS_LISTE))
-PAGES.append(page('/cas-clients/', 'Cas clients racontés honnêtement · ViZiBiLi',
+PAGES.append(page('/cas-clients/', 'Cas clients dans les Vosges, racontés honnêtement · ViZiBiLi',
     "Quatre entreprises accompagnées, dont celle de notre fondateur : ce qui a été mis en place et ce qui a changé, raconté sans chiffres impossibles à vérifier.",
 f'''
 <section class="heros-zone">
@@ -776,7 +778,7 @@ PRINCIPES = [
     (I_MESURE, "Mesurer avant de promettre.", "Une décision s'appuie sur ce que disent vos demandes, vos devis et vos contrats, pas sur une impression."),
     (I_CLE, "Vous laisser propriétaire de tout.", "Compte publicitaire, site, fiche Google, données : tout est à votre nom, dès le premier jour."),
 ]
-PAGES.append(page('/a-propos/', 'À propos de ViZiBiLi, née du terrain · Vosges',
+PAGES.append(page('/a-propos/', 'À propos de ViZiBiLi, agence née du terrain dans les Vosges',
     "ViZiBiLi est née dans une entreprise de nettoyage des Vosges. Une structure à taille humaine, où vous échangez toujours directement avec son fondateur.",
 f'''
 <section class="heros-zone">
@@ -824,6 +826,125 @@ f'''
 </section>
 {bande("Faisons connaissance.", "Le premier échange est offert. Nous vous dirons franchement si nous pouvons vous aider.", "Demander un premier échange")}
 ''', actif='/a-propos/', jsonld=[{"@type": "AboutPage", "url": SITE + "/a-propos/"}]))
+
+# ---------------------------------------------------------------- FICHE GOOGLE · VOSGES (16/10/2026, plan SEO)
+FAQ_F = [
+    ("Combien de temps faut-il pour voir un effet ?", "Les corrections apparaissent sur la fiche en quelques jours. Leur effet sur votre place dans les résultats prend en général plusieurs semaines, et dépend de votre métier, de votre zone et de vos concurrents. Nous ne promettons aucune position."),
+    ("Faut-il un site internet en plus de la fiche ?", "Ce n'est pas obligatoire. Mais une fiche reliée à une page claire de votre offre transforme mieux les visites en demandes. Nous vous disons franchement si votre site actuel suffit."),
+    ("Votre fiche est suspendue, ou vous n'y avez plus accès ?", "Oui. Nous vous aidons à comprendre la cause et à suivre les démarches prévues par Google pour retrouver l'accès ou faire réexaminer la fiche."),
+    ("La fiche reste-t-elle à votre nom ?", "Oui. La fiche reste à votre nom et sous votre contrôle. Si nous avons besoin d'y accéder, c'est comme gestionnaire, et vous pouvez retirer cet accès à tout moment."),
+    ("Combien coûte un audit de fiche Google ?", "Le prix dépend de votre situation. Il vous est donné par écrit avant de commencer, après un premier échange offert."),
+]
+faq_f = '\n'.join(f'      <details{" open" if i == 0 else ""}><summary>{q}</summary><p>{r}</p></details>' for i, (q, r) in enumerate(FAQ_F))
+faq_ld_f = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": r}} for q, r in FAQ_F]}
+svc_f = {"@type": "Service", "name": "Audit et remise en ordre de fiche Google", "serviceType": "Fiche Google et visibilité locale",
+         "provider": {"@id": SITE + "/#organisation"},
+         "areaServed": [{"@type": "City", "name": "Épinal"}, {"@type": "AdministrativeArea", "name": "Vosges"}, {"@type": "Country", "name": "France"}]}
+VERIFS = [
+    (I_FICHE, "La catégorie principale", "Elle décide en grande partie des recherches où vous apparaissez. Une catégorie trop large, ou voisine de votre métier, vous rend invisible là où ça compte."),
+    (I_SUIVI, "L'adresse et la zone desservie", "Votre adresse, ou les communes que vous desservez vraiment. Une zone vide ou démesurée nuit à votre présence dans les recherches proches de chez vous."),
+    (I_COCHE, "La cohérence des informations", "Nom, adresse et coordonnées identiques sur la fiche, le site et les annuaires. Les petites incohérences brouillent le signal envoyé à Google."),
+    (I_BULLE, "Les avis clients", "Des avis récents et authentiques, demandés au bon moment, et une réponse à chacun. Jamais d'avis achetés ou inventés."),
+    (I_PAGE, "Les photos et les services", "Des photos de vos réalisations, des horaires exacts, des services décrits avec les mots de vos clients."),
+    (I_MESURE, "Ce que la fiche vous rapporte", "Les appels, les demandes d'itinéraire, les visites du site et surtout les demandes venues de la fiche : pour savoir si elle travaille vraiment pour vous."),
+]
+ETAPES_F = [
+    (I_LOUPE, "Étape 1", "Audit de votre fiche", "Nous passons votre fiche en revue avec vous, et nous la comparons à celles qui apparaissent avant vous sur les recherches de vos clients.", "La liste des corrections, par ordre d'importance", None),
+    (I_CONSTR, "Étape 2", "Corrections", "Catégories, zone, description, services, photos, horaires : nous corrigeons, ou nous vous guidons pas à pas si vous préférez le faire vous-même.", "Une fiche complète et cohérente avec votre site", None),
+    (I_BULLE, "Étape 3", "Avis clients", "Nous mettons en place une façon simple de demander un avis à vos clients satisfaits, au bon moment, et de répondre à chacun.", "Une routine que vous gardez", None),
+    (I_MESURE, "Étape 4", "Suivi des demandes", "Nous regardons ce que la fiche vous apporte : appels, itinéraires, visites, et surtout les demandes qui en viennent.", "Une vision claire de ce que la fiche rapporte", None),
+]
+PREUVES_F = [
+    (I_NETTOYAGE, "Limpid", "Entreprise de nettoyage · Darnieulles", "Une fiche presque invisible à son lancement, mise en conformité complète, puis une démarche régulière pour recueillir des avis authentiques.", "limpid"),
+    (I_MAISON, "Gîte Chez Paul et Gîte de la Marie", "Locations de gîtes · Épinal", "Des fiches optimisées et des avis clients mis en avant, pour des gîtes enfin présentés à leur juste valeur.", "gite-chez-paul"),
+    (I_CADEAU, "Un Cadeau Une Histoire", "Boutique de cadeaux · Darnieulles", "Une fiche Google rafraîchie, un nouveau site, et des conseils pour entretenir cette présence dans la durée.", "un-cadeau-une-histoire"),
+]
+preuves_f = '\n'.join(f'      <a class="tuile rv" style="--i:{k}" href="/cas-clients/#{a}"><span class="tu-ico">{i}</span><h3>{n}</h3><p class="lieu-mini">{l}</p><p>{t}</p><span class="lire">Lire le cas{I_FLECHE}</span></a>' for k, (i, n, l, t, a) in enumerate(PREUVES_F))
+CHECK_F = ["Catégorie principale", "Zone desservie", "Horaires exacts", "Avis récents", "Photos de vos réalisations"]
+check_f = ''.join(f'<li style="--i:{k}"><span>{I_COCHE}</span>{c}</li>' for k, c in enumerate(CHECK_F))
+
+PAGES.append(page('/fiche-google-vosges/', 'Audit de fiche Google et visibilité locale · Vosges · ViZiBiLi',
+    "Audit de fiche Google à Épinal et dans les Vosges : catégorie, zone, avis, photos, pour que votre visibilité locale devienne des demandes.",
+f'''
+<section class="heros-zone">
+  <div class="contenu heros">
+    <div>
+      <p class="repere">Fiche Google · Épinal et Vosges</p>
+      <h1>Votre fiche Google, remise en ordre pour devenir <em>une source de demandes.</em></h1>
+      <p class="sous-titre">Quand un client cherche votre métier près de chez lui, c'est souvent votre fiche Google qu'il voit en premier. Nous l'auditons, nous la corrigeons, et nous vérifions qu'elle vous apporte des demandes, pas seulement des vues.</p>
+      <div class="actions"><a href="/premier-echange/" class="btn btn-plein">Demander un premier échange</a><a href="#verifications" class="btn btn-ligne">Ce que nous vérifions</a></div>
+      <p class="reassurance">Sur place à Épinal, Darnieulles et dans tout le département des Vosges. À distance partout en France. Premier échange offert.</p>
+    </div>
+    <div class="fiche-demo" aria-hidden="true">
+      <div class="fd-tete"><span class="fd-pin">{I_FICHE}</span><div><strong>Votre entreprise</strong><small>Votre métier · Épinal</small></div></div>
+      <ul class="fd-liste">{check_f}</ul>
+      <div class="fd-pied"><span>{I_DEMANDE}</span>Une demande reçue depuis votre fiche</div>
+    </div>
+  </div>
+</section>
+
+<section class="fond-chaud" id="verifications">
+  <div class="contenu">
+    <div class="titre-section"><h2>Ce que nous vérifions sur votre fiche.</h2><p>Six points, toujours dans cet ordre. Les deux premiers décident souvent à eux seuls si vous apparaissez quand on cherche votre métier près de chez vous.</p></div>
+    {tuiles(VERIFS, 3, numeros=True)}
+  </div>
+</section>
+
+<section>
+  <div class="contenu">
+    <div class="titre-section"><h2>Quatre étapes, de l'audit aux demandes.</h2><p>Vous pouvez vous arrêter après l'audit et faire les corrections vous-même : la liste vous appartient.</p></div>
+    {route(ETAPES_F, arrivee="Des demandes qui viennent de votre fiche", aria="Les quatre étapes de la remise en ordre d'une fiche Google")}
+  </div>
+</section>
+
+<section class="fond-chaud">
+  <div class="contenu">
+    <div class="titre-section"><h2>Des fiches que nous avons déjà remises en ordre.</h2><p>Dans les Vosges, racontées sans chiffres impossibles à vérifier.</p></div>
+    <div class="tuiles t3 preuves-fiche">
+{preuves_f}
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenu bloc-encre">
+    <div class="disposition">
+      <div>
+        <p class="repere">Au-delà de la fiche</p>
+        <h2>Une fiche Google n'est qu'une partie du chemin.</h2>
+        <p>Une fiche bien tenue vous rend visible. Mais être visible ne suffit pas : encore faut-il que les bonnes personnes vous écrivent, et que leurs demandes deviennent des devis signés. C'est pourquoi nous regardons aussi votre site, la façon dont vous répondez aux demandes et, quand c'est utile, les annonces Google.</p>
+      </div>
+      <a href="/methode/" class="btn btn-plein">Découvrir notre méthode</a>
+    </div>
+  </div>
+</section>
+
+<section class="fond-chaud">
+  <div class="contenu deux-temps">
+    <div class="titre-section">
+      <h2>Pour qui ?</h2>
+      <p>Les artisans, commerçants, indépendants, professions libérales, gîtes et entreprises de services d'Épinal, de Darnieulles et de tout le département des Vosges.</p>
+      <p style="margin-top:12px">Et les entreprises de nettoyage partout en France : c'est notre spécialité. <a href="/entreprises-de-nettoyage/">Notre approche pour les entreprises de nettoyage</a></p>
+    </div>
+    <div class="carnet" aria-hidden="true">
+      <p class="carnet-titre">{I_FICHE}Dans les Vosges</p>
+      <ul><li class="rv" style="--i:0"><span>{I_FICHE}</span>Épinal et son agglomération</li><li class="rv" style="--i:1"><span>{I_MAISON}</span>Darnieulles et alentours</li><li class="rv" style="--i:2"><span>{I_SUIVI}</span>Tout le département</li><li class="rv" style="--i:3"><span>{I_BULLE}</span>À distance, partout en France</li></ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="etroit">
+    <h2>Vos questions sur la fiche Google</h2>
+    <div class="faq">
+{faq_f}
+    </div>
+    <p class="note">Pour aller plus loin : <a href="/ressources/entreprise-absente-google-maps/">pourquoi votre entreprise n'apparaît pas sur Google Maps</a>.</p>
+  </div>
+</section>
+{bande("Votre fiche Google vous apporte-t-elle des demandes ?", "Parlons-en 15 à 30 minutes. Le premier échange est offert.", "Demander un premier échange")}
+''', actif=None, jsonld=[svc_f, faq_ld_f]))
+
 
 # ---------------------------------------------------------------- PREMIER ÉCHANGE (conversion unique)
 SECTEURS = ['Nettoyage et propreté', 'Artisanat et bâtiment', 'Commerce de proximité', 'Professions libérales et santé', 'Hôtellerie, restauration, tourisme', 'Services aux entreprises', 'Services aux particuliers', 'Autre secteur']
@@ -953,14 +1074,18 @@ def article(slug, titre, desc, h1, corps, chapo):
     art_ld = {"@type": "Article", "headline": h1_texte, "description": desc, "inLanguage": "fr-FR",
               "author": {"@id": SITE + "/#organisation"}, "publisher": {"@id": SITE + "/#organisation"},
               "mainEntityOfPage": SITE + f"/ressources/{slug}/"}
+    fil_ld = {"@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE + "/"},
+        {"@type": "ListItem", "position": 2, "name": "Ressources", "item": SITE + "/ressources/"},
+        {"@type": "ListItem", "position": 3, "name": h1_texte, "item": SITE + f"/ressources/{slug}/"}]}
     return page(f'/ressources/{slug}/', titre, desc, f'''
 <section>
   <article class="etroit article">
-    <p class="fil"><a href="/ressources/">Ressources</a></p>
+    <nav class="fil" aria-label="Fil d'Ariane"><a href="/">Accueil</a> › <a href="/ressources/">Ressources</a></nav>
     <h1>{h1}</h1>
 {corps.strip()}
   </article>
-</section>''', jsonld=[art_ld])
+</section>''', jsonld=[art_ld, fil_ld])
 
 PAGES.append(article('trouver-clients-entreprise-de-nettoyage', 'Comment trouver des clients pour une entreprise de nettoyage',
     "Contrats de bureaux, ménage à domicile, vitres : les sources de clients qui fonctionnent vraiment pour une entreprise de nettoyage, et comment les piloter.",
@@ -977,10 +1102,10 @@ PAGES.append(article('trouver-clients-entreprise-de-nettoyage', 'Comment trouver
 <h2>3. Soignez votre fiche Google</h2>
 <p>Quand un particulier cherche un prestataire près de chez lui, il regarde d'abord la carte. Une fiche complète, avec la bonne catégorie, votre vraie zone d'intervention, des photos de vos chantiers et des avis récents, fait souvent la différence entre un appel et un oubli.</p>
 <h2>4. Allez chercher les professionnels directement</h2>
-<p>Pour les contrats de bureaux et de commerces, attendre que le client vous trouve est souvent trop lent. Privilégiez les entreprises dirigées par des indépendants, à qui vous pouvez parler directement : la décision est plus rapide qu'auprès d'une enseigne ou d'un grand compte, où tout se décide au siège.</p>
+<p>Pour les contrats de bureaux et de commerces, attendre que le client vous trouve est souvent trop lent. Privilégiez les entreprises dirigées par des indépendants, à qui vous pouvez parler directement : la décision est plus rapide qu'auprès d'une enseigne ou d'un grand compte, où tout se décide au siège. Nous détaillons la démarche dans <a href="/ressources/contrats-entretien-bureaux/">comment obtenir des contrats d'entretien de bureaux</a>.</p>
 <h2>5. Utilisez les annonces Google, mais avec méthode</h2>
 <p>Les annonces Google vous placent devant quelqu'un qui cherche votre service maintenant. C'est puissant, à condition de :</p>
-<ul><li>séparer les campagnes par type de clientèle, par exemple professionnels d'un côté et particuliers de l'autre ;</li><li>exclure les recherches qui ne vous concernent pas, comme les offres d'emploi ou les prestations que vous ne faites pas ;</li><li>mesurer les demandes et ce qu'elles deviennent, pas seulement les clics.</li></ul>
+<ul><li>séparer les campagnes par type de clientèle (voir <a href="/ressources/publicite-google-entreprise-de-nettoyage/">ce qu'il faut vérifier</a>), par exemple professionnels d'un côté et particuliers de l'autre ;</li><li>exclure les recherches qui ne vous concernent pas, comme les offres d'emploi ou les prestations que vous ne faites pas ;</li><li>mesurer les demandes et ce qu'elles deviennent, pas seulement les clics.</li></ul>
 <h2>6. Mesurez ce que chaque source vous rapporte</h2>
 <p>C'est l'étape que presque tout le monde oublie. Pour chaque nouveau client, notez d'où il vient. Au bout de quelques mois, vous saurez quelle source vous apporte des contrats durables, et laquelle ne vous apporte que des devis sans suite.</p>
 <h2>En résumé</h2>
@@ -1039,8 +1164,67 @@ PAGES.append(article('entreprise-absente-google-maps', "Pourquoi votre entrepris
 <p style="margin-top:28px">Vous voulez comprendre pourquoi vos clients ne vous trouvent pas, et ce qui vous ferait gagner des demandes ? <a href="/premier-echange/" class="btn btn-plein" style="margin-left:6px">Demander un premier échange</a></p>
 ''', "Les sept causes les plus fréquentes, et par où commencer pour les corriger."))
 
-ICO_ART = [I_NETTOYAGE, I_EURO, I_FICHE]
-cartes = '\n'.join(f'      <a href="/ressources/{s}/" class="rv" style="--i:{k}"><span class="tu-ico">{ICO_ART[k % 3]}</span><h2>{h}</h2><p>{c}</p><span class="lire">Lire l\'article{I_FLECHE}</span></a>' for k, (s, h, c) in enumerate(ARTICLES))
+PAGES.append(article('contrats-entretien-bureaux', "Comment obtenir des contrats d'entretien de bureaux",
+    "Cibler les bons locaux, parler aux décideurs, chiffrer juste et relancer : comment une entreprise de nettoyage décroche des contrats de bureaux.",
+    "Comment obtenir des <em>contrats d'entretien</em> de bureaux ?", '''
+<p>Un contrat d'entretien de bureaux, c'est un chiffre d'affaires qui revient chaque mois, des horaires prévisibles et un client qui peut rester des années. C'est aussi un marché où l'on ne gagne pas en attendant que le téléphone sonne. Voici la démarche que nous appliquons dans l'entreprise de nettoyage de notre fondateur, et avec les entreprises que nous accompagnons.</p>
+<h2>1. Choisissez les locaux que vous pouvez vraiment servir</h2>
+<p>Tous les bureaux ne se valent pas pour votre entreprise. Avant de prospecter, décidez :</p>
+<ul><li>la <strong>surface</strong> que votre équipe peut entretenir correctement, au rythme demandé ;</li><li>les <strong>créneaux</strong> que vous pouvez tenir : tôt le matin, le soir, le week-end ;</li><li>la <strong>zone</strong> au-delà de laquelle le trajet mange votre marge ;</li><li>les <strong>types de locaux</strong> où vous êtes à l'aise : cabinets, agences, petits sièges, espaces de coworking, locaux médicaux.</li></ul>
+<p>Une liste courte et précise vaut mieux qu'une prospection tous azimuts : vous parlerez mieux à des clients qui vous ressemblent.</p>
+<h2>2. Parlez à la personne qui décide</h2>
+<p>Dans une petite structure, c'est souvent le dirigeant ou l'office manager. Dans un immeuble partagé, c'est parfois le gestionnaire ou le syndic. Dans une grande entreprise, la décision se prend au siège, souvent par appel d'offres : le chemin est long et la marge serrée.</p>
+<p>Pour une entreprise de nettoyage locale, les cibles les plus accessibles sont en général les structures dirigées sur place : cabinets d'expertise comptable, avocats, notaires, architectes, agences immobilières, assurances, professions de santé, PME de services.</p>
+<h2>3. Soyez trouvable au moment où l'on vous cherche</h2>
+<p>Un dirigeant dont le prestataire vient de partir tape « entreprise de nettoyage bureaux » suivi de sa ville. Ce jour-là, trois choses comptent :</p>
+<ul><li>une <strong>fiche Google</strong> complète, avec la bonne catégorie, votre zone, des photos de locaux entretenus et des avis récents de clients professionnels ;</li><li>une <strong>page qui parle aux professionnels</strong> : fréquences possibles, horaires, matériel, assurance, interlocuteur unique, délai pour une visite ;</li><li>un moyen simple de demander une visite ou un devis, avec une réponse rapide.</li></ul>
+<p>Si vous voulez être présent plus vite sur ces recherches, les annonces Google peuvent compléter la fiche. Nous détaillons les réglages à vérifier dans <a href="/ressources/publicite-google-entreprise-de-nettoyage/">notre article sur la publicité Google pour une entreprise de nettoyage</a>.</p>
+<h2>4. Allez au-devant des entreprises, sans les harceler</h2>
+<p>La prospection directe reste efficace pour les bureaux, à condition d'être utile plutôt qu'insistant :</p>
+<ul><li>repérez les entreprises de votre zone qui correspondent à votre liste ;</li><li>présentez-vous brièvement, par courrier, par e-mail ou en passant, avec une proposition concrète : une visite gratuite des locaux pour établir un devis précis ;</li><li>notez chaque contact, sa date et sa réponse, pour relancer au bon moment plutôt qu'au hasard.</li></ul>
+<p>Pensez aussi aux prescripteurs : les agences immobilières d'entreprise, les gestionnaires d'immeubles, les centres d'affaires et les entreprises de travaux voient passer vos futurs clients avant vous.</p>
+<h2>5. Faites une visite avant de chiffrer</h2>
+<p>Un devis de bureaux fait à distance est presque toujours faux, dans un sens ou dans l'autre. La visite vous permet de mesurer les surfaces réelles, de compter les sanitaires et les postes de travail, de repérer les sols particuliers, et de comprendre ce qui déçoit le client dans sa prestation actuelle. C'est souvent là que se joue la signature.</p>
+<h2>6. Rendez votre devis facile à accepter</h2>
+<ul><li>détaillez les tâches et leur fréquence, pièce par pièce si besoin ;</li><li>indiquez clairement ce qui est inclus et ce qui ne l'est pas, par exemple les vitres ou les produits d'accueil ;</li><li>proposez une période de démarrage avec un point d'étape, pour rassurer un client qui change de prestataire ;</li><li>envoyez-le vite, tant que la visite est fraîche dans l'esprit du client.</li></ul>
+<h2>7. Relancez, puis mesurez</h2>
+<p>Beaucoup de devis ne sont pas refusés : ils sont oubliés. Une relance quelques jours après l'envoi, puis une seconde plus tard, suffit souvent à relancer la décision.</p>
+<p>Enfin, pour chaque contrat signé, notez d'où vient le client : fiche Google, annonce, recommandation, prospection. Au bout de quelques mois, vous saurez quelle source vous apporte des contrats durables, et où mettre votre temps.</p>
+<h2>En résumé</h2>
+<p>Les contrats d'entretien de bureaux se gagnent rarement par hasard. Ils viennent d'une cible claire, d'une présence solide au moment où l'on vous cherche, d'une visite bien menée et d'un suivi régulier de chaque devis.</p>
+<p>Pour une vue d'ensemble des sources de clients, lisez aussi <a href="/ressources/trouver-clients-entreprise-de-nettoyage/">comment trouver des clients pour une entreprise de nettoyage</a>.</p>
+<p style="margin-top:28px">Vous voulez développer vos contrats de bureaux ? <a href="/premier-echange/?secteur=proprete" class="btn btn-plein" style="margin-left:6px">Demander un premier échange</a></p>
+''', "Cibler, être trouvé, visiter, chiffrer, relancer : la démarche qui fait signer des contrats durables."))
+
+PAGES.append(article('publicite-google-entreprise-de-nettoyage', "Publicité Google en nettoyage : ce qu'il faut vérifier",
+    "Zone, recherches exclues, campagnes séparées, suivi des demandes : les réglages à vérifier pour la publicité Google d'une entreprise de nettoyage.",
+    "Publicité Google pour une entreprise de nettoyage : <em>ce qu'il faut vérifier</em>", '''
+<p>Pour une entreprise de nettoyage, les annonces Google ont un grand atout : elles vous placent devant quelqu'un qui cherche un prestataire maintenant. Elles ont aussi un piège : sans réglages précis, une bonne partie du budget part dans des clics qui ne deviendront jamais des clients. Voici ce que nous vérifions en premier.</p>
+<h2>1. La zone : là où vous intervenez, pas plus loin</h2>
+<p>Ciblez les communes ou le rayon que vous desservez réellement. Vérifiez aussi l'option de ciblage géographique : par défaut, Google peut montrer vos annonces à des personnes simplement « intéressées » par votre zone, même si elles n'y sont pas. Pour une entreprise de nettoyage, il est souvent plus sûr de viser les personnes qui s'y trouvent vraiment.</p>
+<h2>2. Les recherches à exclure</h2>
+<p>Le mot « nettoyage » attire beaucoup de recherches qui ne vous concernent pas. Les plus fréquentes :</p>
+<ul><li>les <strong>offres d'emploi</strong> : « agent d'entretien recrutement », « emploi femme de ménage » ;</li><li>les <strong>conseils et astuces</strong> : « comment nettoyer », « produit pour » ;</li><li>les <strong>prestations que vous ne faites pas</strong> : nettoyage de voiture, de tapis, après sinistre, selon votre cas ;</li><li>les <strong>formations et devenir auto-entrepreneur</strong> dans le nettoyage.</li></ul>
+<p>Ajoutez ces mots comme exclusions dès le départ, puis consultez régulièrement la liste des recherches qui ont déclenché vos annonces pour compléter.</p>
+<h2>3. Une campagne par type de clientèle</h2>
+<p>Un dirigeant qui cherche un contrat d'entretien de bureaux et un particulier qui cherche une aide ménagère ne tapent pas les mêmes mots, ne lisent pas la même page et ne vous rapportent pas la même chose. Séparez au minimum :</p>
+<ul><li>les <strong>professionnels</strong> : bureaux, commerces, parties communes ;</li><li>les <strong>particuliers</strong> : ménage régulier, grand ménage, fin de bail ;</li><li>les <strong>prestations ponctuelles</strong> : vitres, fin de chantier, si vous les faites.</li></ul>
+<p>Vous pourrez ainsi répartir le budget selon ce que chaque clientèle vous rapporte vraiment.</p>
+<h2>4. Une page qui correspond à l'annonce</h2>
+<p>Une annonce « nettoyage de bureaux » qui mène à une page d'accueil générale fait perdre des demandes. La personne doit retrouver immédiatement ce qu'elle cherche : la prestation, la zone, ce qui vous distingue, et un moyen simple de demander un devis ou une visite.</p>
+<h2>5. Les horaires et le budget</h2>
+<p>Si vous ne pouvez pas répondre au téléphone le soir, une annonce qui pousse à appeler à 22 heures gaspille des clics. Adaptez la diffusion à vos heures de réponse, ou privilégiez le formulaire en dehors. Fixez un budget quotidien que vous pouvez tenir plusieurs semaines : il faut du temps et des données pour juger une campagne.</p>
+<h2>6. Le suivi des demandes, jusqu'au contrat</h2>
+<p>C'est la vérification la plus importante, et la plus souvent oubliée. Votre compte doit au minimum compter les demandes de devis et les appels venus des annonces. Ensuite, notez ce que deviennent ces demandes : sérieuses ou non, devis envoyé, contrat signé. Sans ce suivi, impossible de savoir si la publicité vous rapporte des clients ou seulement des clics. Nous expliquons le calcul dans <a href="/ressources/publicite-google-rapporte-t-elle-des-clients/">votre publicité Google vous rapporte-t-elle des clients ?</a></p>
+<h2>7. Un compte à votre nom</h2>
+<p>Que vous gériez vos annonces seul ou avec un prestataire, le compte publicitaire doit être à votre nom, et le budget payé directement par vous à Google. Vous gardez ainsi l'historique, les données et la liberté de changer de prestataire.</p>
+<h2>En résumé</h2>
+<p>Une publicité Google bien réglée pour une entreprise de nettoyage, c'est une zone précise, des recherches inutiles exclues, une campagne par clientèle, une page adaptée, et un suivi qui va jusqu'au contrat signé. Personne ne peut vous garantir un nombre de clients, mais ces vérifications évitent l'essentiel du gaspillage.</p>
+<p style="margin-top:28px">Vous voulez faire vérifier vos annonces, ou les lancer sur de bonnes bases ? <a href="/premier-echange/?secteur=proprete" class="btn btn-plein" style="margin-left:6px">Demander un premier échange</a></p>
+''', "Zone, exclusions, campagnes séparées, suivi : les réglages qui évitent l'essentiel du gaspillage."))
+
+ICO_ART = {'trouver-clients-entreprise-de-nettoyage': I_NETTOYAGE, 'publicite-google-rapporte-t-elle-des-clients': I_EURO, 'entreprise-absente-google-maps': I_FICHE, 'contrats-entretien-bureaux': I_BUREAU, 'publicite-google-entreprise-de-nettoyage': I_ANNONCE}
+cartes = '\n'.join(f'      <a href="/ressources/{s}/" class="rv" style="--i:{k}"><span class="tu-ico">{ICO_ART[s]}</span><h2>{h}</h2><p>{c}</p><span class="lire">Lire l\'article{I_FLECHE}</span></a>' for k, (s, h, c) in enumerate(ARTICLES))
 PAGES.append(page('/ressources/', 'Ressources pour trouver des clients sur Google · ViZiBiLi',
     "Des conseils concrets, issus du terrain, pour trouver des clients sur Google et savoir ce que chaque action vous rapporte vraiment.",
 f'''
@@ -1081,7 +1265,7 @@ PAGES.append(page('/confidentialite/', 'Politique de confidentialité · ViZiBiL
 <section>
   <div class="etroit page-simple">
     <h1>Politique de confidentialité</h1>
-    <p>Dernière mise à jour : [DATE DE PUBLICATION]</p>
+    <p>Dernière mise à jour : 16 octobre 2026</p>
     <h2>Qui est responsable de vos données ?</h2>
     <p>Clément VAILLANT-HANNE, entrepreneur individuel (EI), activité exercée sous le nom « ViZiBiLi », SIREN 822 090 486, 5 Rue des Sapins, 88390 Darnieulles, France. Contact pour toute question sur vos données : <a href="mailto:hello@vizibili.fr">hello@vizibili.fr</a></p>
     <h2>Quelles données collectons-nous ?</h2>
